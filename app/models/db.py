@@ -37,11 +37,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.Date, nullable=False)
     updated_at = db.Column(db.Date, nullable=False)
 
-    
-    comments_rel = db.relationship("Comment", backref="user")
-    wallets_rel = db.relationship("Wallet", backref="user")
-    watchlists_rel = db.relationship("Watchlist", backref="user")
-
+    #relationships
+    comments_rel = db.relationship("Comment", backref="user", cascade="all, delete-orphan")
+    wallets_rel = db.relationship("Wallet", backref="user", cascade="all, delete-orphan")
+    watchlists_rel = db.relationship("Watchlist", backref="user", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -91,7 +90,7 @@ class Comment(db.Model):
     updated_at = db.Column(db.Date, nullable=False)
 
     # one-to-many: one user can have many comments
-    users_rel = db.relationship("User", back_populates="comments_rel")
+    users_rel = db.relationship("User", back_populates="comments_rel", cascade="all, delete-orphan", single_parent=True)
 
     # one-to-many: one crypto can have many comments
     cryptos_rel = db.relationship("Crypto", back_populates="comments_rel")
@@ -128,7 +127,7 @@ class Wallet(db.Model):
     updated_at = db.Column(db.Date, nullable=False)
 
     # one-to-many: one user can have many wallets
-    users_rel = db.relationship("User", back_populates="wallets_rel")
+    users_rel = db.relationship("User", back_populates="wallets_rel", cascade="all, delete-orphan", single_parent=True)
 
     # one-to-many: one crypto can have many wallets
     cryptos_rel = db.relationship("Crypto", back_populates="wallets_rel")
@@ -165,7 +164,7 @@ class Watchlist(db.Model):
     updated_at = db.Column(db.Date, nullable=False)
 
     # one-to-many: one user can have many watchlists
-    users_rel = db.relationship("User", back_populates="watchlists_rel")
+    users_rel = db.relationship("User", back_populates="watchlists_rel", cascade="all, delete-orphan", single_parent=True)
 
     # one-to-many: one crypto can have (be in) many watchlists
     cryptos_rel = db.relationship("Crypto", back_populates="watchlists_rel")
@@ -185,6 +184,7 @@ class Watchlist(db.Model):
 
 # ==================================== Crypto Model ====================================
 
+
 class Crypto(db.Model):
     __tablename__ = "cryptos"
 
@@ -195,11 +195,9 @@ class Crypto(db.Model):
     name = db.Column(db.String(50), nullable=False)
     symbol = db.Column(db.String(10), nullable=False)
 
-
-
     comments_rel = db.relationship("Comment", back_populates="cryptos_rel")
-    wallets_rel = db.relationship("Wallet", back_populates="cryptos_rel")
-    watchlists_rel = db.relationship("Watchlist", back_populates="cryptos_rel")
+    wallets_rel = db.relationship("Wallet", back_populates="cryptos_rel", cascade="all, delete-orphan")
+    watchlists_rel = db.relationship("Watchlist", back_populates="cryptos_rel", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
