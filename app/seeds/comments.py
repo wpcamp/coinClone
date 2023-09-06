@@ -1,24 +1,21 @@
 from app.models import db, environment, SCHEMA
-from app.models.db import User
-from .data import users
+from app.models.db import Comment
+from .data import comments
 from sqlalchemy.sql import text
 import datetime
 
 
-def seed_users():
-    for user in users:
-        new_user = User(
-            username = user["username"],
-            password = user["password"],
-            email = user["email"],
-            first_name = user["first_name"],
-            last_name=user["last_name"],
-            buying_power=user["buying_power"],
-            title=user["title"],
-            created_at=user["created_at"],
-            updated_at=user["updated_at"]
+def seed_comments():
+    for comment in comments:
+        new_comment = Comment(
+            user_id = comment["user_id"],
+            crypto_id = comment["crypto_id"],
+            bullish = comment["bullish"],
+            text = comment["text"],
+            created_at=comment["created_at"],
+            updated_at=comment["updated_at"]
         )
-        db.session.add(new_user)
+        db.session.add(new_comment)
 
     db.session.commit()
 
@@ -29,7 +26,7 @@ def seed_users():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_comments():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
