@@ -30,7 +30,11 @@ def get_coin(symbol):
         'percent_change_30d': data["data"][symbol][0]["quote"]["USD"]["percent_change_30d"],
         'percent_change_60d': data["data"][symbol][0]["quote"]["USD"]["percent_change_60d"],
         'percent_change_90d': data["data"][symbol][0]["quote"]["USD"]["percent_change_90d"],
-        'rank': data["data"][symbol][0]["cmc_rank"]
+        'rank': data["data"][symbol][0]["cmc_rank"],
+        'created': data["data"][symbol][0]["date_added"],
+        'volume_24h': data["data"][symbol][0]["quote"]["USD"]["volume_24h"],
+        'date_added': data["data"][symbol][0]["date_added"],
+        'last_updated': data["data"][symbol][0]["last_updated"]
         }
         return new_data
     else:
