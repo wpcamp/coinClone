@@ -426,3 +426,32 @@ watchlists = [
         'updated_at': datetime.datetime.now()
     }
 ]
+
+
+top_25_cryptos = [
+    {"symbol": "BTC"},
+    {"symbol": "ETH"},
+    {"symbol": "ADA"},
+    {"symbol": "BNB"},
+    {"symbol": "USDT"},
+    {"symbol": "XRP"},
+    {"symbol": "SOL"},
+    {"symbol": "DOT"},
+    {"symbol": "DOGE"},
+    {"symbol": "AVAX"},
+    {"symbol": "LUNA"},
+    {"symbol": "LINK"},
+    {"symbol": "MATIC"},
+    {"symbol": "XLM"},
+    {"symbol": "UNI"},
+    {"symbol": "ALGO"},
+    {"symbol": "FIL"},
+    {"symbol": "TRX"},
+    {"symbol": "AAVE"},
+    {"symbol": "ATOM"},
+    {"symbol": "XTZ"},
+    {"symbol": "VET"},
+    {"symbol": "LTC"},
+    {"symbol": "BCH"},
+    {"symbol": "EGLD"}
+]

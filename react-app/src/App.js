@@ -5,6 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import HomePage from "./components/Asset/AssetDetails"
+import AssetDetails from "./components/Asset/AssetDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +25,12 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path='/assets/:cryptoSymbol'>
+            <AssetDetails/>
+          </Route>
+          <Route>
+            <h1>Page does not exist</h1>
           </Route>
         </Switch>
       )}
