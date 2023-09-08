@@ -428,30 +428,285 @@ watchlists = [
 ]
 
 
-top_25_cryptos = [
-    {"symbol": "BTC"},
-    {"symbol": "ETH"},
-    {"symbol": "ADA"},
-    {"symbol": "BNB"},
-    {"symbol": "USDT"},
-    {"symbol": "XRP"},
-    {"symbol": "SOL"},
-    {"symbol": "DOT"},
-    {"symbol": "DOGE"},
-    {"symbol": "AVAX"},
-    {"symbol": "LUNA"},
-    {"symbol": "LINK"},
-    {"symbol": "MATIC"},
-    {"symbol": "XLM"},
-    {"symbol": "UNI"},
-    {"symbol": "ALGO"},
-    {"symbol": "FIL"},
-    {"symbol": "TRX"},
-    {"symbol": "AAVE"},
-    {"symbol": "ATOM"},
-    {"symbol": "XTZ"},
-    {"symbol": "VET"},
-    {"symbol": "LTC"},
-    {"symbol": "BCH"},
-    {"symbol": "EGLD"}
+coins = [
+    {
+        "name": "bitcoin",
+        "symbol": "btc"
+    },
+    {
+        "name": "ethereum",
+        "symbol": "eth"
+    },
+    {
+        "name": "tether",
+        "symbol": "usdt"
+    },
+    {
+        "name": "pepe",
+        "symbol": "pepe"
+    },
+    {
+        "name": "ripple",
+        "symbol": "xrp"
+    },
+    {
+        "name": "usd",
+        "symbol": "usd"
+    },
+    {
+        "name": "cardano",
+        "symbol": "ada"
+    },
+    {
+        "name": "dogecoin",
+        "symbol": "doge"
+    },
+    {
+        "name": "solana",
+        "symbol": "sol"
+    },
+    {
+        "name": "tron",
+        "symbol": "trx"
+    },
+    {
+        "name": "dai",
+        "symbol": "dai"
+    },
+    {
+        "name": "polkadot",
+        "symbol": "dot"
+    },
+    {
+        "name": "matic-network",
+        "symbol": "matic"
+    },
+    {
+        "name": "litecoin",
+        "symbol": "ltc"
+    },
+    {
+        "name": "shiba-inu",
+        "symbol": "shib"
+    },
+    {
+        "name": "wrapped-bitcoin",
+        "symbol": "wbtc"
+    },
+    {
+        "name": "bitcoin-cash",
+        "symbol": "bch"
+    },
+    {
+        "name": "avalanche-2",
+        "symbol": "avax"
+    },
+    {
+        "name": "stellar",
+        "symbol": "xlm"
+    },
+    {
+        "name": "chainlink",
+        "symbol": "link"
+    },
+    {
+        "name": "wbnb",
+        "symbol": "wbnb"
+    },
+    {
+        "name": "monero",
+        "symbol": "xmr"
+    },
+    {
+        "name": "binance-usd",
+        "symbol": "busd"
+    },
+    {
+        "name": "uniswap",
+        "symbol": "uni"
+    },
+    {
+        "name": "okb",
+        "symbol": "okb"
+    },
+    {
+        "name": "cosmos",
+        "symbol": "atom"
+    },
+    {
+        "name": "ethereum-classic",
+        "symbol": "etc"
+    },
+    {
+        "name": "hedera-hashgraph",
+        "symbol": "hbar"
+    },
+    {
+        "name": "internet-computer",
+        "symbol": "icp"
+    },
+    {
+        "name": "filecoin",
+        "symbol": "fil"
+    },
+    {
+        "name": "lido-dao",
+        "symbol": "ldo"
+    },
+    {
+        "name": "mantle",
+        "symbol": "mnt"
+    },
+    {
+        "name": "crypto-com-chain",
+        "symbol": "cro"
+    },
+    {
+        "name": "aptos",
+        "symbol": "apt"
+    },
+    {
+        "name": "quant-network",
+        "symbol": "qnt"
+    },
+    {
+        "name": "arbitrum",
+        "symbol": "arb"
+    },
+    {
+        "name": "vechain",
+        "symbol": "vet"
+    },
+    {
+        "name": "maker",
+        "symbol": "mkr"
+    },
+    {
+        "name": "near",
+        "symbol": "near"
+    },
+    {
+        "name": "optimism",
+        "symbol": "op"
+    },
+    {
+        "name": "aave",
+        "symbol": "aave"
+    },
+    {
+        "name": "the-graph",
+        "symbol": "grt"
+    },
+    {
+        "name": "xdce-crowd-sale",
+        "symbol": "xdc"
+    },
+    {
+        "name": "algorand",
+        "symbol": "algo"
+    },
+    {
+        "name": "usdd",
+        "symbol": "usdd"
+    },
+    {
+        "name": "blockstack",
+        "symbol": "stx"
+    },
+    {
+        "name": "tezos",
+        "symbol": "xtz"
+    },
+    {
+        "name": "eos",
+        "symbol": "eos"
+    },
+    {
+        "name": "axie-infinity",
+        "symbol": "axs"
+    },
+    {
+        "name": "elrond-erd-2",
+        "symbol": "egld"
+    },
+    {
+        "name": "the-sandbox",
+        "symbol": "sand"
+    },
+    {
+        "name": "theta-token",
+        "symbol": "theta"
+    },
+    {
+        "name": "havven",
+        "symbol": "snx"
+    },
+    {
+        "name": "immutable-x",
+        "symbol": "imx"
+    },
+    {
+        "name": "bitcoin-cash-sv",
+        "symbol": "bsv"
+    },
+    {
+        "name": "injective-protocol",
+        "symbol": "inj"
+    },
+    {
+        "name": "fantom",
+        "symbol": "ftm"
+    },
+    {
+        "name": "decentraland",
+        "symbol": "mana"
+    },
+    {
+        "name": "render-token",
+        "symbol": "rndr"
+    },
+    {
+        "name": "thorchain",
+        "symbol": "rune"
+    },
+    {
+        "name": "neo",
+        "symbol": "neo"
+    },
+    {
+        "name": "iota",
+        "symbol": "miota"
+    },
+    {
+        "name": "kava",
+        "symbol": "kava"
+    },
+    {
+        "name": "apecoin",
+        "symbol": "ape"
+    },
+    {
+        "name": "pax-gold",
+        "symbol": "paxg"
+    },
+    {
+        "name": "dao-maker",
+        "symbol": "dao"
+    },
+    {
+        "name": "dfx-finance",
+        "symbol": "dfx"
+    },
+    {
+        "name": "pulsechain-flow",
+        "symbol": "flow"
+    },
+    {
+        "name": "juventus-fan-token",
+        "symbol": "juv"
+    },
+    {
+        "name": "dydx",
+        "symbol": "dydx"
+    }
 ]

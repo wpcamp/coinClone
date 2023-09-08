@@ -96,14 +96,14 @@ class Comment(db.Model):
 
     # one-to-many: one user can have many comments
     users_rel = db.relationship(
-        "User", back_populates="comments_rel", cascade="all, delete-orphan", single_parent=True)
+        "User", back_populates="comments_rel")
 
     # one-to-many: one crypto can have many comments
     cryptos_rel = db.relationship("Crypto", back_populates="comments_rel")
 
     def to_dict(self):
-        user_name = User.query.get(self.user_id)
-        user_data = user_name.to_dict()
+        # user_name = User.query.get(self.user_id)
+        # user_data = user_name.to_dict()
         return {
             'id': self.id,
             'userId': self.user_id,
@@ -112,7 +112,7 @@ class Comment(db.Model):
             'bullish': self.bullish,
             "createdAt": self.created_at,
             "updatedAt": self.updated_at,
-            "user": user_data
+            # "user": user_data
         }
 
 
@@ -135,14 +135,14 @@ class Wallet(db.Model):
 
     # one-to-many: one user can have many wallets
     users_rel = db.relationship(
-        "User", back_populates="wallets_rel", cascade="all, delete-orphan", single_parent=True)
+        "User", back_populates="wallets_rel")
 
     # one-to-many: one crypto can have many wallets
     cryptos_rel = db.relationship("Crypto", back_populates="wallets_rel")
 
     def to_dict(self):
-        user_name = User.query.get(self.user_id)
-        user_data = user_name.to_dict()
+        # user_name = User.query.get(self.user_id)
+        # user_data = user_name.to_dict()
         return {
             'id': self.id,
             'userId': self.user_id,
@@ -150,7 +150,7 @@ class Wallet(db.Model):
             'quantity': self.quantity,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'user': user_data
+            # 'user': user_data
         }
 
 
@@ -172,21 +172,21 @@ class Watchlist(db.Model):
 
     # one-to-many: one user can have many watchlists
     users_rel = db.relationship(
-        "User", back_populates="watchlists_rel", cascade="all, delete-orphan", single_parent=True)
+        "User", back_populates="watchlists_rel")
 
     # one-to-many: one crypto can have (be in) many watchlists
     cryptos_rel = db.relationship("Crypto", back_populates="watchlists_rel")
 
     def to_dict(self):
-        user_name = User.query.get(self.user_id)
-        user_data = user_name.to_dict()
+        # user_name = User.query.get(self.user_id)
+        # user_data = user_name.to_dict()
         return {
             'id': self.id,
             'userId': self.user_id,
             'cryptoId': self.crypto_id,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            'user': user_data
+            # 'user': user_data
         }
 
 # ==================================== Crypto Model ====================================

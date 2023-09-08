@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AssetMarketDetails from "./components/Asset/AssetMarketDetails";
+import AssetSelect from "./components/Asset/AssetSelect"
 import AssetChart from "./components/Asset/AssetChart";
 
 function App() {
@@ -27,8 +28,9 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path='/assets/:cryptoSymbol'>
-            <AssetMarketDetails/>
+            <AssetMarketDetails />
             <AssetChart />
+            <AssetSelect />
           </Route>
           <Route>
             <h1>Page does not exist</h1>
