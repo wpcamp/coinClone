@@ -3,6 +3,7 @@
 const GET_COMMENTS = "comments/getComments"
 const CREATE_COMMENT = "comments/createComment"
 const REMOVE_COMMENT = "comments/removeComment"
+const UPDATE_COMMENT = "comments/updateComment"
 
 
 // Action Creator
@@ -28,6 +29,12 @@ const removeComment = (commentId) => {
     }
 }
 
+const updateComment = (comment) => {
+    return {
+        type: UPDATE_COMMENT,
+        comment
+    }
+}
 
 // Thunks
 
@@ -77,6 +84,28 @@ export const thunkRemoveComment = (commentId) => async (dispatch) => {
         return errors
     }
 }
+
+export const thunkUpdateComment = (comment) => async (dispatch) => {
+    const { bullish, text, id } = menuItem;
+  
+    const res = await fetch(`/api/comments/${id}/update`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bullish,
+        text
+      })
+    })
+  
+    if (res.ok) {
+      const menuItem = await res.json();
+      dispatch(updateMenuItem(menuItem));
+      return menuItem;
+    } else {
+      const errors = await res.json();
+      return errors;
+    }
+  };
 
 
 // State 

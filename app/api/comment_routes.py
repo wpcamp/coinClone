@@ -15,3 +15,12 @@ def delete_comment(id):
         return {"message": "success"}, 200
     else:
         return {"message": "Comment couldn't be found"}, 404
+
+
+@comment_routes.route("/<int:id>/show", methods=["GET"])
+def show_comment(id):
+    comment = Comment.query.get(id)
+    if comment:
+        return {"comment": comment.to_dict()}
+    else:
+        return {"message": "Comment couldn't be found"}, 404 

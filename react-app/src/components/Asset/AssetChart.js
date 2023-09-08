@@ -95,8 +95,8 @@ export default function AssetChart() {
                         </select>
                     </div>
                     <LineChart width={1000} height={600} data={finalData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-                        <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false}/>
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="value" stroke="#82ca9d" dot={false}/>
+                        <CartesianGrid strokeDasharray="1 1" />
                         <XAxis dataKey="time" />
                         <YAxis domain={[min, max]} label={{ value: 'Price', angle: 0, position: 'insideLeft' }} tickFormatter={(value) => value.toFixed(2)}/>
                         <Tooltip />
