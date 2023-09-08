@@ -5,6 +5,7 @@ import { thunkGetComments } from "../../store/comment";
 import OpenModalButton from "../OpenModalButton"
 import { CreateCommentModal } from "./CreateCommentModal";
 import { DeleteCommentModal } from "./DeleteCommentModal";
+import { UpdateCommentModal } from "./UpdateCommentModal";
 import coins from './coins';
 
 
@@ -67,7 +68,12 @@ export default function CommentCard() {
                             {sessionUser.id === comment.userId &&
                                 <OpenModalButton
                                     buttonText="Delete comment"
-                                    modalComponent={<DeleteCommentModal commentId={comment.id} cryptoId={match.id} />} />
+                                    modalComponent={<DeleteCommentModal commentId={comment.id} cryptoId={match.id} />} /> 
+                            }
+                            {sessionUser.id === comment.userId &&
+                                <OpenModalButton
+                                    buttonText="Update comment"
+                                    modalComponent={<UpdateCommentModal comment={comment} cryptoId={match.id} />} /> 
                             }
                         </div>
                     ))}

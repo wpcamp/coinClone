@@ -86,26 +86,24 @@ export const thunkRemoveComment = (commentId) => async (dispatch) => {
 }
 
 export const thunkUpdateComment = (comment) => async (dispatch) => {
-    const { bullish, text, id } = menuItem;
-  
-    const res = await fetch(`/api/comments/${id}/update`, {
-      method: "PUT",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        bullish,
-        text
-      })
+    const { bullish, text, id } = comment;
+    const res = await fetch(`/api/comment/${id}/update`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            bullish,
+            text
+        })
     })
-  
     if (res.ok) {
-      const menuItem = await res.json();
-      dispatch(updateMenuItem(menuItem));
-      return menuItem;
+        const comment = await res.json();
+        dispatch(updateComment(comment));
+        return comment;
     } else {
-      const errors = await res.json();
-      return errors;
+        const errors = await res.json();
+        return errors;
     }
-  };
+};
 
 
 // State 
@@ -137,6 +135,12 @@ const commentsReducer = (state = initialState, action) => {
             const newState = { ...state }
             delete newState.comments[action.commentId]
             return newState
+        }
+        case UPDATE_COMMENT: {
+            const newState = {
+                ...state, comments: {...state.comments, [action.comment.id]: action.comment}
+            };
+            return newState;
         }
         default: {
             return state
