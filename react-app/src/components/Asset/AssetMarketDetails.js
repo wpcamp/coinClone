@@ -34,7 +34,7 @@ export default function AssetDetails() {
         fetchPrice().then(setIsLoaded(true))
     }, [dispatch, cryptoSymbol])
 
-    console.log(`filtered data of ${cryptoSymbol}`, filtered_data);
+    // console.log(`filtered data of ${cryptoSymbol}`, filtered_data);
 
     return (
         <>
