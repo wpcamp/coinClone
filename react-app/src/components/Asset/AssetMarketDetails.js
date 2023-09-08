@@ -7,14 +7,11 @@ import { useParams } from 'react-router-dom';
 
 export default function AssetDetails() {
     const dispatch = useDispatch()
-    //!! change this back to const if need be - weird 
     let { cryptoSymbol } = useParams()
     cryptoSymbol = cryptoSymbol.toUpperCase()
-    //!!
     const [isLoaded, setIsLoaded] = useState(false)
     const [selectedInterval, setSelectedInterval] = useState('24h');
-    const data = useSelector(state => state.crypto)
-    const filtered_data = data.crypto
+    const data = useSelector(state => state.crypto.crypto)
 
     function formatValuation(num) {
         if (num >= 1000000000) {
@@ -26,7 +23,6 @@ export default function AssetDetails() {
         }
     }
 
-
     useEffect(() => {
         const fetchPrice = async () => {
             await dispatch(thunkGetPrice(cryptoSymbol))
@@ -34,16 +30,16 @@ export default function AssetDetails() {
         fetchPrice().then(setIsLoaded(true))
     }, [dispatch, cryptoSymbol])
 
-    // console.log(`filtered data of ${cryptoSymbol}`, filtered_data);
+
 
     return (
         <>
             {isLoaded ? (
                 <>
-                    <h2>${cryptoSymbol} • ${filtered_data.price?.toFixed(2)}</h2>
+                    <h2>${cryptoSymbol} • ${data.price?.toFixed(2)}</h2>
                     <h3>Details:</h3>
-                    <div>Market Cap: {formatValuation(filtered_data.market_cap)}</div>
-                    <div>Rank (by market cap): {filtered_data.rank}</div>
+                    <div>Market Cap: {formatValuation(data.market_cap)}</div>
+                    <div>Rank (by market cap): {data.rank}</div>
                     <div>
                         <select
                             id="intervalSelect"
@@ -57,9 +53,9 @@ export default function AssetDetails() {
                             <option value="90d">90d</option>
                         </select>
                     </div>
-                    <div>% Change in the last {selectedInterval}: {filtered_data[`percent_change_${selectedInterval}`]?.toFixed(2)}%</div>
-                    <div>Created: {filtered_data.date_added?.slice(0,10)}</div>
-                    <div>Last updated: {filtered_data.last_updated?.slice(0,10)}</div>
+                    <div>% Change in the last {selectedInterval}: {data[`percent_change_${selectedInterval}`]?.toFixed(2)}%</div>
+                    <div>Created: {data.date_added?.slice(0,10)}</div>
+                    <div>Last updated: {data.last_updated?.slice(0,10)}</div>
                 </>
             ) : (
                 <>
