@@ -1,0 +1,112 @@
+#homePageImg {
+    width: 100%;
+    height: 100%;
+}
+
+#firstSeg {
+    display: flex;
+    flex-direction: row;
+}
+
+#firstSegTextDiv {
+    /* display: flex;
+    flex-direction: row ;
+    justify-content: center; */
+    font-size: 50px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    width: 70%;
+}
+
+#firstSegBlurb {
+    width: 70%;
+    padding-left: 45px;
+}
+
+#firstSegSignUpDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    gap: 50px;
+}
+
+#firstSegInput {
+    width: 100%;
+    margin-right: 15px;
+    padding: 15px 15px;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+
+#firstSegSignUpButton button {
+    background-color: rgb(0, 82, 255);
+    color: white;
+    border-radius: 40px;
+    padding: 15px 55px 15px 55px;
+    gap: 10px;
+    font-size: 20px;
+}
+
+#secondSeg {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#secondSegText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#secondSegA {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 35px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#moreAssetButtonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#moreAssetButton {
+    background-color: rgb(0, 82, 255);
+    color: white;
+    border-radius: 30px;
+    padding: 10px 25px 10px 25px;
+    margin-top: 25px;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.coinLogos {
+    width: 50%;
+    height: 50%;
+}
+
+#assetBoxDiv {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    height: 100px;
+    border-radius: 15px;
+}

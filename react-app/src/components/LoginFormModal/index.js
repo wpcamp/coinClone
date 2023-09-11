@@ -17,9 +17,22 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
+
+  const handleDemoUser = async (e) => {
+    e.preventDefault()
+    let demoEmail = 'user@demo.io'
+    let demoPassword = 'password'
+    const data = await dispatch(login(demoEmail, demoPassword));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal()
+    }
+  };
+
 
   return (
     <>
@@ -50,6 +63,11 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+      <div id='demoUserButtonDiv'>
+        <button id='demoUserButton' onClick={handleDemoUser}>
+          Log In as Demo User
+        </button>
+      </div>
     </>
   );
 }

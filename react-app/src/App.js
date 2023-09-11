@@ -9,6 +9,12 @@ import AssetMarketDetails from "./components/Asset/AssetMarketDetails";
 import AssetSelect from "./components/Asset/AssetSelect"
 import AssetChart from "./components/Asset/AssetChart";
 import CommentCard from "./components/Comment/CommentCard";
+import AccountDetails from "./components/AccountDetails";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AssetHeader from "./components/Asset/AssetHeader";
+import Asset from "./components/Asset/Asset";
+import Home from "./components/Home";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,18 +28,21 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/home">
+            <Home/>
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path='/assets/:cryptoSymbol'>
-            <AssetSelect />
-            <AssetMarketDetails />
-            <AssetChart />
-            <CommentCard />
-          </Route>
+          <ProtectedRoute exact path='/account'>
+            <AccountDetails />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/assets/:cryptoSymbol'>
+            <Asset />
+          </ProtectedRoute>
           <Route>
             <h1>Page does not exist</h1>
           </Route>

@@ -3,6 +3,7 @@
 const GET_COMMENTS = "comments/getComments"
 const CREATE_COMMENT = "comments/createComment"
 const REMOVE_COMMENT = "comments/removeComment"
+const UPDATE_COMMENT = "comments/updateComment"
 
 
 // Action Creator
@@ -28,6 +29,12 @@ const removeComment = (commentId) => {
     }
 }
 
+const updateComment = (comment) => {
+    return {
+        type: UPDATE_COMMENT,
+        comment
+    }
+}
 
 // Thunks
 
@@ -78,6 +85,26 @@ export const thunkRemoveComment = (commentId) => async (dispatch) => {
     }
 }
 
+export const thunkUpdateComment = (comment) => async (dispatch) => {
+    const { bullish, text, id } = comment;
+    const res = await fetch(`/api/comment/${id}/update`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            bullish,
+            text
+        })
+    })
+    if (res.ok) {
+        const comment = await res.json();
+        dispatch(updateComment(comment));
+        return comment;
+    } else {
+        const errors = await res.json();
+        return errors;
+    }
+};
+
 
 // State 
 
@@ -108,6 +135,12 @@ const commentsReducer = (state = initialState, action) => {
             const newState = { ...state }
             delete newState.comments[action.commentId]
             return newState
+        }
+        case UPDATE_COMMENT: {
+            const newState = {
+                ...state, comments: {...state.comments, [action.comment.id]: action.comment}
+            };
+            return newState;
         }
         default: {
             return state

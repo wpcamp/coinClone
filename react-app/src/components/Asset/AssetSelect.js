@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import coins from './coins' 
 
-const DropdownButton = () => {
+export default function AssetSelect() {
     const history = useHistory();
     const [selectedItem, setSelectedItem] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +48,7 @@ const DropdownButton = () => {
     return (
         <div className="dropdown">
             <button onClick={() => setIsOpen(!isOpen)}>
-                {selectedItem ? selectedItem : 'Select an item'}
+                {selectedItem ? selectedItem : 'Select an asset'}
             </button>
             {isOpen && (
                 <ul className="dropdown-list">
@@ -63,4 +63,4 @@ const DropdownButton = () => {
     );
 };
 
-export default DropdownButton;
+
