@@ -103,7 +103,7 @@ def create_comment(id):
         return {"errors": validation_errors_to_error_messages(form.errors)}, 404
 
 
-#get all reviews for a coin
+#get all comments for a coin
 @crypto_routes.route("/<int:id>/comments", methods=["GET"])
 @login_required
 def get_comments(id):

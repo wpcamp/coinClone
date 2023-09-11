@@ -289,7 +289,6 @@ watchlists = [
     {
         'user_id': 3,
         'crypto_id': 3,
-        'quantity': 2500,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     },

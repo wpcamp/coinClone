@@ -13,8 +13,9 @@ import AccountDetails from "./components/AccountDetails";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AssetHeader from "./components/Asset/AssetHeader";
 import Asset from "./components/Asset/Asset";
-import Home from "./components/Home";
+import HomeNotLogged from "./components/Home/HomeNotLogged";
 import Sidebar from "./components/Sidebar";
+import WatchlistCard from "./components/Watchlist/Watchlist";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,8 +30,11 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/home">
-            <Home/>
+            <HomeNotLogged />
           </Route>
+          <ProtectedRoute exact path='/watchlist'>
+            <WatchlistCard />
+          </ProtectedRoute>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
