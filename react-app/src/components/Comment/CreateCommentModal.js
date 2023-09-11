@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkCreateComment, thunkGetComments } from "../../store/comment";
-import { useParams } from "react-router-dom";
-import coins from './coins';
+import './Comment.css'
 
 
-function CreateCommentModal({cryptoId}) {
+function CreateCommentModal({ cryptoId }) {
     const dispatch = useDispatch();
     const [text, setText] = useState("");
     const [bullish, setBullish] = useState(null)
@@ -14,9 +13,6 @@ function CreateCommentModal({cryptoId}) {
     const { closeModal } = useModal();
     const sessionUser = useSelector(state => state.session.user);
 
-    // console.log('HERES CRYPTO ID', cryptoId);
-
-    // console.log("heres session user: ", sessionUser.id);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,25 +37,32 @@ function CreateCommentModal({cryptoId}) {
     return (
         <>
 
-
-            <div>
-                <textarea placeholder="Please write at least 10 characters" onChange={(e) => setText(e.target.value)}></textarea>
+            <div id="createCommentHeader">Leave a comment below</div>
+            <div id="updateCommentTextAreaDiv">
+                <textarea placeholder="Please write at least 10 characters" 
+                onChange={(e) => setText(e.target.value)}
+                id="updateCommentTextArea"
+                ></textarea>
             </div>
-            <div>
-                <button onClick={() => setBullish(true)}>Bullish</button>
-                <button onClick={() => setBullish(false)}>Bearish</button>
-            </div>
-
-            <div>
-                <div >
-
+                <div id="createButtons">
+                    <button
+                        onClick={() => setBullish(true)}
+                        className={bullish ? 'isActiveG' : 'isNotActive'}
+                    >Bullish</button>
+                    <button
+                        onClick={() => setBullish(false)}
+                        className={!bullish ? 'isActiveR' : 'isNotActive'}
+                    >Bearish</button>
                 </div>
-                <div>
+            <div>
+                <div id="nothingDiv">
+                </div>
+                <div id="submitUpdateCommentButtonDiv">
                     <button onClick={handleSubmit} disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
+                    id='submitUpdateCommentButton'
                     >Submit Your Comment</button>
                 </div>
             </div>
-
         </>
     )
 }

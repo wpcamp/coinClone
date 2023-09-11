@@ -2,18 +2,26 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.commentModalContainer button{
-    background-color: rgb(0,82,255);
+.commentModalContainer button {
+    background-color: rgb(0, 82, 255);
     color: white;
-    border-radius: 5px;
-    padding: 2px 2px 2px 2px;
-    gap: 10px;
+    border-radius: 15px;
+    padding: 5px 5px;
+}
+
+#actionButtonsCommentDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 5px;
+    margin-left: 5px;
+    margin-bottom: 15px;
 }
 
 #commentDiv {
-    border: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
     margin-bottom: 10px;
-    
+
 }
 
 #fullCommentDiv {
@@ -21,7 +29,7 @@
     flex-direction: column;
     width: 100%;
     gap: 15px;
-    border-right: 1px solid lightgrey;
+    /* border-right: 1px solid lightgrey; */
     padding-right: 5px;
 }
 
@@ -38,15 +46,16 @@
 }
 
 #bullishTag {
-    background-color: rgb(20,188,11);
+    background-color: rgb(20, 188, 11);
     border-radius: 20px;
-    padding: 5px 5px 5px 5px;
-    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 8px;
+    margin: 5px 6px 5px 5px;
+    width: 55px;
     color: white;
 }
 
 #bearishTag {
-    background-color: rgb(240,97,109);
+    background-color: rgb(240, 97, 109);
     border-radius: 20px;
     padding: 5px 5px 5px 5px;
     margin: 5px 5px 5px 5px;
@@ -58,7 +67,124 @@
     color: grey;
 }
 
-#commentTextContainer { 
+#commentTextContainer {
     margin-left: 5px;
     margin-bottom: 5px;
+}
+
+.isActiveG {
+    background-color: rgb(20, 188, 11);
+}
+
+.isActiveR {
+    background-color: rgb(240, 97, 109);
+}
+
+.isNotActive {
+    background-color: grey;
+
+}
+
+#updateButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+#updateButtons button {
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px 5px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    width: 175px;
+    color: white;
+}
+
+
+#updateCommentHeader {
+    display: flex;
+    flex-direction: column;
+}
+
+#updateCommentHeaderA {
+    margin-top: 35px;
+    margin-bottom: 15px;
+    padding-right: 65px;
+    padding-left: 65px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#updateCommentHeaderB {
+    margin-bottom: 15px;
+    padding-right: 65px;
+    padding-left: 85px;
+    font-size: 15px;
+}
+
+#submitUpdateCommentButtonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#nothingDiv {
+    border-top: 2px solid lightgrey;
+    width: 75%;
+    margin-left: 45px;
+
+}
+
+#submitUpdateCommentButton {
+    background-color: rgb(0, 82, 255);
+    border-radius: 15px;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 15px;
+}
+
+#updateCommentTextAreaDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+#updateCommentTextArea {
+    width: 80%;
+    height: 100px;
+    resize: none;
+}
+
+#deleteHeaderA{
+    font-size: 23px;
+    margin: 25px 30px;
+}
+
+#deleteButtonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+}
+
+#createCommentHeader {
+    font-size: 23px;
+    margin: 40px 45px;
+    padding-left: 20px;
+}
+
+#createButtons button {
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 5px 5px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 25px;
+    width: 175px;
+    color: white;
 }

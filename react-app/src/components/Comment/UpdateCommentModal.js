@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkUpdateComment, thunkGetComments } from "../../store/comment";
+import './Comment.css'
 
 
 function UpdateCommentModal({ cryptoId, comment }) {
@@ -12,9 +13,12 @@ function UpdateCommentModal({ cryptoId, comment }) {
     const { closeModal } = useModal();
     const sessionUser = useSelector(state => state.session.user);
 
-    // console.log("heres the cryptoID inside update:", cryptoId);
+
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+
+
         const updatedComment = {
             id: comment?.id,
             cryptoId: cryptoId.cryptoId,
@@ -22,44 +26,53 @@ function UpdateCommentModal({ cryptoId, comment }) {
             text: text,
             bullish: bullish,
         };
-        
-        e.preventDefault();
-        dispatch(thunkUpdateComment(updatedComment))
+
+        await dispatch(thunkUpdateComment(updatedComment))
         closeModal()
-        dispatch(thunkGetComments(cryptoId))
+        await dispatch(thunkGetComments(cryptoId))
     };
+
 
 
     return (
         <>
-            <div>
-                <textarea
-                    onChange={(e) => setText(e.target.value)}
-                    value={text}
-                ></textarea>
-            </div>
-            <div>
-                <button
-                    onClick={() => setBullish(true)}
-                >
-                    Bullish
-                </button>
-                <button
-                    //!! NOT WORKING WHEN YOU SET IT TO FALSE ON UPDATE -- BACKEND ERRORS
-                    onClick={() => setBullish(false)}
-                >
-                    Bearish
-                </button>
-            </div>
-            <div>
-                <div></div>
-                <div>
+            <div id="updateModalDiv">
+                <div id="updateCommentHeader">
+                    <div id="updateCommentHeaderA">Changed your mind?</div>
+                    <div id="updateCommentHeaderB">Update your comment below</div>
+                </div>
+                <div id="updateCommentTextAreaDiv">
+                    <textarea
+                        onChange={(e) => setText(e.target.value)}
+                        value={text}
+                        id="updateCommentTextArea"
+                    ></textarea>
+                </div>
+                <div id="updateButtons">
                     <button
-                        onClick={handleSubmit}
-                        disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
+                        onClick={() => setBullish(true)}
+                        className={bullish ? 'isActiveG' : 'isNotActive'}
                     >
-                        Submit Your Comment
+                        Bullish
                     </button>
+                    <button
+                        onClick={() => setBullish(false)}
+                        className={!bullish ? 'isActiveR' : 'isNotActive'}
+                    >
+                        Bearish
+                    </button>
+                </div>
+                <div>
+                    <div id="nothingDiv"></div>
+                    <div id="submitUpdateCommentButtonDiv">
+                        <button
+                            onClick={handleSubmit}
+                            disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
+                            id="submitUpdateCommentButton"
+                        >
+                            Submit Your Comment
+                        </button>
+                    </div>
                 </div>
             </div>
         </>

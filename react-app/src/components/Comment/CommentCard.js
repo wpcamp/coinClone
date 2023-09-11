@@ -67,7 +67,7 @@ export default function CommentCard() {
                             modalComponent={<CreateCommentModal cryptoId={match.id} />} />
                     </span>}
                     <div id="scrollComment">
-                        {coinComments?.map((comment) => (
+                        {coinComments?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))?.map((comment) => (
                             <div id="commentDiv">
                                 <div key={comment.id}>
                                     <div id="commentInfoDiv">
@@ -77,7 +77,7 @@ export default function CommentCard() {
                                         </div>
                                         {comment.bullish === true ? <div id="bullishTag"> Bullish </div> : <div id="bearishTag">Bearish</div>}
                                     </div>
-                                    <div>
+                                    <div id="actionButtonsCommentDiv">
                                         {sessionUser.id === comment?.userId && <span className="commentModalContainer">
                                             <OpenModalButton
                                                 buttonText="Delete comment"

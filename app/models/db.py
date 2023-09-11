@@ -90,7 +90,7 @@ class Comment(db.Model):
     crypto_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("cryptos.id")), nullable=False)
     text = db.Column(db.String(800), nullable=False)
-    bullish = db.Column(db.Boolean, nullable=False)
+    bullish = db.Column(db.Boolean)
     created_at = db.Column(db.Date, nullable=False)
     updated_at = db.Column(db.Date, nullable=False)
 

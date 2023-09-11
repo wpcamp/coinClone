@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import { thunkRemoveComment, thunkGetComments } from "../../store/comment";
 import { useParams } from "react-router-dom";
 import coins from './coins';
+import './Comment.css'
 
 
 function DeleteCommentModal({ commentId, cryptoId }) {
@@ -17,7 +18,7 @@ function DeleteCommentModal({ commentId, cryptoId }) {
         closeModal()
     }
 
-    console.log("heres cryptoId inside delete", cryptoId);
+    // console.log("heres cryptoId inside delete", cryptoId);
 
     const handleDelete = async (e, commentId) => {
         e.preventDefault();
@@ -30,9 +31,13 @@ function DeleteCommentModal({ commentId, cryptoId }) {
     return (
         <>
             <div>
-                <span>Are you sure you want to delete your comment?</span>
-                <button onClick={(e) => { handleDelete(e, commentId).then(dispatch(thunkGetComments(cryptoId))) }}>Yes, delete my comment</button>
-                <button onClick={handleKeep} >No, keep my comment</button>
+                <div>
+                    <p id="deleteHeaderA">Are you sure you want to delete your comment?</p>
+                </div>
+                <div id="deleteButtonDiv">
+                    <button id='submitUpdateCommentButton' onClick={(e) => { handleDelete(e, commentId).then(dispatch(thunkGetComments(cryptoId))) }}>Yes, delete my comment</button>
+                    <button id='submitUpdateCommentButton' onClick={handleKeep} >No, keep my comment</button>
+                </div>
             </div>
         </>
     )
