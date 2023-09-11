@@ -40,13 +40,13 @@ function UpdateCommentModal({ cryptoId, comment }) {
             </div>
             <div>
                 <button
-                    onClick={() => setBullish("True")}
+                    onClick={() => setBullish(true)}
                 >
                     Bullish
                 </button>
                 <button
                     //!! NOT WORKING WHEN YOU SET IT TO FALSE ON UPDATE -- BACKEND ERRORS
-                    onClick={() => setBullish("False")}
+                    onClick={() => setBullish(false)}
                 >
                     Bearish
                 </button>
@@ -56,7 +56,7 @@ function UpdateCommentModal({ cryptoId, comment }) {
                 <div>
                     <button
                         onClick={handleSubmit}
-                        disabled={text?.length <= 9 || (bullish !== "True" && bullish !== "False")}
+                        disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
                     >
                         Submit Your Comment
                     </button>

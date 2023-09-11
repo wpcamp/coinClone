@@ -7,6 +7,7 @@ import { CreateCommentModal } from "./CreateCommentModal";
 import { DeleteCommentModal } from "./DeleteCommentModal";
 import { UpdateCommentModal } from "./UpdateCommentModal";
 import coins from './coins';
+import "./Comment.css"
 
 
 export default function CommentCard() {
@@ -18,12 +19,14 @@ export default function CommentCard() {
     const [pastComment, setPastComment] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)
 
+
+
     const match = coins.find(coin => coin.symbol.toUpperCase() === cryptoSymbol.toUpperCase());
     const name = match ? match.name.toLowerCase() : null;
 
     useEffect(() => {
         const fetchComments = async () => {
-            await dispatch(thunkGetComments(match.id))
+            await dispatch(thunkGetComments(match?.id))
             setIsLoaded(true)
         }
         fetchComments()
@@ -45,39 +48,52 @@ export default function CommentCard() {
         }
     }, [comments, sessionUser])
 
-    console.log("Heres symbol:", cryptoSymbol);
-    console.log("Heres id:", match.id);
+    // console.log("Heres symbol:", cryptoSymbol);
+    // console.log("Heres id:", match.id);
     // console.log("heres the pastcomment value:", pastComment);
 
     const coinComments = comments?.comments
+    console.log("COIN COMMENTS: ", coinComments);
 
 
     return (
         <>
             {isLoaded && (
-                <>
-                    {!pastComment && <div>
+                <div id="fullCommentDiv">
+                    <div>Hear what the community thinks about {cryptoSymbol.toUpperCase()}:</div>
+                    {!pastComment && <span className="commentModalContainer">
                         <OpenModalButton
                             buttonText="Leave a comment"
                             modalComponent={<CreateCommentModal cryptoId={match.id} />} />
-                    </div>}
-                    {coinComments.map((comment) => (
-                        <div key={comment.id}>
-                            <p>{comment.text}</p>
-                            {comment.bullish ? <p>True</p> : <p>False</p>}
-                            {sessionUser.id === comment.userId &&
-                                <OpenModalButton
-                                    buttonText="Delete comment"
-                                    modalComponent={<DeleteCommentModal commentId={comment.id} cryptoId={match.id} />} /> 
-                            }
-                            {sessionUser.id === comment.userId &&
-                                <OpenModalButton
-                                    buttonText="Update comment"
-                                    modalComponent={<UpdateCommentModal comment={comment} cryptoId={match.id} />} /> 
-                            }
-                        </div>
-                    ))}
-                </>
+                    </span>}
+                    <div id="scrollComment">
+                        {coinComments?.map((comment) => (
+                            <div id="commentDiv">
+                                <div key={comment.id}>
+                                    <div id="commentInfoDiv">
+                                        <div id="commentTextContainer">
+                                            <div id="commentDate">{comment.createdAt.slice(4, 11)}</div>
+                                            <div>{comment.text}</div>
+                                        </div>
+                                        {comment.bullish === true ? <div id="bullishTag"> Bullish </div> : <div id="bearishTag">Bearish</div>}
+                                    </div>
+                                    <div>
+                                        {sessionUser.id === comment?.userId && <span className="commentModalContainer">
+                                            <OpenModalButton
+                                                buttonText="Delete comment"
+                                                modalComponent={<DeleteCommentModal commentId={comment.id} cryptoId={match.id} />} />
+                                        </span>}
+                                        {sessionUser.id === comment.userId && <span className="commentModalContainer">
+                                            <OpenModalButton
+                                                buttonText="Update comment"
+                                                modalComponent={<UpdateCommentModal comment={comment} cryptoId={match.id} />} />
+                                        </span>}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             )}
         </>
     )

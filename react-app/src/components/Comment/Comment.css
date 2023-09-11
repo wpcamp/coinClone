@@ -1,0 +1,64 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.commentModalContainer button{
+    background-color: rgb(0,82,255);
+    color: white;
+    border-radius: 5px;
+    padding: 2px 2px 2px 2px;
+    gap: 10px;
+}
+
+#commentDiv {
+    border: 1px solid lightgrey;
+    margin-bottom: 10px;
+    
+}
+
+#fullCommentDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    border-right: 1px solid lightgrey;
+    padding-right: 5px;
+}
+
+#scrollComment {
+    border: 1px solid black;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#commentInfoDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#bullishTag {
+    background-color: rgb(20,188,11);
+    border-radius: 20px;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    color: white;
+}
+
+#bearishTag {
+    background-color: rgb(240,97,109);
+    border-radius: 20px;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    color: white;
+}
+
+#commentDate {
+    font-size: 12px;
+    color: grey;
+}
+
+#commentTextContainer { 
+    margin-left: 5px;
+    margin-bottom: 5px;
+}

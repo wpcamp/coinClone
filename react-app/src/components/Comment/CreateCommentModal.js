@@ -46,8 +46,8 @@ function CreateCommentModal({cryptoId}) {
                 <textarea placeholder="Please write at least 10 characters" onChange={(e) => setText(e.target.value)}></textarea>
             </div>
             <div>
-                <button onClick={() => setBullish("True")}>Bullish</button>
-                <button onClick={() => setBullish("False")}>Bearish</button>
+                <button onClick={() => setBullish(true)}>Bullish</button>
+                <button onClick={() => setBullish(false)}>Bearish</button>
             </div>
 
             <div>
@@ -55,7 +55,7 @@ function CreateCommentModal({cryptoId}) {
 
                 </div>
                 <div>
-                    <button onClick={handleSubmit} disabled={text?.length <= 9 || (bullish !== "True" && bullish !== "False")}
+                    <button onClick={handleSubmit} disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
                     >Submit Your Comment</button>
                 </div>
             </div>

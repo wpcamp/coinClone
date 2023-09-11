@@ -1,23 +1,60 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
+import OpenModalButton from '../OpenModalButton';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
+import openWalletImage from './openwallet.png'
 
-function Navigation({ isLoaded }){
+
+function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
+	const dispatch = useDispatch()
+	const history = useHistory()
+
 
 	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">Home</NavLink>
-			</li>
-			{isLoaded && (
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
-		</ul>
+		<>
+			{isLoaded && (<div className='navBarDiv'>
+				<div id='logoHeader'>
+					<img id='navLogo' src={openWalletImage} onClick={() => {
+						history.push('/home')
+					}} />
+					<p id='headerText' onClick={() => {
+						history.push('/home')
+					}} >OpenWallet</p>
+				</div>
+				<div>
+					{!sessionUser && (
+						<>
+							<div id='actionButtonsDiv'>
+								<div className='actionButtonsK'>
+									<OpenModalButton
+										modalComponent={<SignupFormModal />}
+										buttonText={"Sign Up"} />
+								</div>
+								<div className='actionButtonsK'>
+									<OpenModalButton
+										modalComponent={<LoginFormModal />}
+										buttonText={"Sign In"} />
+								</div>
+							</div>
+						</>
+					)}
+				</div>
+				{isLoaded && sessionUser && (
+					<div id='profileButtonC'>
+						<i className="fa-solid fa-user fa-2xl" onClick={() => {
+							history.push('/account')
+						}} />
+					</div>
+				)}
+
+			</div>)}
+		</>
 	);
 }
 

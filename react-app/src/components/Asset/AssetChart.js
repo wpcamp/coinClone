@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkGetChartData } from '../../store/crypto';
 import { useParams } from 'react-router-dom';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import coins from './coins';
+import "./Asset.css"
 
 export default function AssetChart() {
     const dispatch = useDispatch();
@@ -82,7 +83,7 @@ export default function AssetChart() {
         <>
             {isLoaded ? (
                 <div>
-                    <div>
+                    <div id='intervalSelectDiv'>
                         <select
                             value={selectedInterval}
                             onChange={(e) => setSelectedInterval(e.target.value)}>
@@ -94,14 +95,16 @@ export default function AssetChart() {
                             <option value="90d">90d</option>
                         </select>
                     </div>
-                    <LineChart width={1000} height={600} data={finalData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-                        <Line type="monotone" dataKey="value" stroke="#82ca9d" dot={false}/>
-                        <CartesianGrid strokeDasharray="1 1" />
-                        <XAxis dataKey="time" />
-                        <YAxis domain={[min, max]} label={{ value: 'Price', angle: 0, position: 'insideLeft' }} tickFormatter={(value) => value.toFixed(2)}/>
-                        <Tooltip />
-                        <Legend />
-                    </LineChart>
+                    <ResponsiveContainer height={600} width={"100%"}>
+                        <LineChart data={finalData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+                            <Line type="monotone" dataKey="value" stroke="#82ca9d" dot={false} />
+                            <CartesianGrid strokeDasharray="1 1" />
+                            <XAxis dataKey="time" />
+                            <YAxis domain={[min, max]} label={{ value: 'Price', angle: 0, position: 'insideLeft' }} tickFormatter={(value) => value.toFixed(2)} />
+                            <Tooltip />
+                        </LineChart>
+                    </ResponsiveContainer>
+
                 </div>
             ) : (
                 <p>Loading Content...</p>

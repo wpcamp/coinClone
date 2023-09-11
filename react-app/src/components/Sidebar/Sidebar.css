@@ -1,0 +1,12 @@
+#sideBarDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 35px;
+}
+
+.sideBarButtons {
+    padding: 10px 10px;
+    border-radius: 10px;
+}

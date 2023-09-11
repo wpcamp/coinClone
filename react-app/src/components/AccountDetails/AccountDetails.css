@@ -1,0 +1,12 @@
+#fullPageDiv {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+#sideBarDivj {
+    margin-right: 25px;
+    border-right: 1px solid lightgray;
+    padding-right: 10px;
+    height: 100%;
+}
