@@ -23,7 +23,7 @@ function Watchlist() {
 
     return (
         <>
-            Hey
+            Hello
         </>
     );
 }

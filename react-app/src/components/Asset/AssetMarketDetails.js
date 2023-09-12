@@ -9,6 +9,7 @@ export default function AssetMarketDetails() {
     const dispatch = useDispatch()
     let { cryptoSymbol } = useParams()
     cryptoSymbol = cryptoSymbol.toUpperCase()
+    console.log("heres crypto symbol:", cryptoSymbol);
     const [isLoaded, setIsLoaded] = useState(false)
     const [selectedInterval, setSelectedInterval] = useState('24h');
     const data = useSelector(state => state.crypto.crypto)

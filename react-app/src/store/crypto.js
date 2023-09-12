@@ -1,5 +1,6 @@
 // Constant
 const GET_PRICE = "crypto/getPrice"
+const GET_PRICES = "crypto/getPrices"
 const GET_CHART_DATA = "crypto/getChartData"
 
 // Action Creator 
@@ -7,6 +8,13 @@ const getPrice = (cryptoSymbol) => {
     return {
         type: GET_PRICE,
         cryptoSymbol
+    }
+}
+
+const getPrices = (cryptoSymbols) => {
+    return {
+        type: GET_PRICES,
+        cryptoSymbols
     }
 }
 
@@ -19,6 +27,20 @@ const getChartData = (data) => {
 
 
 // Thunks
+
+export const thunkGetPrices = (cryptoSymbols) => async (dispatch) => {
+    const res = await fetch(`/api/coin/datum/${cryptoSymbols}`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    })
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(getPrice(data))
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
 
 export const thunkGetPrice = (cryptoSymbol) => async (dispatch) => {
     const res = await fetch(`/api/coin/data/${cryptoSymbol}`, {
@@ -69,6 +91,9 @@ const cryptoReducer = (state = initialState, action) => {
         case GET_CHART_DATA: {
             // console.log("HERES THE action.data:", action.data);
             return { ...state, chartData: action.data};
+        }
+        case GET_PRICES: {
+            return {...state, crypto: action.cryptoSymbols}
         }
         default: {
             return state
