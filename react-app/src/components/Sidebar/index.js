@@ -19,7 +19,7 @@ export default function Sidebar() {
         <div id='sideBarDiv'>
             <button className='sideBarButtons' onClick={()=> history.push('/home')}>Home</button>
             <button className='sideBarButtons'>My assets</button>
-            <button className='sideBarButtons'>My watchlist</button>
+            <button className='sideBarButtons' onClick={()=> history.push('/watchlist')}>My watchlist</button>
             <button className='sideBarButtons' onClick={()=> history.push('/account')}>My account</button>
             <button className='sideBarButtons' onClick={handleLogout}>Sign out</button>
         </div>

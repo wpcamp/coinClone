@@ -4,9 +4,22 @@
     height: 100%;
 }
 
-#sideBarDivj {
-    margin-right: 25px;
-    border-right: 1px solid lightgray;
-    padding-right: 10px;
-    height: 100%;
+#sideBarDivAccount {
+    margin-right: 200px;
+}
+
+#contentDiv button {
+    background-color: rgb(0, 82, 255);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+
+}
+
+#contentDiv button:hover {
+    background-color: #2980b9;
 }

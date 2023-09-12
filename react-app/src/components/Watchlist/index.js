@@ -5,25 +5,24 @@ import { useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 import Sidebar from '../Sidebar';
-
-
-
-
-
-
-
+import WatchlistCard from './Watchlist';
+import './Watchlist.css'
 
 function Watchlist() {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch()
     const history = useHistory()
 
-
-
-
     return (
         <>
-            Hello
+            <div id='fullPageDiv'>
+                <div id='sideBarDivWatchlist' >
+                    <Sidebar />
+                </div>
+                <div>
+                    <WatchlistCard />
+                </div>
+            </div>
         </>
     );
 }

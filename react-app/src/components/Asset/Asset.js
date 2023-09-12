@@ -15,7 +15,7 @@ export default function Asset() {
     return (
         <>
             <div className='fullPageDiv'>
-                <div id="sideBarDivf">
+                <div id="sideBarDivAsset">
                     <Sidebar />
                 </div>
                 <div id="contentDiv">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -16,10 +16,13 @@ import Asset from "./components/Asset/Asset";
 import HomeNotLogged from "./components/Home/HomeNotLogged";
 import Sidebar from "./components/Sidebar";
 import WatchlistCard from "./components/Watchlist/Watchlist";
+import Watchlist from "./components/Watchlist";
+import HomeLoggedIn from "./components/Home/HomeLogged";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const sessionUser = useSelector(state => state.session.user)
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -30,10 +33,11 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/home">
-            <HomeNotLogged />
+            {sessionUser && <HomeLoggedIn />}
+            {!sessionUser && <HomeNotLogged />}
           </Route>
           <ProtectedRoute exact path='/watchlist'>
-            <WatchlistCard />
+            <Watchlist />
           </ProtectedRoute>
           <Route path="/login" >
             <LoginFormPage />

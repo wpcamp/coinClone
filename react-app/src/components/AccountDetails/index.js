@@ -18,7 +18,7 @@ export default function AccountDetails() {
     return (
         <>
             <div id='fullPageDiv'>
-                <div id='sideBarDivj'>
+                <div id='sideBarDivAccount' >
                     <Sidebar />
                 </div>
                 <div id='contentDiv'>

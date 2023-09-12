@@ -1,0 +1,83 @@
+#sideBarDivWatchlist {
+    margin-right: 200px;
+}
+
+.watchlistCardContainer {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.watchlistHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.watchlistTitle {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.watchlistUpdateButton {
+    margin-left: 10px;
+}
+
+
+.coinTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+.coinTable th,
+.coinTable td {
+    padding: 10px;
+    text-align: center;
+}
+
+.coinTable th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+#watchlistUpdateDivM button {
+    background-color: rgb(0, 82, 255);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+#watchlistUpdateDivM button:hover {
+    background-color: #2980b9
+}
+
+.coinTable button {
+    background-color: rgb(0, 82, 255);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+
+}
+
+.coinTable button:hover {
+    background-color: #2980b9;
+}
+
+.emptyWatchlistMessage,
+.checkOutAssetsMessage,
+.loadingMessage {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+

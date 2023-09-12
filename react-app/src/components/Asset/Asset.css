@@ -34,12 +34,11 @@
     width: 100%;
 }
 
-#sideBarDivf {
-    border-right: 1px solid lightgray;
-    margin-right: 25px;
-    padding-right: 10px;
-}
 
 #intervalSelectDiv {
     margin-right: 20px;
+}
+
+#sideBarDivAsset {
+    margin-right: 200px;
 }
