@@ -1,0 +1,90 @@
+/* Apply styles to the main container */
+#main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+#footer {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid #dadada;
+    border-bottom: .5px solid #dadada;
+    padding: 60px 30px;
+}
+
+
+
+#footer-copyright {
+    color: #828282;
+    display: flex;
+    justify-content: end;
+    padding: 30px;
+    font-size: 13px;
+}
+
+
+
+#footer-logo-text {
+    font-size: 30px;
+    margin-right: 50px;
+}
+
+/* #footerModal button {
+    background-color: white;
+    color: black;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: -6px;
+    font-weight: 300;
+} */
+
+#footer-col-1 {
+    display: flex;
+    gap: 50px;
+}
+
+/* .footer-right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+} */
+
+.footer-right-header {
+    font-size: 16pt;
+    padding-right: 15px;
+    color: darkgray;
+    padding-bottom: 20px;
+}
+
+.footer-col {
+    display: flex;
+    width: 1fr;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.footer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-weight: lighter;
+}
+
+.footer-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-links {
+    font-size: 14pt;
+    display: flex;
+    gap: 15px;
+    margin-left: 50px;
+}

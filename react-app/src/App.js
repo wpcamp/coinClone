@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
+import SignupFormPage from "./components/SignupFormPage/SignupCard";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
@@ -13,12 +13,22 @@ import AccountDetails from "./components/AccountDetails";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AssetHeader from "./components/Asset/AssetHeader";
 import Asset from "./components/Asset/Asset";
-import Home from "./components/Home";
+import WalletPortfolio from "./components/Wallet/WalletPortfolio";
 import Sidebar from "./components/Sidebar";
+import WatchlistCard from "./components/Watchlist/Watchlist";
+import Watchlist from "./components/Watchlist";
+import HomeNotLogged from "./components/Home/HomeNotLogged";
+import HomeLoggedIn from "./components/Home/HomeLogged";
+import Footer from "./components/Footer";
+import OpenModalButton from "./components/OpenModalButton";
+import LoginFormModal from "./components/LoginFormModal";
+import SignUpPage from "./components/SignupFormPage";
+import TopCoins from "./components/AllAssets/TopCoins";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const sessionUser = useSelector(state => state.session.user)
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -29,13 +39,17 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/home">
-            <Home/>
+            {sessionUser && <HomeLoggedIn />}
+            {!sessionUser && <HomeNotLogged />}
           </Route>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
+          <ProtectedRoute exact path='/watchlist'>
+            <Watchlist />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/assets'>
+            <TopCoins/>
+          </ProtectedRoute>
           <Route path="/signup">
-            <SignupFormPage />
+            <SignUpPage />
           </Route>
           <ProtectedRoute exact path='/account'>
             <AccountDetails />
@@ -48,6 +62,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

@@ -1,12 +1,38 @@
-#fullPageDiv {
+.account-details-container {
     display: flex;
     flex-direction: row;
     height: 100%;
 }
 
-#sideBarDivj {
-    margin-right: 25px;
-    border-right: 1px solid lightgray;
-    padding-right: 10px;
-    height: 100%;
+.sidebar-container {
+    margin-right: 50px;
+}
+
+.content-container {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.logout-button {
+    background-color: rgb(0, 82, 255);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.logout-button:hover {
+    background-color: #2980b9;
 }

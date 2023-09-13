@@ -3,11 +3,15 @@ import thunk from 'redux-thunk';
 import session from './session'
 import cryptoReducer from './crypto';
 import commentsReducer from './comment'
+import watchlistReducer from './watchlist';
+import walletReducer from './wallet';
 
 const rootReducer = combineReducers({
   session,
   crypto: cryptoReducer,
-  comments: commentsReducer
+  comments: commentsReducer,
+  watchlist: watchlistReducer,
+  wallet: walletReducer
 });
 
 

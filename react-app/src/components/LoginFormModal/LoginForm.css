@@ -1,0 +1,57 @@
+#demoUserButton {
+    background-color: rgb(0, 82, 255);
+    color: white;
+    border-radius: 15px;
+    padding: 5px 5px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+#demoUserButtonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top: 2px solid lightgrey;
+    margin-top: 25px;
+    width: 200px;
+    margin-left: 95px;
+
+}
+
+#loginButtonC {
+    background-color: rgb(0, 82, 255);
+    color: white;
+    border-radius: 15px;
+    padding: 5px 5px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    width: 150px;
+    margin-left: 120px;
+}
+
+#logInFormDi {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+#logInFormDivIn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 120px;
+    gap: 20px;
+}
+
+#logInFormDivIn input{
+    border-radius: 15px;
+    border: 1px solid silver;
+    padding-left: 5px;
+}
+
+
+.loginFormTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

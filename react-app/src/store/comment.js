@@ -45,11 +45,11 @@ export const thunkGetComments = (cryptoId) => async (dispatch) => {
     })
     if (res.ok) {
         const comments = await res.json()
-        console.log("im in the thunk : ", comments)
+        // console.log("im in the thunk : ", comments)
         dispatch(getComments(comments))
     } else {
         const errors = await res.json()
-        console.log("im in the errors");
+        // console.log("im in the errors");
         return errors
     }
 }
