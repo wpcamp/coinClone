@@ -4,7 +4,6 @@ import { thunkGetPrice } from '../../store/crypto';
 import { thunkCreateWatchlist, thunkGetWatchlist } from '../../store/watchlist';
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-
 import coins from './coins'
 
 
@@ -27,11 +26,6 @@ export default function AssetHeader() {
         }
     }
 
-    console.log("inside asset header,", watchlist);
-
-
-
-
     let matchingId
     for (let i = 0; i < coins.length; i++) {
         if (coins[i].symbol == cryptoSymbol.toLowerCase()) {
@@ -48,9 +42,6 @@ export default function AssetHeader() {
             }
         }
     }
-
-
-    console.log('YESYSYSRS id:', inWatchlist);
 
     useEffect(() => {
         dispatch(thunkGetPrice(cryptoSymbol))

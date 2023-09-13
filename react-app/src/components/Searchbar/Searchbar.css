@@ -1,0 +1,28 @@
+#searchBarFull {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    margin-right: 400px;
+}
+
+#searchInputDiv input{
+    width: 300px;
+    height: 35px;
+    border-radius: 20px;
+    border: 1px solid silver;
+    padding-left: 15px;
+}
+
+#searchInputDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+#submitSearchButton button{
+    border: none;
+    background-color: white;
+    font-size: 17px;
+    margin-top: 8px;
+    padding-right: 10px;
+
+}

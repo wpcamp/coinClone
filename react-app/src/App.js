@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
+import SignupFormPage from "./components/SignupFormPage/SignupCard";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
@@ -13,11 +13,17 @@ import AccountDetails from "./components/AccountDetails";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AssetHeader from "./components/Asset/AssetHeader";
 import Asset from "./components/Asset/Asset";
-import HomeNotLogged from "./components/Home/HomeNotLogged";
+import WalletPortfolio from "./components/Wallet/WalletPortfolio";
 import Sidebar from "./components/Sidebar";
 import WatchlistCard from "./components/Watchlist/Watchlist";
 import Watchlist from "./components/Watchlist";
+import HomeNotLogged from "./components/Home/HomeNotLogged";
 import HomeLoggedIn from "./components/Home/HomeLogged";
+import Footer from "./components/Footer";
+import OpenModalButton from "./components/OpenModalButton";
+import LoginFormModal from "./components/LoginFormModal";
+import SignUpPage from "./components/SignupFormPage";
+import TopCoins from "./components/AllAssets/TopCoins";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,23 +45,29 @@ function App() {
           <ProtectedRoute exact path='/watchlist'>
             <Watchlist />
           </ProtectedRoute>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
+          {/* <Route path="/login" >
             <SignupFormPage />
+            <OpenModalButton
+              modalComponent={<LoginFormModal />} />
+          </Route> */}
+          <ProtectedRoute exact path='/assets'>
+            <TopCoins/>
+          </ProtectedRoute>
+          <Route path="/signup">
+            <SignUpPage />
           </Route>
           <ProtectedRoute exact path='/account'>
             <AccountDetails />
           </ProtectedRoute>
-          <ProtectedRoute exact path='/assets/:cryptoSymbol'>
+          <Route exact path='/assets/:cryptoSymbol'>
             <Asset />
-          </ProtectedRoute>
+          </Route>
           <Route>
             <h1>Page does not exist</h1>
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

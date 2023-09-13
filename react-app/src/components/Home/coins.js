@@ -351,4 +351,5 @@ const coins = [
     }
 ]
 
+
 export default coins

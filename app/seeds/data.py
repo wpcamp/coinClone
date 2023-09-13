@@ -134,28 +134,28 @@ wallets = [
     {
         'user_id': 1,
         'crypto_id': 1,
-        'quantity': 500,
+        'quantity': 5,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     },
     {
         'user_id': 1,
         'crypto_id': 2,
-        'quantity': 250,
+        'quantity': 15,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     },
     {
         'user_id': 1,
         'crypto_id': 3,
-        'quantity': 70,
+        'quantity': 4000,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     },
     {
         'user_id': 1,
         'crypto_id': 4,
-        'quantity': 1000,
+        'quantity': 100000000,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     },
@@ -169,7 +169,7 @@ wallets = [
     {
         'user_id': 2,
         'crypto_id': 1,
-        'quantity': 800,
+        'quantity': 8,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     },

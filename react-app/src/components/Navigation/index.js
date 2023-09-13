@@ -8,6 +8,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import openWalletImage from './openwallet.png'
+import Searchbar from '../Searchbar/Searchbar';
 
 
 function Navigation({ isLoaded }) {
@@ -45,6 +46,7 @@ function Navigation({ isLoaded }) {
 						</>
 					)}
 				</div>
+				{isLoaded && sessionUser && <Searchbar />}
 				{isLoaded && sessionUser && (
 					<div id='profileButtonC'>
 						<i className="fa-solid fa-user fa-2xl" onClick={() => {
