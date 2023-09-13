@@ -17,7 +17,7 @@ export default function Sidebar() {
     return (
         <>
             <div id='sideBarDiv'>
-                <button className='sideBarButtons' onClick={() => history.push('/home')}><i className="fa-solid fa-house"></i> Home</button>
+                <button className='sideBarButtons' onClick={() => history.push('/')}><i className="fa-solid fa-house"></i> Home</button>
                 <button className='sideBarButtons' onClick={() => history.push('/assets')}><i className="fa-solid fa-chart-simple"></i> All Assets</button>
                 <button className='sideBarButtons' onClick={() => history.push('/watchlist')}><i className="fa-solid fa-binoculars"></i> Watchlist</button>
                 <button className='sideBarButtons' onClick={() => history.push('/account')}><i className="fa-solid fa-user"></i> Account</button>

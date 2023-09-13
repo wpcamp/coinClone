@@ -38,7 +38,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/home">
+          <Route exact path="/">
             {sessionUser && <HomeLoggedIn />}
             {!sessionUser && <HomeNotLogged />}
           </Route>

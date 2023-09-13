@@ -18,7 +18,7 @@ export default function Footer() {
             <div id="footer">
                 <div id='footer-col-1'>
                     <img id='navLogo' src={openWalletImage} onClick={() => {
-                        history.push('/home')
+                        history.push('/')
                     }} />
                 </div>
                 <div className='footer-right'>

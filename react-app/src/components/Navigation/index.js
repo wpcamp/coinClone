@@ -22,10 +22,10 @@ function Navigation({ isLoaded }) {
 			{isLoaded && (<div className='navBarDiv'>
 				<div id='logoHeader'>
 					<img id='navLogo' src={openWalletImage} onClick={() => {
-						history.push('/home')
+						history.push('/')
 					}} />
 					<p id='headerText' onClick={() => {
-						history.push('/home')
+						history.push('/')
 					}} >OpenWallet</p>
 				</div>
 				<div>
