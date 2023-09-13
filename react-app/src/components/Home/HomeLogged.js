@@ -21,8 +21,6 @@ export default function HomeLoggedIn() {
     const history = useHistory()
 
 
-
-
     return (
         <>
             <div id='homePageFullDiv'>

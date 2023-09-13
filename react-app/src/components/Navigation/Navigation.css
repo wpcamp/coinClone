@@ -17,6 +17,7 @@
 #navLogo {
   width: 70px;
   height: 70px;
+  cursor: pointer;
 }
 
 #actionButtonsDiv {
@@ -33,11 +34,13 @@
   font-size: 15px;
   margin-top: 15px;
   margin-right: 15px;
+  cursor: pointer;
 }
 
 #logoHeader {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 #headerText {

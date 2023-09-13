@@ -36,36 +36,46 @@ function LoginFormModal() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
+      <div className="loginFormTitle">
+        <h1 >Log In</h1>
+      </div>
+      <div>
+        <form id='logInFormDi'onSubmit={handleSubmit}>
+          <ul className="errorList">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <div id='logInFormDivIn'>
 
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-      <div id='demoUserButtonDiv'>
-        <button id='demoUserButton' onClick={handleDemoUser}>
+          <label className="formLabel">
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="formInput"
+            />
+          </label>
+          <label className="formLabel">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="formInput"
+            />
+          </label>
+          </div>
+          <button type="submit" id="loginButtonC">
+            Log In
+          </button>
+        </form>
+      </div>
+      <div id="demoUserButtonDiv">
+        <button id="demoUserButton" onClick={handleDemoUser}>
           Log In as Demo User
         </button>
       </div>

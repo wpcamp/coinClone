@@ -22,7 +22,7 @@
 
 .assetChartC {
     width: 100%;
-    height:500px;
+    height: 500px;
 }
 
 .fullPageDiv {
@@ -41,4 +41,45 @@
 
 #sideBarDivAsset {
     margin-right: 200px;
+}
+
+#topDiv button {
+    background-color: rgb(0, 82, 255);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+}
+
+.dropdown-list li {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background-color: #e0e0e0;
 }

@@ -15,7 +15,7 @@ function Watchlist() {
 
     return (
         <>
-            <div id='fullPageDiv'>
+            <div id='fullPageDivP'>
                 <div id='sideBarDivWatchlist' >
                     <Sidebar />
                 </div>

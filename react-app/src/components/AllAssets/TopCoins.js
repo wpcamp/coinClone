@@ -16,7 +16,6 @@ import './TopCoins.css'
 
 export default function TopCoins() {
     const sessionUser = useSelector(state => state.session.user);
-    const wallets = useSelector(state => state.wallet.wallet.wallets)
     const crypto = useSelector(state => state.crypto)
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()

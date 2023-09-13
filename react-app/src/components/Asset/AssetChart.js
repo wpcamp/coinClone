@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { thunkGetChartData } from '../../store/crypto';
 import { useParams } from 'react-router-dom';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PropagateLoader } from 'react-spinners';
 import coins from './coins';
 import "./Asset.css"
 
 export default function AssetChart() {
     const dispatch = useDispatch();
     const chartData = useSelector(state => state.crypto.chartData);
-
 
     const { cryptoSymbol } = useParams();
 
@@ -62,7 +62,6 @@ export default function AssetChart() {
         fetchChartData();
     }, [dispatch, name, selectedInterval, startTime, endTime]);
 
-    // console.log("HERE IS THE COMPONENT DATA:", chartData);
 
     const finalData = []
     for (let i = 0; i < chartData.length; i++) {
@@ -72,9 +71,6 @@ export default function AssetChart() {
             value,
         });
     }
-    // console.log("heres the initial data: ", new Date(chartData[0][0]));
-    // console.log("heres regular chart data: ", chartData[0]);
-    console.log('heres that final data: ', finalData[0]);
 
     const min = Math.min(...finalData.map(dataPoint => dataPoint.value));
     const max = Math.max(...finalData.map(dataPoint => dataPoint.value));
@@ -107,7 +103,9 @@ export default function AssetChart() {
 
                 </div>
             ) : (
-                <p>Loading Content...</p>
+                <div className='loader-container'>
+                        <PropagateLoader color='#36D7B7' size={15} />
+                    </div>
             )}
         </>
     );

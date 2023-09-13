@@ -33,9 +33,7 @@ function Navigation({ isLoaded }) {
 						<>
 							<div id='actionButtonsDiv'>
 								<div className='actionButtonsK'>
-									<OpenModalButton
-										modalComponent={<SignupFormModal />}
-										buttonText={"Sign Up"} />
+									<button onClick={()=> history.push('/signup')}>Sign Up</button>
 								</div>
 								<div className='actionButtonsK'>
 									<OpenModalButton

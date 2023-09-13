@@ -1,14 +1,28 @@
-#fullPageDiv {
+.account-details-container {
     display: flex;
     flex-direction: row;
     height: 100%;
 }
 
-#sideBarDivAccount {
+.sidebar-container {
     margin-right: 50px;
 }
 
-#contentDiv button {
+.content-container {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.logout-button {
     background-color: rgb(0, 82, 255);
     color: #ffffff;
     border: none;
@@ -17,9 +31,8 @@
     border-radius: 5px;
     cursor: pointer;
     margin-right: 15px;
-
 }
 
-#contentDiv button:hover {
+.logout-button:hover {
     background-color: #2980b9;
 }

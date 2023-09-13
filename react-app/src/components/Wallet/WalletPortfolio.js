@@ -82,7 +82,7 @@ export default function WalletPortfolio() {
 
     return (
         <>
-            {isLoaded && coinData ?
+            {isLoaded && coinData && coinData.every((coin) => coin !== undefined)?
                 (
                     <div>
                         <div>

@@ -45,11 +45,6 @@ function App() {
           <ProtectedRoute exact path='/watchlist'>
             <Watchlist />
           </ProtectedRoute>
-          {/* <Route path="/login" >
-            <SignupFormPage />
-            <OpenModalButton
-              modalComponent={<LoginFormModal />} />
-          </Route> */}
           <ProtectedRoute exact path='/assets'>
             <TopCoins/>
           </ProtectedRoute>
@@ -59,9 +54,9 @@ function App() {
           <ProtectedRoute exact path='/account'>
             <AccountDetails />
           </ProtectedRoute>
-          <Route exact path='/assets/:cryptoSymbol'>
+          <ProtectedRoute exact path='/assets/:cryptoSymbol'>
             <Asset />
-          </Route>
+          </ProtectedRoute>
           <Route>
             <h1>Page does not exist</h1>
           </Route>

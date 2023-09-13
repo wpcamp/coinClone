@@ -19,9 +19,11 @@
 }
 
 #commentDiv {
-    border-bottom: 1px solid lightgrey;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
-
 }
 
 #fullCommentDiv {
@@ -29,13 +31,11 @@
     flex-direction: column;
     width: 100%;
     gap: 15px;
-    /* border-right: 1px solid lightgrey; */
     padding-right: 5px;
 }
 
 #scrollComment {
-    border: 1px solid black;
-    max-height: 300px;
+    max-height: 340px;
     overflow-y: auto;
 }
 
@@ -48,7 +48,7 @@
 #bullishTag {
     background-color: rgb(20, 188, 11);
     border-radius: 20px;
-    padding: 5px 5px 5px 8px;
+    padding: 5px 8px;
     margin: 5px 6px 5px 5px;
     width: 55px;
     color: white;
@@ -82,14 +82,12 @@
 
 .isNotActive {
     background-color: grey;
-
 }
 
 #updateButtons {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
 }
 
 #updateButtons button {
@@ -101,7 +99,6 @@
     width: 175px;
     color: white;
 }
-
 
 #updateCommentHeader {
     display: flex;
@@ -134,7 +131,6 @@
     border-top: 2px solid lightgrey;
     width: 75%;
     margin-left: 45px;
-
 }
 
 #submitUpdateCommentButton {
@@ -150,7 +146,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
 }
 
 #updateCommentTextArea {
@@ -159,7 +154,7 @@
     resize: none;
 }
 
-#deleteHeaderA{
+#deleteHeaderA {
     font-size: 23px;
     margin: 25px 30px;
 }
@@ -187,4 +182,20 @@
     margin-top: 25px;
     width: 175px;
     color: white;
+}
+
+
+#commentCardBackground {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin: 20px;
+}
+
+#commentsHeadingA {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import coins from './coins' 
+import { useModal } from "../../context/Modal";
+import coins from './coins'
+import './Asset.css'
 
 export default function AssetSelect() {
     const history = useHistory();
     const [selectedItem, setSelectedItem] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const { closeModal } = useModal();
 
     const handleItemClick = (coinName) => {
         setIsOpen(false);
@@ -14,9 +17,10 @@ export default function AssetSelect() {
             setSelectedItem(selectedCoin.symbol);
             history.push(`/assets/${selectedCoin.symbol}`);
         }
+        closeModal()
     };
 
-    
+
 
     const coinNames = [
         'bitcoin', 'ethereum', 'tether',
@@ -47,18 +51,13 @@ export default function AssetSelect() {
 
     return (
         <div className="dropdown">
-            <button onClick={() => setIsOpen(!isOpen)}>
-                {selectedItem ? selectedItem : 'Select an asset'}
-            </button>
-            {isOpen && (
-                <ul className="dropdown-list">
-                    {coinNames.map((coinName) => (
-                        <li key={coinName} onClick={() => handleItemClick(coinName)}>
-                            {coinName}
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <ul className="dropdown-list">
+                {coinNames.map((coinName) => (
+                    <li key={coinName} onClick={() => handleItemClick(coinName)}>
+                        {coinName}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

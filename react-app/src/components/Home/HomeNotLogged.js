@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
+import AssetSelect from '../Asset/AssetSelect';
 import './Home.css'
 
 
@@ -38,9 +39,7 @@ function HomeNotLogged() {
                                 <input id='firstSegInput' type='text' placeholder='Enter your email address'></input>
                             </span>
                             <span id='firstSegSignUpButton'>
-                                <OpenModalButton
-                                    modalComponent={<SignupFormModal />}
-                                    buttonText={"Sign Up"} />
+                            <button onClick={()=> history.push('/signup')}>Sign Up</button>
                             </span>
                         </div>
                     </div>
@@ -54,33 +53,35 @@ function HomeNotLogged() {
                             Simply and securely buy, sell, and manage hundreds of cryptocurrencies.
                         </div>
                         <div id='moreAssetButtonDiv'>
-                            <button id='moreAssetButton'>See more assets</button>
+                            <OpenModalButton
+                                modalComponent={<AssetSelect />}
+                                buttonText={"See more assets"} />
                         </div>
                     </div>
                     <div id='assetBoxDiv'>
-                        <div className="box" onClick={()=> {
+                        <div className="box" onClick={() => {
                             history.push('/assets/btc')
-                        }}><img className='coinLogos' src='./coinLogos/btc.png'/></div>
+                        }}><img className='coinLogos' src='./coinLogos/btc.png' /></div>
 
-                        <div className="box" onClick={()=> {
+                        <div className="box" onClick={() => {
                             history.push('/assets/eth')
-                        }}><img className='coinLogos' src='./coinLogos/ethereum.png'/></div>
+                        }}><img className='coinLogos' src='./coinLogos/ethereum.png' /></div>
 
-                        <div className="box" onClick={()=> {
+                        <div className="box" onClick={() => {
                             history.push('/assets/sol')
-                        }}><img className='coinLogos' src='./coinLogos/solana.png'/></div>
+                        }}><img className='coinLogos' src='./coinLogos/solana.png' /></div>
 
-                        <div className="box" onClick={()=> {
+                        <div className="box" onClick={() => {
                             history.push('/assets/wbnb')
-                        }}><img className='coinLogos' src='./coinLogos/bnb.png'/></div>
+                        }}><img className='coinLogos' src='./coinLogos/bnb.png' /></div>
 
-                        <div className="box" onClick={()=> {
+                        <div className="box" onClick={() => {
                             history.push('/assets/doge')
-                        }}><img className='coinLogos' src='./coinLogos/Doge-icon.png'/></div>
+                        }}><img className='coinLogos' src='./coinLogos/Doge-icon.png' /></div>
 
-                        <div className="box" onClick={()=> {
+                        <div className="box" onClick={() => {
                             history.push('/assets/ada')
-                        }}><img className='coinLogos' src='./coinLogos/ada.png'/></div>
+                        }}><img className='coinLogos' src='./coinLogos/ada.png' /></div>
                     </div>
                 </div>
                 <div id='thirdSeg'>

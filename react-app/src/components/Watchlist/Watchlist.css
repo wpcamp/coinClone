@@ -1,9 +1,5 @@
-#sideBarDivWatchlist {
-    /* margin-right: 200px; */
-}
-
 .watchlistCardContainer {
-    border-radius: 10px;
+    margin-left: 50px;
     padding: 20px;
 }
 
@@ -19,10 +15,18 @@
     font-weight: bold;
 }
 
+#fullPageDivP {
+    display: flex;
+    flex-direction: row;
+}
+
 .watchlistUpdateButton {
     margin-left: 10px;
 }
 
+.watchlistButtonA {
+    margin-left: 35px;
+}
 
 .coinTable {
     width: 100%;
@@ -56,6 +60,8 @@
     background-color: #2980b9
 }
 
+
+
 .coinTable button {
     background-color: rgb(0, 82, 255);
     color: #ffffff;
@@ -80,4 +86,22 @@
     margin-top: 20px;
 }
 
+.checkOutAssetsMessage{
+    background-color: rgb(0, 82, 255);
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+#emptyWatchlistDivA {
+    margin-left: 50px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 

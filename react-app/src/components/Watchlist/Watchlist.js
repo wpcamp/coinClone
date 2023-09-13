@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
+import { PropagateLoader } from 'react-spinners';
 import { thunkGetWatchlist, thunkRemoveWatchlist } from '../../store/watchlist';
 import { thunkGetPrice, thunkGetPrices } from '../../store/crypto';
 import coins from './coins'
@@ -20,8 +21,6 @@ function WatchlistCard() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [watchlistCoins, setWatchlistCoins] = useState([]);
 
-
-    console.log("heres the sessionUser: ", sessionUser);
 
     function formatValuation(num) {
         if (num >= 1000000000) {
@@ -45,10 +44,8 @@ function WatchlistCard() {
     }
 
     useEffect(() => {
-
         dispatch(thunkGetWatchlist(sessionUser.id));
         setIsLoaded(true);
-
     }, [dispatch, sessionUser]);
 
     const watchlistCoinIds = {}
@@ -57,15 +54,11 @@ function WatchlistCard() {
         for (let j = 0; j < watchlist?.length; j++) {
             if (watchlist[j]?.cryptoId === coins[i]?.id) {
                 const watchlistId = watchlist[j]?.id
-                // console.log("watchlistId: ", watchlistId);
                 const coinSymbol = coins[i]?.symbol
-                // console.log('coinsymbol:', coinSymbol);
                 watchlistCoinIds[coinSymbol] = watchlistId
             }
         }
     }
-
-    console.log("heres the important thing", watchlistCoinIds);
 
     useEffect(() => {
         const output = [];
@@ -74,14 +67,12 @@ function WatchlistCard() {
                 if (watchlist[j]?.cryptoId === coins[i]?.id) {
                     const coinSymbol = coins[i]?.symbol
                     output.push(coinSymbol);
-
                 }
             }
         }
         setWatchlistCoins(output);
     }, [watchlist]);
 
-    console.log("WATCH LIST IDS", watchlistCoinIds);
 
     useEffect(() => {
         if (watchlistCoins.length > 0) {
@@ -92,12 +83,6 @@ function WatchlistCard() {
             fetchPrices().then(() => setIsLoaded(true));
         }
     }, [dispatch, watchlistCoins]);
-
-
-    // console.log("here is watchlist:", watchlist);
-    // console.log("HERES THE OUTPUT", watchlistCoins.join(",").toUpperCase());
-    // console.log("heres crypto,", crypto);
-
 
 
     const handleDelete = async (watchlistId) => {
@@ -111,11 +96,10 @@ function WatchlistCard() {
         ...crypto[symbol],
     }));
 
-    console.log("heres crypto array", cryptoArray);
 
     return (
         <>
-            {isLoaded ? (
+            {isLoaded && cryptoArray.length > 0 ? (
                 watchlist.length ? (
                     <div className="watchlistCardContainer">
                         <div className="watchlistHeader">
@@ -146,29 +130,29 @@ function WatchlistCard() {
                                 {cryptoArray?.map((coinData) => {
                                     return (
 
-                                            <tr key={coinData.symbol}>
-                                                <td>{coinData.symbol}</td>
-                                                <td className='wCoinPrice'>${formatPrice(coinData.price)}</td>
-                                                <td className='wCoin1h'>
-                                                    {coinData.percent_change_1h > 0
-                                                        ? "+" + coinData.percent_change_1h?.toFixed(3) + "%"
-                                                        : coinData.percent_change_1h?.toFixed(3) + "%"}
-                                                </td>
-                                                <td className='wCoin24h'>
-                                                    {coinData.percent_change_24h > 0
-                                                        ? "+" + coinData.percent_change_24h?.toFixed(3) + "%"
-                                                        : coinData.percent_change_24h?.toFixed(3) + "%"}
-                                                </td>
-                                                <td className='wCoin7d'>
-                                                    {coinData.percent_change_7d > 0
-                                                        ? "+" + coinData.percent_change_7d?.toFixed(3) + "%"
-                                                        : coinData.percent_change_7d?.toFixed(3) + "%"}
-                                                </td>
-                                                <td className='wCoinMC'>{formatValuation(coinData.market_cap)}</td>
-                                                <td className='wCoinVolume'>{formatValuation(coinData.volume_24h)}</td>
-                                                <button onClick={() => history.push(`/assets/${coinData.symbol}`)}>Go to asset</button>
-                                                <button onClick={() => handleDelete(watchlistCoinIds[coinData.symbol.toLowerCase()])}>Remove from watchlist</button>
-                                            </tr>
+                                        <tr key={coinData.symbol}>
+                                            <td>{coinData.symbol}</td>
+                                            <td className='wCoinPrice'>${formatPrice(coinData.price)}</td>
+                                            <td className='wCoin1h'>
+                                                {coinData.percent_change_1h > 0
+                                                    ? "+" + coinData.percent_change_1h?.toFixed(3) + "%"
+                                                    : coinData.percent_change_1h?.toFixed(3) + "%"}
+                                            </td>
+                                            <td className='wCoin24h'>
+                                                {coinData.percent_change_24h > 0
+                                                    ? "+" + coinData.percent_change_24h?.toFixed(3) + "%"
+                                                    : coinData.percent_change_24h?.toFixed(3) + "%"}
+                                            </td>
+                                            <td className='wCoin7d'>
+                                                {coinData.percent_change_7d > 0
+                                                    ? "+" + coinData.percent_change_7d?.toFixed(3) + "%"
+                                                    : coinData.percent_change_7d?.toFixed(3) + "%"}
+                                            </td>
+                                            <td className='wCoinMC'>{formatValuation(coinData.market_cap)}</td>
+                                            <td className='wCoinVolume'>{formatValuation(coinData.volume_24h)}</td>
+                                            <button className='watchlistButtonA' onClick={() => history.push(`/assets/${coinData.symbol}`)}>Go to asset</button>
+                                            <button className='watchlistButtonB' onClick={() => handleDelete(watchlistCoinIds[coinData.symbol.toLowerCase()])}>Remove from watchlist</button>
+                                        </tr>
                                     );
                                 })}
                             </tbody>
@@ -176,12 +160,17 @@ function WatchlistCard() {
                     </div>
                 ) : (
                     <>
-                        <div className="emptyWatchlistMessage">You aren't currently watching any coins</div>
-                        <div className="checkOutAssetsMessage">Check out all assets</div>
+                        <div id='emptyWatchlistDivA'>
+                            <div className="emptyWatchlistMessage">You aren't currently watching any coins</div>
+                            <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Check out all assets</button>
+                        </div>
                     </>
                 )
             ) : (
-                <div className="loadingMessage">Loading...</div>
+
+                <div className='loader-container'>
+                    <PropagateLoader color='#36D7B7' size={15} />
+                </div>
             )}
         </>
     );
