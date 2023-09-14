@@ -28,10 +28,10 @@ export default function Footer() {
                             <div>Will Campbell</div>
                             <div className='footer-links'>
                                 <a href="https://www.linkedin.com/in/will-campbell22/" target="_blank" rel="noopener noreferrer">
-                                    <i class="fa-brands fa-linkedin"></i>
+                                    <i className="fa-brands fa-linkedin"></i>
                                 </a>
                                 <a href="https://github.com/wpcamp" target="_blank" rel="noopener noreferrer">
-                                    <i class="fa-brands fa-github"></i>
+                                    <i className="fa-brands fa-github"></i>
                                 </a>
                             </div>
                         </div>

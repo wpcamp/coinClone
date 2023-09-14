@@ -67,6 +67,5 @@ function CreateCommentModal({ cryptoId }) {
     )
 }
 
-
 export { CreateCommentModal };
 

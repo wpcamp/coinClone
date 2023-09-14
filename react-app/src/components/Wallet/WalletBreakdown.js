@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Tooltip, Legend, ResponsiveContainer, Pie, PieChart, Cell } from 'recharts';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import OpenModalButton from '../OpenModalButton';
 import { thunkGetWallet } from '../../store/wallet';
 import { thunkGetPrice2 } from '../../store/crypto';
-import SignupFormModal from '../SignupFormModal';
 import { PropagateLoader } from 'react-spinners';
 import coins from '../Asset/coins.js';
 import '../Home/Home.css';
@@ -17,9 +13,8 @@ export default function WalletBreakdown() {
     const crypto = useSelector((state) => state.crypto);
     const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch();
-    const history = useHistory();
 
-    console.log("heres my wallets:", crypto);
+    // console.log("heres my wallets:", crypto);
 
     const walletCoins = coins
         .map((coin) => {

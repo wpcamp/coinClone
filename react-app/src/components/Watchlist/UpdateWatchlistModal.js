@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import './Watchlist.css'
-import { thunkGetWatchlist, thunkUpdateWatchlist } from "../../store/watchlist";
+import { thunkUpdateWatchlist } from "../../store/watchlist";
 import { authenticate } from "../../store/session";
 
 
 function UpdateWatchlistModal() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const history = useHistory()
     const [title, setTitle] = useState(sessionUser.title);
     const { closeModal } = useModal();
 

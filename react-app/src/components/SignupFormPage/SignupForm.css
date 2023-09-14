@@ -104,8 +104,9 @@
 }
 
 .inputError {
-    border: 1px solid red; /* Red border for error */
-  }
+    border: 1px solid red;
+    /* RED BORDER FOR ERRORS */
+}
 
 #signupimage-t {
     font-size: 30px;

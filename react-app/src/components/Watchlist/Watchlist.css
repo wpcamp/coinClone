@@ -49,8 +49,8 @@
     background-color: rgb(0, 82, 255);
     color: #ffffff;
     border: none;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 6px 10px;
+    font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
     margin-right: 15px;
@@ -60,18 +60,16 @@
     background-color: #2980b9
 }
 
-
-
 .coinTable button {
     background-color: rgb(0, 82, 255);
     color: #ffffff;
     border: none;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 6px 10px;
+    font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
     margin-right: 15px;
-
+    margin-top: 2px;
 }
 
 .coinTable button:hover {

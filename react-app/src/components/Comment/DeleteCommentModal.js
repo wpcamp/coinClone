@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkRemoveComment, thunkGetComments } from "../../store/comment";
-import { useParams } from "react-router-dom";
-import coins from './coins';
 import './Comment.css'
 
 

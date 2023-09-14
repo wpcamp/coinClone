@@ -31,7 +31,7 @@ export default function Searchbar() {
                     />
                     <div id="submitSearchButton">
                         <button onClick={handleSearch}>
-                            <div><i class="fa-solid fa-magnifying-glass"></i></div>
+                            <div><i className="fa-solid fa-magnifying-glass"></i></div>
                         </button>
                     </div>
                 </div>

@@ -1,24 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
-import SignupFormModal from '../SignupFormModal';
 import AssetSelect from '../Asset/AssetSelect';
 import './Home.css'
 
 
-
-
-
-
 function HomeNotLogged() {
-    const sessionUser = useSelector(state => state.session.user);
-    const dispatch = useDispatch()
     const history = useHistory()
-
-
-
 
     return (
         <>
@@ -86,8 +74,6 @@ function HomeNotLogged() {
                 </div>
                 <div id='thirdSeg'>
                     <div>
-
-
                         <div>
                             Learn more about cryptocurrencies and the technology that powers them:
                         </div>
@@ -101,11 +87,7 @@ function HomeNotLogged() {
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
-
         </>
     );
 }

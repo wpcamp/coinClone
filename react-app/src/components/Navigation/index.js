@@ -1,11 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import openWalletImage from './openwallet.png'
 import Searchbar from '../Searchbar/Searchbar';
@@ -13,9 +10,7 @@ import Searchbar from '../Searchbar/Searchbar';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
-	const dispatch = useDispatch()
 	const history = useHistory()
-
 
 	return (
 		<>

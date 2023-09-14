@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Tooltip, Legend, ResponsiveContainer, Pie, PieChart, Cell } from 'recharts';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import OpenModalButton from '../OpenModalButton';
-import { thunkGetWallet } from '../../store/wallet';
 import { thunkGetPrice2 } from '../../store/crypto';
-import SignupFormModal from '../SignupFormModal';
 import { PropagateLoader } from 'react-spinners';
 import coins from '../Asset/coins.js'
-import '../Wallet/Wallet.css'
 import Sidebar from '../Sidebar';
+import '../Wallet/Wallet.css'
 import './TopCoins.css'
 
 
@@ -20,7 +16,6 @@ export default function TopCoins() {
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
-
 
     const walletCoinsA = [
         'bitcoin', 'ethereum', 'tether',
