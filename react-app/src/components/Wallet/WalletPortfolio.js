@@ -22,7 +22,7 @@ export default function WalletPortfolio() {
 
 
 
-    console.log("heres my wallets:", crypto);
+    // console.log("heres my wallets:", crypto);
 
 
 
@@ -76,7 +76,7 @@ export default function WalletPortfolio() {
             };
         }
     })
-    console.log("heres the really really good stuf", coinData);
+
     const colorList = ["#FF5733", "#3498DB", "#2ECC71", "#FF33FF", "#FFA500"];
 
 

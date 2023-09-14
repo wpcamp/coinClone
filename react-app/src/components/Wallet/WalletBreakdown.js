@@ -33,15 +33,15 @@ export default function WalletBreakdown() {
             }
             return null;
         })
-        .filter((walletCoin) => walletCoin !== null); s
+        .filter((walletCoin) => walletCoin !== null); 
 
-    console.log("HERES THE WALLET COINS: ", walletCoins);
+    // console.log("HERES THE WALLET COINS: ", walletCoins);
 
     const finalWallet = walletCoins.map((walletCoin) => walletCoin.coinSymbol).join("%2C");
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log('Fetching data...');
+            // console.log('Fetching data...');
             await dispatch(thunkGetWallet(sessionUser.id));
 
             await dispatch(thunkGetPrice2(finalWallet));
@@ -68,7 +68,7 @@ export default function WalletBreakdown() {
         return null;
     });
 
-    console.log("heres the really really good stuff", coinData);
+
     const colorList = ["#FF5733", "#3498DB", "#2ECC71", "#FF33FF", "#FFA500"];
 
     function formatPrice(value) {
@@ -124,7 +124,7 @@ export default function WalletBreakdown() {
                             <tbody>
                                 {coinData?.map((coin) => {
                                     const matchingCrypto = Object.entries(crypto.crypto).find(([name]) => coin?.name === name);
-                                    console.log("HERES MATCHING COINS", matchingCrypto);
+                                    // console.log("HERES MATCHING COINS", matchingCrypto);
                                     return (
                                         <tr key={coin?.symbol}>
                                             <td>{coin?.name.charAt(0).toUpperCase() + coin?.name.slice(1)}</td>
