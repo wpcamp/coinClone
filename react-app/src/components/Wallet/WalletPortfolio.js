@@ -49,8 +49,8 @@ export default function WalletPortfolio() {
 
     const finalWallet = walletCoinsA.join("%2C");
 
-    // console.log("heres wallet coins", walletCoinsB);
-    // console.log("and here sthe good stuff", finalWallet);
+
+
 
 
     useEffect(() => {

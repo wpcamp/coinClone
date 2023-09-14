@@ -33,7 +33,7 @@ export default function WalletBreakdown() {
             }
             return null;
         })
-        .filter((walletCoin) => walletCoin !== null); // Exclude null values
+        .filter((walletCoin) => walletCoin !== null); s
 
     console.log("HERES THE WALLET COINS: ", walletCoins);
 
@@ -43,10 +43,10 @@ export default function WalletBreakdown() {
         const fetchData = async () => {
             console.log('Fetching data...');
             await dispatch(thunkGetWallet(sessionUser.id));
-            console.log('Wallet data fetched.');
+
             await dispatch(thunkGetPrice2(finalWallet));
-            console.log('Price data fetched.');
-            setIsLoaded(true); // Set isLoaded to true only after both actions have completed.
+
+            setIsLoaded(true); 
         };
 
         fetchData();

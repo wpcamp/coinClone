@@ -21,12 +21,12 @@ function SignupFormPage({ passedEmail }) {
 
 
 
-  if (sessionUser) return <Redirect to="/home" />;
+  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const buyingPower = Math.floor(Math.random() * (2000 - 500 + 1)) + 500;
+
     if (password === confirmPassword) {
       const data = await dispatch(signUp(username, email, password, firstName, lastName));
       if (data) {
