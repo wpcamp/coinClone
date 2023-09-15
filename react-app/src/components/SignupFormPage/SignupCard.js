@@ -5,10 +5,11 @@ import { signUp } from "../../store/session";
 
 import './SignupForm.css';
 
-function SignupFormPage({ passedEmail }) {
+function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
+  const storedEmail = localStorage.getItem("userEmail");
+  const [email, setEmail] = useState(storedEmail || "");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("")
@@ -17,15 +18,13 @@ function SignupFormPage({ passedEmail }) {
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-
-
+  const [usernameError, setUsernameError] = useState(""); 
+  const [passwordError, setPasswordError] = useState("")
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
 
     if (password === confirmPassword) {
       const data = await dispatch(signUp(username, email, password, firstName, lastName));
@@ -34,6 +33,27 @@ function SignupFormPage({ passedEmail }) {
       }
     } else {
       setErrors(['Confirm Password field must be the same as the Password field']);
+    }
+  };
+
+
+  const handleUsernameChange = (e) => {
+    const newUsername = e.target.value;
+    setUsername(newUsername);
+    if (newUsername.length < 6) {
+      setUsernameError("Username must be 6 characters long");
+    } else {
+      setUsernameError(""); 
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    if (newPassword.length < 6) {
+      setPasswordError("Password must be more than 5 characters");
+    } else {
+      setPasswordError("");
     }
   };
 
@@ -48,7 +68,7 @@ function SignupFormPage({ passedEmail }) {
         </div>
         <form onSubmit={handleSubmit}>
           <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            {errors && <div className="errorText">{errors}</div>}
           </ul>
           <div className="signUpFormatA">
             <div>
@@ -65,7 +85,6 @@ function SignupFormPage({ passedEmail }) {
                 />
               </div>
             </div>
-
             <div>
               <div>
                 Last Name
@@ -89,8 +108,8 @@ function SignupFormPage({ passedEmail }) {
               placeholder="Must be unique"
               onChange={(e) => setEmail(e.target.value)}
               required
-              className={errors.some((error) => error.includes("email :")) ? "inputError" : ""}
             />
+            {console.log("ERRORS", errors)}
           </div>
 
           <div className="signUpFormatB">
@@ -98,12 +117,12 @@ function SignupFormPage({ passedEmail }) {
             <input
               type="text"
               value={username}
-              placeholder="Minimum 6 characters"
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              onChange={handleUsernameChange}
               required
             />
+            {usernameError && <div className="errorText">{usernameError}</div>} 
           </div>
-
 
           <div className="signUpFormatB">
             Password
@@ -111,9 +130,10 @@ function SignupFormPage({ passedEmail }) {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               required
             />
+            {passwordError && <div className="errorText">{passwordError}</div>}
           </div>
 
           <div className="signUpFormatB">
@@ -131,10 +151,10 @@ function SignupFormPage({ passedEmail }) {
             <label>I certify that I understand this is not real</label>
           </div>
           <div id='submitBuDi'>
-            <button id='submitButtonS' type="submit" disabled={!input || username.length < 6}>Create  account</button>
+            <button id='submitButtonS' type="submit" disabled={!input || username.length < 6 || !username || !firstName || !lastName}>Create  account</button>
           </div>
-        </form >
-      </div >
+        </form>
+      </div>
     </>
   );
 }

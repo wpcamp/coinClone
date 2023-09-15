@@ -65,13 +65,11 @@ function UpdateCommentModal({ cryptoId, comment }) {
                 <div>
                     <div id="nothingDiv"></div>
                     <div id="submitUpdateCommentButtonDiv">
-                        <button
-                            onClick={handleSubmit}
-                            disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
-                            id="submitUpdateCommentButton"
-                        >
-                            Submit Your Comment
-                        </button>
+                    <button
+                        onClick={handleSubmit}
+                        disabled={text?.length <= 9 || bullish === undefined}
+                        id={text?.length <= 9 || bullish === undefined ? 'isNotActiveB' : 'submitUpdateCommentButton'}
+                    >Submit Your Comment</button>
                     </div>
                 </div>
             </div>

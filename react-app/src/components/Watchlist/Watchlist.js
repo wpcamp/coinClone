@@ -8,7 +8,6 @@ import { thunkGetPrices } from '../../store/crypto';
 import { UpdateWatchlistModal } from './UpdateWatchlistModal';
 import coins from './coins'
 
-
 function WatchlistCard() {
     const dispatch = useDispatch();
     const watchlist = useSelector(state => state.watchlist.watchlist.watchlists ?? []);
@@ -19,7 +18,6 @@ function WatchlistCard() {
     const [watchlistCoins, setWatchlistCoins] = useState([]);
     const watchlistCoinIds = {}
 
-
     function formatValuation(num) {
         if (num >= 1000000000) {
             return (num / 1000000000).toFixed(1) + 'B';
@@ -29,6 +27,7 @@ function WatchlistCard() {
             return num?.toString();
         }
     }
+
     function formatPrice(value) {
         const baseVal = 1;
         if (value) {
@@ -41,52 +40,59 @@ function WatchlistCard() {
     }
 
     const handleDelete = async (watchlistId) => {
-        await dispatch(thunkRemoveWatchlist(watchlistId))
-        await dispatch(thunkGetWatchlist(sessionUser.id))
+        await dispatch(thunkRemoveWatchlist(watchlistId));
+        await dispatch(thunkGetWatchlist(sessionUser.id));
     };
-
-
 
     useEffect(() => {
         dispatch(thunkGetWatchlist(sessionUser.id));
+        setIsLoaded(true);
     }, [dispatch, sessionUser]);
 
-    useEffect(() => {
-        const coinSymbolToWatchlistId = {};
-        const watchlistCoinsArray = [];
+    for (let i = 0; i < coins.length; i++) {
+        for (let j = 0; j < watchlist?.length; j++) {
+            if (watchlist[j]?.cryptoId === coins[i]?.id) {
+                const watchlistId = watchlist[j]?.id
+                const coinSymbol = coins[i]?.symbol
+                watchlistCoinIds[coinSymbol] = watchlistId
+            }
+        }
+    }
 
-        if (coins && watchlist) {
-            for (let i = 0; i < coins.length; i++) {
-                for (let j = 0; j < watchlist.length; j++) {
-                    if (watchlist[j]?.cryptoId === coins[i]?.id) {
-                        const watchlistId = watchlist[j]?.id;
-                        const coinSymbol = coins[i]?.symbol;
-                        coinSymbolToWatchlistId[coinSymbol] = watchlistId;
-                        watchlistCoinsArray.push(coinSymbol);
-                    }
+    useEffect(() => {
+        const output = [];
+        for (let i = 0; i < coins.length; i++) {
+            for (let j = 0; j < watchlist?.length; j++) {
+                if (watchlist[j]?.cryptoId === coins[i]?.id) {
+                    const coinSymbol = coins[i]?.symbol
+                    output.push(coinSymbol);
                 }
             }
         }
-        setWatchlistCoins(watchlistCoinsArray);
+        setWatchlistCoins(output);
+    }, [watchlist]);
 
-        if (watchlistCoinsArray.length > 0) {
-            const searchParams = watchlistCoinsArray.join(",").toUpperCase();
-            dispatch(thunkGetPrices(searchParams));
-            setIsLoaded(true);
+    useEffect(() => {
+        if (watchlistCoins.length > 0) {
+            const searchParams = watchlistCoins.join(",").toUpperCase();
+            dispatch(thunkGetPrices(searchParams))
+            setIsLoaded(true)
         }
-    }, [dispatch, coins, watchlist]);
+    }, [dispatch, watchlistCoins]);
 
     const cryptoArray = Object.keys(crypto).map(symbol => ({
         symbol,
         ...crypto[symbol],
     }));
 
-    // console.log("heres cryptoArray", cryptoArray);
-    // console.log("HERES SOMETHING GOOD<", watchlistCoins);
+    console.log("HERES THE THING:", cryptoArray);
+
+
+
 
     return (
         <>
-            {isLoaded && cryptoArray.length === watchlistCoins.length && cryptoArray.every(coinData => coinData !== undefined)? (
+            {isLoaded && cryptoArray.length !== 69 && cryptoArray.length === watchlistCoins.length ? (
                 watchlist.length ? (
                     <div className="watchlistCardContainer">
                         <div className="watchlistHeader">
@@ -148,20 +154,27 @@ function WatchlistCard() {
                         </table>
                     </div>
                 ) : (
-                    <>
-                        <div id='emptyWatchlistDivA'>
-                            <div className="emptyWatchlistMessage">You aren't currently watching any coins</div>
-                            <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Check out all assets</button>
-                        </div>
-                    </>
+                    <div id='emptyWatchlistDivA'>
+                        <div className="emptyWatchlistMessage">You aren't currently watching any coins</div>
+                        <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Check out all assets</button>
+                    </div>
                 )
             ) : (
-                <div className='loader-container'>
-                    <PropagateLoader color='#36D7B7' size={15} />
-                </div>
+                <>
+                    <div id='emptyWatchlistDivB'>
+                        <div className="emptyWatchlistMessage">You either aren't currently watching any coins or our real-time crypto prices are rendering, in the meantime feel free to click the button below! </div>
+                        <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Check out all assets</button>
+                    </div>
+                    <div className='loader-container'>
+                        <PropagateLoader color='#36D7B7' size={15} />
+                    </div>
+                </>
             )}
         </>
     );
 }
 
 export default WatchlistCard;
+
+
+

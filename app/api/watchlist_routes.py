@@ -77,7 +77,7 @@ def delete_watchlist(id):
         db.session.commit()
         return {"message": "success"}, 200
     else:
-        return {"message": "Comment couldn't be found"}, 404
+        return {"message": "Watchlist item couldn't be found"}, 404
     
 
 #get all coins on watchlist for a user

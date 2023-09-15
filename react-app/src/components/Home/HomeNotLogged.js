@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 import OpenModalButton from '../OpenModalButton';
 import AssetSelect from '../Asset/AssetSelect';
 import './Home.css'
@@ -7,6 +8,14 @@ import './Home.css'
 
 function HomeNotLogged() {
     const history = useHistory()
+    const [email, setEmail] = useState("");
+
+    const handleEmailSubmit = (e) => {
+        e.preventDefault();
+        localStorage.setItem("userEmail", email);
+        history.push("/signup");
+    };
+
 
     return (
         <>
@@ -24,10 +33,17 @@ function HomeNotLogged() {
                         </div>
                         <div id='firstSegSignUpDiv'>
                             <span>
-                                <input id='firstSegInput' type='text' placeholder='Enter your email address'></input>
+                                <input
+                                    id="firstSegInput"
+                                    type="text"
+                                    placeholder="satoshi.nakamoto@bitcoin.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+
                             </span>
                             <span id='firstSegSignUpButton'>
-                            <button onClick={()=> history.push('/signup')}>Sign Up</button>
+                                <button onClick={handleEmailSubmit}>Sign Up</button>
                             </span>
                         </div>
                     </div>

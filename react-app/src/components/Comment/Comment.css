@@ -84,6 +84,7 @@
     background-color: grey;
 }
 
+
 #updateButtons {
     display: flex;
     flex-direction: row;
@@ -168,8 +169,12 @@
 
 #createCommentHeader {
     font-size: 23px;
-    margin: 40px 45px;
-    padding-left: 20px;
+    margin: 40px 55px;
+    padding-left: 90px;
+}
+
+#createButtons {
+    margin-left: 90px;
 }
 
 #createButtons button {
@@ -198,4 +203,19 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+#isNotActiveB {
+    background-color: grey;
+    border-radius: 15px;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 15px;
+}
+
+#noteDiv {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
 }

@@ -8,7 +8,7 @@ import './Comment.css'
 function CreateCommentModal({ cryptoId }) {
     const dispatch = useDispatch();
     const [text, setText] = useState("");
-    const [bullish, setBullish] = useState(null)
+    const [bullish, setBullish] = useState(undefined)
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
     const sessionUser = useSelector(state => state.session.user);
@@ -51,15 +51,19 @@ function CreateCommentModal({ cryptoId }) {
                     >Bullish</button>
                     <button
                         onClick={() => setBullish(false)}
-                        className={!bullish ? 'isActiveR' : 'isNotActive'}
+                        className={bullish === false ? 'isActiveR' : 'isNotActive'}
                     >Bearish</button>
                 </div>
             <div>
+                <div id="noteDiv">Note: You must indicate whether you are bullish or bearish on this project</div>
                 <div id="nothingDiv">
                 </div>
                 <div id="submitUpdateCommentButtonDiv">
-                    <button onClick={handleSubmit} disabled={text?.length <= 9 || (bullish !== true && bullish !== false)}
-                    id='submitUpdateCommentButton'
+                    
+                    <button
+                        onClick={handleSubmit}
+                        disabled={text?.length <= 9 || bullish === undefined}
+                        id={text?.length <= 9 || bullish === undefined ? 'isNotActiveB' : 'submitUpdateCommentButton'}
                     >Submit Your Comment</button>
                 </div>
             </div>
