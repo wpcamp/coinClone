@@ -7,6 +7,7 @@ import coins from '../Asset/coins.js'
 import Sidebar from '../Sidebar';
 import '../Wallet/Wallet.css'
 import './TopCoins.css'
+import { login } from '../../store/session';
 
 
 
@@ -79,9 +80,12 @@ export default function TopCoins() {
         ...crypto.crypto[name],
     }));
 
+
+    // console.log("HERES THE LENGTH:", coinDataArray.length);
+
     return (
         <>
-            {isLoaded && coinDataArray ?
+            {isLoaded && coinDataArray.length === 69 ?
                 (
                     <>
                         <div id='topCoinsFullD'>

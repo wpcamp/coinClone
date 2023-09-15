@@ -81,11 +81,12 @@ function WatchlistCard() {
         ...crypto[symbol],
     }));
 
-    console.log("heres cryptoArray", cryptoArray);
+    // console.log("heres cryptoArray", cryptoArray);
+    // console.log("HERES SOMETHING GOOD<", watchlistCoins);
 
     return (
         <>
-            {isLoaded && cryptoArray.length < 30 && cryptoArray.every(coinData => coinData !== undefined)? (
+            {isLoaded && cryptoArray.length === watchlistCoins.length && cryptoArray.every(coinData => coinData !== undefined)? (
                 watchlist.length ? (
                     <div className="watchlistCardContainer">
                         <div className="watchlistHeader">

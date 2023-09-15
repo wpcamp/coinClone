@@ -41,10 +41,11 @@ export default function WalletBreakdown() {
 
             await dispatch(thunkGetPrice2(finalWallet));
 
-            setIsLoaded(true); 
+            // setIsLoaded(true); 
         };
 
-        fetchData();
+        fetchData()
+        setIsLoaded(true)
     }, [dispatch, sessionUser, finalWallet]);
 
     const coinData = walletCoins.map((walletCoin) => {
@@ -90,10 +91,11 @@ export default function WalletBreakdown() {
         totalBalance += coin?.value;
     });
     const formattedBalance = totalBalance.toFixed(2);
+    console.log('heres coinData', coinData);
 
     return (
         <>
-            {isLoaded && coinData && coinData.every((coin) => coin !== undefined) ? (
+            {isLoaded && coinData && coinData.every((coin) => coin !== null) ? (
                 <>
                     <div id='portfolioBalDiv'>
                         <div id='portfolioBalText'>Total Portfolio Balance: ${parseFloat(formattedBalance).toLocaleString()}</div>
