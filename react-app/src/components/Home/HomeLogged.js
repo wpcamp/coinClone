@@ -1,37 +1,38 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import WalletPortfolio from '../Wallet/WalletPortfolio';
+import SideBar from '../Sidebar/index';
 import WalletBreakdown from '../Wallet/WalletBreakdown';
-import SideBar from '../Sidebar/index'
-import './Home.css'
-
-
-
-
-
-
+import WalletPortfolio from '../Wallet/WalletPortfolio';
+import TrendingCard from '../Trending';
+import BuyingPowerCard from '../Wallet/BuyingPower';
+import './Home.css';
 
 export default function HomeLoggedIn() {
-
     return (
-        <>
-            <div id='homePageFullDiv'>
-                <div id='homePageSideWal'>
-                    <SideBar />
-                </div>
+        <div id='homePageFullDiv'>
+            <div id='homePageSideWal'>
+                <SideBar />
+            </div>
+            <div id='contentDivHo'>
+
                 <div id='walletDivHome'>
-                    <div>
+                    <div id='walletBreakdownDiv'>
                         <WalletBreakdown />
                     </div>
-                    <div id='walletPortDiv'>
+                    <div id='buyingPowerCardDiv'>
+                        <BuyingPowerCard />
+                    </div>
+
+                </div>
+                <div id='trendingAndBuyingPowerDiv'>
+                    <div id='walletPortfolioDiv'>
+                        <p id='breakdownText'>Breakdown of your assets:</p>
                         <WalletPortfolio />
                     </div>
-                </div>
-                <div>
+                    <div id='trendingCardDiv'>
+                        <TrendingCard />
+                    </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
-

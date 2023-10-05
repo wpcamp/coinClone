@@ -6,6 +6,7 @@ import { PropagateLoader } from 'react-spinners';
 import coins from '../Asset/coins.js';
 import '../Home/Home.css';
 import './Wallet.css';
+import TrendingCard from '../Trending';
 
 export default function WalletBreakdown() {
     const sessionUser = useSelector((state) => state.session.user);
@@ -28,7 +29,7 @@ export default function WalletBreakdown() {
             }
             return null;
         })
-        .filter((walletCoin) => walletCoin !== null); 
+        .filter((walletCoin) => walletCoin !== null);
 
     // console.log("HERES THE WALLET COINS: ", walletCoins);
 
@@ -96,84 +97,79 @@ export default function WalletBreakdown() {
     return (
         <>
             {isLoaded && coinData && coinData.every((coin) => coin !== null) ? (
-                <>
+                <div id='fullWalletDiv'>
                     <div id='portfolioBalDiv'>
-                        <div id='portfolioBalText'>Total Portfolio Balance: ${parseFloat(formattedBalance).toLocaleString()}</div>
-                        <div></div>
-                    </div>
-                    <div id='cryptoHeadTab'>
-                        My Crypto:
-                    </div>
-                    <div>
-                        <table className='coinTable'>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Total Balance</th>
-                                    <th>Unit Price</th>
-                                    <th>Value</th>
-                                    <th>Portfolio Allocation</th>
-                                    <th>24h Change</th>
-                                    <th>Market Cap</th>
-                                    <th>24h Volume</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {coinData?.map((coin) => {
-                                    const matchingCrypto = Object.entries(crypto.crypto).find(([name]) => coin?.name === name);
-                                    // console.log("HERES MATCHING COINS", matchingCrypto);
-                                    return (
-                                        <tr key={coin?.symbol}>
-                                            <td>{coin?.name.charAt(0).toUpperCase() + coin?.name.slice(1)}</td>
-                                            <td className='xCoinBalance'> {coin?.quantity}</td>
-                                            <td className='xCoinPrice'>${formatPrice(coin?.price)}</td>
-                                            <td>${(coin?.price * coin?.quantity) > 0.1 ? parseFloat((coin?.price * coin?.quantity).toFixed(2)).toLocaleString() : formatPrice(coin?.price * coin?.quantity)}</td>
-                                            <td className='xCoinAllocation'>{(coin?.value / formattedBalance * 100) > 0.01 ? (coin?.value / formattedBalance * 100).toFixed(2) : formatPrice(coin?.value / formattedBalance * 100)}%</td>
-                                            <td className='xCoin24h'>
-                                                {matchingCrypto && matchingCrypto[1]?.usd_24h_change !== undefined
-                                                    ? (matchingCrypto[1]?.usd_24h_change > 0 ? "+" + matchingCrypto[1]?.usd_24h_change?.toFixed(3) + "%" : matchingCrypto[1]?.usd_24h_change?.toFixed(3) + "%")
-                                                    : "Loading..."}
-                                            </td>
-                                            <td className='xCoinMC'>{matchingCrypto && matchingCrypto[1]?.usd_market_cap !== undefined
-                                                ? formatValuation(matchingCrypto[1]?.usd_market_cap)
-                                                : "Loading..."}
-                                            </td>
-                                            <td className='xCoinVolume'>{matchingCrypto && matchingCrypto[1]?.usd_24h_vol !== undefined
-                                                ? formatValuation(matchingCrypto[1]?.usd_24h_vol)
-                                                : "Loading..."}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id='buyingPowerFull'>
-                        <div id='buyingPowerHead'>
-                        My Cash:
+                        <div id='portfolioBalText'>
+                            Total Portfolio Balance: ${parseFloat(formattedBalance).toLocaleString()}
                         </div>
-                        <table className='coinTable' id='buyingPowerTable'>
-                            <thead>
-                                <th>Name</th>
-                                <th>Balance</th>
-                            </thead>
-                            <tbody>
-                                <td>
-                                    USDC
-                                </td>
-                                <td>
-                                ${sessionUser.buyingPower}
-                                </td>
-                            </tbody>
-                        </table>
                     </div>
-                    
-                </>
-            ) : (
-                <div className='loader-container'>
-                    <PropagateLoader color='#36D7B7' size={15} />
+
+                    <div id='cryptoAndCashTables'>
+                        <div id='cryptoHeadTab'>My Crypto:</div>
+                        <div id='fullWalletD'>
+                            <table className='coinTable'>
+                                {/* Table headers */}
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Total Balance</th>
+                                        <th>Unit Price</th>
+                                        <th>Value</th>
+                                        <th>Portfolio Allocation</th>
+                                        <th>24h Change</th>
+                                        <th>Market Cap</th>
+                                        <th>24h Volume</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* Render cryptocurrency data */}
+                                    {coinData?.map((coin) => {
+                                        const matchingCrypto = Object.entries(crypto.crypto).find(([name]) => coin?.name === name);
+                                        return (
+                                            <tr key={coin?.symbol}>
+                                                <td>{coin?.name.charAt(0).toUpperCase() + coin?.name.slice(1)}</td>
+                                                <td className='xCoinBalance'>{coin?.quantity.toFixed(4)}</td>
+                                                <td className='xCoinPrice'>${formatPrice(coin?.price)}</td>
+                                                <td>
+                                                    ${(coin?.price * coin?.quantity) > 0.1
+                                                        ? parseFloat((coin?.price * coin?.quantity).toFixed(2)).toLocaleString()
+                                                        : formatPrice(coin?.price * coin?.quantity)}
+                                                </td>
+                                                <td className='xCoinAllocation'>
+                                                    {(coin?.value / formattedBalance * 100) > 0.01
+                                                        ? (coin?.value / formattedBalance * 100).toFixed(2)
+                                                        : formatPrice(coin?.value / formattedBalance * 100)}%
+                                                </td>
+                                                <td className='xCoin24h'>
+                                                    {matchingCrypto && matchingCrypto[1]?.usd_24h_change !== undefined
+                                                        ? (matchingCrypto[1]?.usd_24h_change > 0
+                                                            ? "+" + matchingCrypto[1]?.usd_24h_change?.toFixed(3) + "%"
+                                                            : matchingCrypto[1]?.usd_24h_change?.toFixed(3) + "%")
+                                                        : "Loading..."}
+                                                </td>
+                                                <td className='xCoinMC'>
+                                                    {matchingCrypto && matchingCrypto[1]?.usd_market_cap !== undefined
+                                                        ? formatValuation(matchingCrypto[1]?.usd_market_cap)
+                                                        : "Loading..."}
+                                                </td>
+                                                <td className='xCoinVolume'>
+                                                    {matchingCrypto && matchingCrypto[1]?.usd_24h_vol !== undefined
+                                                        ? formatValuation(matchingCrypto[1]?.usd_24h_vol)
+                                                        : "Loading..."}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+            ) : (
+                                        <div className='loader-container'>
+                                            <PropagateLoader color='#36D7B7' size={15} />
+                                        </div>
             )}
-        </>
-    );
+                                    </>
+                                    );
 }

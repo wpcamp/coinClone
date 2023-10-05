@@ -13,6 +13,7 @@
 .watchlistTitle {
     font-size: 24px;
     font-weight: bold;
+    margin-right: 5px;
 }
 
 #fullPageDivP {
@@ -26,6 +27,11 @@
 
 .watchlistButtonA {
     margin-left: 35px;
+}
+
+.watchlistButtonB {
+    margin-top: 15px;
+    cursor: pointer;
 }
 
 .coinTable {
@@ -90,7 +96,7 @@
     border: none;
     padding: 8px 12px;
     font-size: 14px;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     margin-right: 15px;
 }
@@ -125,4 +131,20 @@
 
 #emptyWatchlistDivB button {
     width: 150px;
+}
+
+
+#goToAddDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#watchlistLoaderDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: top;
+    align-items: center;
+    margin-top: 0px;
+    margin-left: 400px;
 }

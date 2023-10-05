@@ -1,3 +1,45 @@
-#supportedCoinTable {
-    margin-top: 50px;
+.coinTable {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
 }
+
+.coinTable th,
+.coinTable td {
+    padding: 10px;
+    text-align: center !important;
+    margin-right: 0px;
+}
+
+.coinTable th:first-child,
+.coinTable td:first-child {
+    padding-left: 20px;
+}
+
+#supportedCoinTable {
+    height: 800px;
+    overflow: auto;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+#topCoinsFullD {
+    display: flex;
+    flex-direction: row;
+    height: 900px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+#sideBarfullCoin {
+    height: 100%;
+    margin-right: 50px;
+}
+

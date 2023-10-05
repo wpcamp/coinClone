@@ -7,14 +7,16 @@ import { thunkGetWatchlist, thunkRemoveWatchlist } from '../../store/watchlist';
 import { thunkGetPrices } from '../../store/crypto';
 import { UpdateWatchlistModal } from './UpdateWatchlistModal';
 import coins from './coins'
+import './Watchlist.css'
 
-function WatchlistCard() {
+export default function WatchlistCard() {
     const dispatch = useDispatch();
     const watchlist = useSelector(state => state.watchlist.watchlist.watchlists ?? []);
     const sessionUser = useSelector(state => state.session.user);
     const crypto = useSelector(state => state.crypto.crypto);
     const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded2, setIsLoaded2] = useState(false);
     const [watchlistCoins, setWatchlistCoins] = useState([]);
     const watchlistCoinIds = {}
 
@@ -45,8 +47,13 @@ function WatchlistCard() {
     };
 
     useEffect(() => {
-        dispatch(thunkGetWatchlist(sessionUser.id));
-        setIsLoaded(true);
+        dispatch(thunkGetWatchlist(sessionUser.id)).then(() => {
+            // Check if watchlist contains any undefined values
+            const hasUndefinedValues = watchlist.some(item => item === undefined);
+            if (!hasUndefinedValues) {
+                setIsLoaded(true);
+            }
+        });
     }, [dispatch, sessionUser]);
 
     for (let i = 0; i < coins.length; i++) {
@@ -72,11 +79,30 @@ function WatchlistCard() {
         setWatchlistCoins(output);
     }, [watchlist]);
 
+    // useEffect(() => {
+    //     if (watchlistCoins.length > 0) {
+    //         const searchParams = watchlistCoins.join(",").toUpperCase();
+    //         dispatch(thunkGetPrices(searchParams)).then(() => setIsLoaded2(true))
+    //     } else {
+    //         setIsLoaded2(true)
+    //     }
+    // }, [dispatch, watchlistCoins]);
+
     useEffect(() => {
         if (watchlistCoins.length > 0) {
             const searchParams = watchlistCoins.join(",").toUpperCase();
             dispatch(thunkGetPrices(searchParams))
-            setIsLoaded(true)
+                .then(() => {
+                    // Set isLoaded2 to true when the data fetching is complete
+                    setIsLoaded2(true);
+                })
+                .catch((error) => {
+                    // Handle any errors here if needed
+                    console.error('Error fetching prices:', error);
+                });
+        } else {
+            // If watchlistCoins is empty, just set isLoaded2 to true
+            setIsLoaded2(true);
         }
     }, [dispatch, watchlistCoins]);
 
@@ -85,96 +111,86 @@ function WatchlistCard() {
         ...crypto[symbol],
     }));
 
-    console.log("HERES THE THING:", cryptoArray);
 
-
-
+    console.log("heres watchlist", Object.keys(crypto));
+    // console.log("heres crypto", crypto);
+    // Display a loading indicator while the data is loading
+    if (!isLoaded || !isLoaded2 || Object.keys(crypto).length > 50 || crypto.hasOwnProperty('created')) {
+        return (
+            <div className='loader-container' id='watchlistLoaderDiv'>
+                <PropagateLoader color='#36D7B7' size={15} />
+            </div>
+        );
+    }
 
     return (
-        <>
-            {isLoaded && cryptoArray.length !== 69 && cryptoArray.length === watchlistCoins.length ? (
-                watchlist.length ? (
-                    <div className="watchlistCardContainer">
-                        <div className="watchlistHeader">
-                            <div className="watchlistTitle">
-                                Watchlist: {sessionUser.title}
-                            </div>
-                            <div id='watchlistUpdateDivM'>
-                                <OpenModalButton
-                                    modalComponent={<UpdateWatchlistModal />}
-                                    buttonText={"Update watchlist title"}
-                                    className="watchlistUpdateButton"
-                                />
-                            </div>
-                        </div>
-                        <table className="coinTable">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>1h Change</th>
-                                    <th>24h Change</th>
-                                    <th>7d Change</th>
-                                    <th>Market Cap</th>
-                                    <th>Volume</th>
-                                    <th>    </th>
+        <div className="watchlistCardContainer">
+            <div className="watchlistHeader">
+                <div className="watchlistTitle">
+                    Watchlist: {sessionUser.title}
+                </div>
+                <div id='watchlistUpdateDivM'>
+                    <OpenModalButton
+                        modalComponent={<UpdateWatchlistModal />}
+                        buttonText={"Update watchlist title"}
+                        className="watchlistUpdateButton"
+                    />
+                </div>
+            </div>
+            {watchlist.length ? (
+                <table className="coinTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>1h Change</th>
+                            <th>24h Change</th>
+                            <th>7d Change</th>
+                            <th>Market Cap</th>
+                            <th>Volume</th>
+                            <th>    </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cryptoArray?.map((coinData) => {
+                            return (
+                                <tr key={coinData.symbol}>
+                                    <td>{coinData.symbol}</td>
+                                    <td className='wCoinPrice'>${formatPrice(coinData.price)}</td>
+                                    <td className='wCoin1h'>
+                                        {coinData.percent_change_1h > 0
+                                            ? "+" + coinData.percent_change_1h?.toFixed(3) + "%"
+                                            : coinData.percent_change_1h?.toFixed(3) + "%"}
+                                    </td>
+                                    <td className='wCoin24h'>
+                                        {coinData.percent_change_24h > 0
+                                            ? "+" + coinData.percent_change_24h?.toFixed(3) + "%"
+                                            : coinData.percent_change_24h?.toFixed(3) + "%"}
+                                    </td>
+                                    <td className='wCoin7d'>
+                                        {coinData.percent_change_7d > 0
+                                            ? "+" + coinData.percent_change_7d?.toFixed(3) + "%"
+                                            : coinData.percent_change_7d?.toFixed(3) + "%"}
+                                    </td>
+                                    <td className='wCoinMC'>{formatValuation(coinData.market_cap)}</td>
+                                    <td className='wCoinVolume'>{formatValuation(coinData.volume_24h)}</td>
+                                    <td id='goToAddDiv'>
+                                        <button className='watchlistButtonA' onClick={() => history.push(`/assets/${coinData.symbol}`)}>Go to asset</button>
+                                        <i className="fa-solid fa-delete-left watchlistButtonB" onClick={() => handleDelete(watchlistCoinIds[coinData.symbol.toLowerCase()])}></i>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {cryptoArray?.map((coinData) => {
-                                    return (
-                                        <tr key={coinData.symbol}>
-                                            <td>{coinData.symbol}</td>
-                                            <td className='wCoinPrice'>${formatPrice(coinData.price)}</td>
-                                            <td className='wCoin1h'>
-                                                {coinData.percent_change_1h > 0
-                                                    ? "+" + coinData.percent_change_1h?.toFixed(3) + "%"
-                                                    : coinData.percent_change_1h?.toFixed(3) + "%"}
-                                            </td>
-                                            <td className='wCoin24h'>
-                                                {coinData.percent_change_24h > 0
-                                                    ? "+" + coinData.percent_change_24h?.toFixed(3) + "%"
-                                                    : coinData.percent_change_24h?.toFixed(3) + "%"}
-                                            </td>
-                                            <td className='wCoin7d'>
-                                                {coinData.percent_change_7d > 0
-                                                    ? "+" + coinData.percent_change_7d?.toFixed(3) + "%"
-                                                    : coinData.percent_change_7d?.toFixed(3) + "%"}
-                                            </td>
-                                            <td className='wCoinMC'>{formatValuation(coinData.market_cap)}</td>
-                                            <td className='wCoinVolume'>{formatValuation(coinData.volume_24h)}</td>
-                                            <td>
-                                                <button className='watchlistButtonA' onClick={() => history.push(`/assets/${coinData.symbol}`)}>Go to asset</button>
-                                                <button className='watchlistButtonB' onClick={() => handleDelete(watchlistCoinIds[coinData.symbol.toLowerCase()])}>Remove from watchlist</button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
-                ) : (
-                    <div id='emptyWatchlistDivA'>
-                        <div className="emptyWatchlistMessage">You aren't currently watching any coins</div>
-                        <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Check out all assets</button>
-                    </div>
-                )
+                            );
+                        })}
+                    </tbody>
+
+                </table>
             ) : (
-                <>
-                    <div id='emptyWatchlistDivB'>
-                        <div className="emptyWatchlistMessage">You either aren't currently watching any coins or our real-time crypto prices are rendering, in the meantime feel free to click the button below! </div>
-                        <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Check out all assets</button>
-                    </div>
-                    <div className='loader-container'>
-                        <PropagateLoader color='#36D7B7' size={15} />
-                    </div>
-                </>
+                <div id='emptyWatchlistDivA'>
+                    <div className="emptyWatchlistMessage">You aren't currently watching any coins</div>
+                    <button className="checkOutAssetsMessage" onClick={() => history.push('/assets')}>Select an Asset</button>
+                </div>
             )}
-        </>
+        </div>
     );
 }
-
-export default WatchlistCard;
-
-
 

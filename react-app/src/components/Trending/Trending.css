@@ -1,0 +1,71 @@
+/* TrendingCard.css */
+
+/* Container for the entire TrendingCard component */
+.trending-card {
+    background-color: #f5f5f5; /* Background color */
+    width: 80%;
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the card */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle elevation effect */
+    text-align: center; /* Center the content */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Title styling */
+.trending-card h1 {
+    font-size: 24px; /* Font size for the title */
+    margin-bottom: 20px; /* Spacing below the title */
+}
+
+/* Carousel container */
+.carousel-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Distribute items evenly horizontally */
+}
+
+/* Carousel item container */
+.carousel-item {
+    background-color: #ffffff; /* Background color for the item */
+    border-radius: 10px; /* Rounded corners for the item */
+    padding: 20px; /* Spacing inside the item */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for each item */
+    text-align: center; /* Center the content */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for item change */
+}
+
+/* Styling for the item image */
+.carousel-item img {
+    max-width: 100%; /* Ensure the image fits within the container */
+    border-radius: 5px; /* Slightly rounded corners for the image */
+}
+
+/* Styling for item headings */
+.carousel-item h2 {
+    font-size: 20px; /* Font size for item headings */
+    margin-top: 10px; /* Spacing above the heading */
+}
+
+/* Styling for item details */
+.carousel-item p {
+    font-size: 16px; /* Font size for item details */
+    margin: 5px 0; /* Vertical spacing between details */
+}
+
+/* Carousel navigation buttons */
+.carousel-button {
+    background-color: #36D7B7; /* Button background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove button border */
+    border-radius: 50%; /* Circular shape for buttons */
+    width: 40px; /* Button width */
+    height: 40px; /* Button height */
+    font-size: 18px; /* Font size for buttons */
+    cursor: pointer; /* Add cursor pointer */
+    transition: background-color 0.3s ease-in-out; /* Smooth button hover effect */
+}
+
+/* Hover effect for buttons */
+.carousel-button:hover {
+    background-color: #2CAE9D; /* Button background color on hover */
+}

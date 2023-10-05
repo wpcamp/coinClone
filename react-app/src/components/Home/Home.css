@@ -40,12 +40,13 @@
 
 #firstSegSignUpButton button {
     background-color: rgb(0, 82, 255);
-    color: white;
-    border-radius: 40px;
-    padding: 15px 55px 15px 55px;
-    gap: 10px;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
     font-size: 20px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-right: 15px;
 }
 
 #secondSeg {
@@ -77,18 +78,19 @@
 
 #moreAssetButtonDiv button {
     background-color: rgb(0, 82, 255);
-    color: white;
-    border-radius: 30px;
-    padding: 10px 25px 10px 25px;
-    margin-top: 25px;
-    gap: 10px;
-    font-size: 15px;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 20px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-right: 15px;
+    margin-top: 25px;
 }
 
 .coinLogos {
-    width: 50%;
-    height: 50%;
+    width: 50px;
+    height: 50px
 }
 
 #assetBoxDiv {
@@ -110,24 +112,47 @@
     border-radius: 15px;
 }
 
+/* Below here is logged */
 
 #homePageFullDiv {
     display: flex;
     flex-direction: row;
 }
 
-#walletPortDiv {
-    width: 250px;
-    margin-top: -75px;
-}
-
-#walletDivHome{
+/* #walletAndBuyingPowerDiv {
     display: flex;
     flex-direction: row ;
-    margin-bottom: 50px;
-    height: 440px;
+} */
+
+/* #walletDivHome {
+    display: flex;
+    flex-direction: row;
+} */
+
+/* #contentDivHo {
+    display: flex;
+    flex-direction: column;
+} */
+
+#trendingCardDiv {
+    max-height: 80%;
+    margin-top: 5%;
 }
 
-#homePageSideWal {
-    margin-right: 30px;
+#trendingAndBuyingPowerDiv {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+#walletPortfolioDiv {
+    width: 55%;
+    margin-right: 20%;
+}
+
+#breakdownText {
+    font-size: 20px;
+    margin-top: 15px;
+    padding-top: 15px;
+    margin-left: 5%;
 }
