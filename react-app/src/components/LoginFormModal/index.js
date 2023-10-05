@@ -17,37 +17,34 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-      closeModal()
+      closeModal();
     }
   };
 
   const handleDemoUser = async (e) => {
-    e.preventDefault()
-    let demoEmail = 'user@demo.io'
-    let demoPassword = 'password'
+    e.preventDefault();
+    let demoEmail = 'user@demo.io';
+    let demoPassword = 'password';
     const data = await dispatch(login(demoEmail, demoPassword));
     if (data) {
       setErrors(data);
     } else {
-      closeModal()
+      closeModal();
     }
   };
 
-
   return (
-    <>
+    <div className="loginFormContainer">
       <div className="loginFormTitle">
-        <h1 >Log In</h1>
+        <h1>Log In</h1>
       </div>
-      <div>
-        <form id='logInFormDi'onSubmit={handleSubmit}>
-          <ul className="errorList">
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-          </ul>
-          <div id='logInFormDivIn'>
-
+      <form id="logInForm" onSubmit={handleSubmit}>
+        <ul className="errorList">
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <div className="inputContainer">
           <label className="formLabel">
             <input
               type="text"
@@ -68,18 +65,17 @@ function LoginFormModal() {
               className="formInput"
             />
           </label>
-          </div>
-          <button type="submit" id="loginButtonC">
-            Log In
-          </button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" id="loginButton">
+          Log In
+        </button>
+      </form>
       <div id="demoUserButtonDiv">
         <button id="demoUserButton" onClick={handleDemoUser}>
           Log In as Demo User
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

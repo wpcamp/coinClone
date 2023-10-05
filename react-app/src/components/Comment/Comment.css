@@ -2,11 +2,24 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.commentModalContainer button {
+/* .commentModalContainer button {
     background-color: rgb(0, 82, 255);
     color: white;
     border-radius: 15px;
     padding: 5px 5px;
+} */
+.commentModalContainer button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.commentModalContainer button:hover {
+    background-color: #0056b3;
 }
 
 #actionButtonsCommentDiv {
@@ -47,17 +60,18 @@
 
 #bullishTag {
     background-color: rgb(20, 188, 11);
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 5px 8px;
-    margin: 5px 6px 5px 5px;
+    margin: 5px 4px 5px 5px;
+    padding-left: 15px;
     width: 55px;
     color: white;
 }
 
 #bearishTag {
     background-color: rgb(240, 97, 109);
-    border-radius: 20px;
-    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
     margin: 5px 5px 5px 5px;
     color: white;
 }
@@ -92,13 +106,13 @@
 }
 
 #updateButtons button {
-    border-radius: 20px;
-    font-size: 20px;
-    padding: 5px 5px;
-    margin-bottom: 25px;
-    margin-top: 25px;
-    width: 175px;
     color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 36px;
+    cursor: pointer;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 #updateCommentHeader {

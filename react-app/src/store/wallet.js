@@ -1,7 +1,8 @@
 // Constant 
 
 const GET_WALLET = "wallet/getWallet"
-
+const BUY_COIN = "wallet/buyCoin"
+const SELL_COIN = "wallet/sellCoin"
 
 
 
@@ -10,6 +11,20 @@ const GET_WALLET = "wallet/getWallet"
 const getWallet = (wallet) => {
     return {
         type: GET_WALLET,
+        wallet
+    }
+}
+
+const buyCoin = (wallet) => {
+    return {
+        type: BUY_COIN,
+        wallet
+    }
+}
+
+const sellCoin = (wallet) => {
+    return {
+        type: SELL_COIN,
         wallet
     }
 }
@@ -32,6 +47,38 @@ export const thunkGetWallet = (userId) => async (dispatch) => {
     }
 }
 
+export const thunkBuyCoin = (coinId, quantity, fiat, method) => async (dispatch) => {
+    const res = await fetch(`/api/coin/buy/${coinId}/${quantity}/${fiat}`, {
+        method: method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ coinId, quantity, fiat })
+    })
+
+    if (res.ok) {
+        const wallet = await res.json()
+        dispatch(buyCoin(wallet))
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
+export const thunkSellCoin = (coinId, quantity, fiat) => async (dispatch) => {
+    const res = await fetch(`/api/coin/sell/${coinId}/${quantity}/${fiat}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ coinId, quantity, fiat })
+    })
+
+    if (res.ok) {
+        const wallet = await res.json()
+        dispatch(sellCoin(wallet))
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
 
 
 // State 
@@ -45,6 +92,24 @@ const walletReducer = (state = initialState, action) => {
         case GET_WALLET: {
             const newState = { ...state, wallet: action.wallet }
             return newState
+        }
+        case BUY_COIN: {
+            return {
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    [action.wallet.id]: action.wallet,
+                },
+            };
+        }
+        case SELL_COIN: {
+            return{
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    [action.wallet.id]: action.wallet
+                }
+            }
         }
         default: {
             return state

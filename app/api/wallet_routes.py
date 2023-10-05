@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 
-#get all coins on watchlist for a user
+# get all wallets for a user
 @wallet_routes.route("/<int:id>", methods=["GET"])
 @login_required
 def get_wallets(id):
