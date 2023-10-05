@@ -1,0 +1,132 @@
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { thunkBuyCoin, thunkGetWallet, thunkSellCoin } from "../../store/wallet";
+import { useParams } from "react-router-dom";
+import coins from '../Asset/coins.js';
+import "./BuyCard.css"; // Import your CSS file here
+
+export default function BuyCard() {
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.session.user);
+    const wallets = useSelector((state) => state.wallet.wallet.wallets);
+    const coinTicker = useParams();
+    const crypto = useSelector((state) => state.crypto);
+
+    const [amount, setAmount] = useState(0);
+    const [error, setError] = useState("");
+    const [currency, setCurrency] = useState("USD"); // Default to USD for now
+
+    useEffect(() => {
+        dispatch(thunkGetWallet(user.id))
+    }, [dispatch, user.id])
+
+    const coin = coins.find((c) => c.symbol.toUpperCase() === coinTicker.cryptoSymbol.toUpperCase());
+    const matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
+
+    function formatValuation(num) {
+        if (num >= 1000000000) {
+            return (num / 1000000000).toFixed(1) + 'B';
+        } else if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + 'M';
+        } else {
+            return num?.toString();
+        }
+    }
+
+    const handleBuy = () => {
+        let fiat = amount;
+        if (fiat <= 0) {
+            setError("Amount must be greater than zero");
+            return;
+        }
+    
+        const selectedCoin = coins.find((c) => c.id === coin.id);
+        if (!selectedCoin) {
+            setError("Invalid coin selection");
+            return;
+        }
+        if (currency !== "USD") {
+            const exchangeRate = crypto.crypto.price;
+            fiat = amount * exchangeRate;
+        }
+        if (fiat > user.buyingPower) {
+            setError("Insufficient buying power");
+            return;
+        }
+    
+        const method = matchedWallet ? 'PUT' : 'POST';
+        dispatch(thunkBuyCoin(selectedCoin.id, amount, fiat, method));
+        setAmount(0);
+        setError(""); // Clear the error message when successful
+    }
+
+    const handleSell = () => {
+        let fiat = amount;
+        if (fiat <= 0) {   
+            setError("Amount must be greater than zero");
+            return;
+        }
+        if (currency !== "USD") {
+            const exchangeRate = crypto.crypto.price;
+            fiat = amount * exchangeRate;
+        }
+        if (amount > matchedWallet.quantity) {
+            setError("Insufficient quantity");
+            return;
+        }
+        dispatch(thunkSellCoin(coin.id, amount, fiat));
+    }
+
+    return (
+        <div className="buy-card">
+            <div className="card-container">
+                <h2>Trading</h2>
+                <table className="wallet-table">
+                    <thead>
+                        <tr>
+                            <th>Holdings</th>
+                            <th>
+                                Trade in:
+                                <select
+                                    value={currency}
+                                    onChange={(e) => setCurrency(e.target.value)}
+                                >
+                                    <option value="USD">USD</option>
+                                    <option value={coinTicker.cryptoSymbol.toUpperCase()}>
+                                        {coinTicker.cryptoSymbol.toUpperCase()}
+                                    </option>
+                                </select>
+                            </th>
+                            <th>Buying Power</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{matchedWallet ? matchedWallet.quantity.toFixed(4) : 0}</td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    min="0"
+                                />
+                            </td>
+                            <td>${formatValuation(user.buyingPower)}</td>
+                            <td>
+                                {error && <div className="error-message">{error}</div>} {/* Display error message */}
+                                <button className="buy-button" onClick={handleBuy}>
+                                    Buy
+                                </button>
+                                <button className="sell-button" onClick={handleSell}>
+                                    Sell
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+}

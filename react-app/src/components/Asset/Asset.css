@@ -32,6 +32,7 @@
 
 #contentDiv {
     width: 100%;
+    margin-left: -100px;
 }
 
 
@@ -85,3 +86,34 @@
 .dropdown-list li:hover {
     background-color: #e0e0e0;
 }
+
+  /* .goldStar .fas.fa-star {
+    color: gold; 
+    margin-top: 19px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+
+  .whiteStar .far.fa-star {
+    color: gold; 
+    margin-top: 19px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  #selectAddButtonDiv{
+    display: flex;
+  } */
+
+  #assetChartDiv {
+
+        background-color: #f8f8f8;
+        padding: 20px;
+        width: 90%;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        margin: 20px;
+    
+  }

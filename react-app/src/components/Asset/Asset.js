@@ -4,6 +4,7 @@ import AssetMarketDetails from "./AssetMarketDetails";
 import AssetSelect from "./AssetSelect";
 import CommentCard from "../Comment/CommentCard";
 import Sidebar from "../Sidebar";
+import TransactCard from "../TransactionCard";
 import "./Asset.css"
 import OpenModalButton from "../OpenModalButton";
 
@@ -23,8 +24,11 @@ export default function Asset() {
                         buttonText={"Select an asset"}
                         />
                     </span>
-                    <div>
+                    <div id="assetChartDiv">
                         <AssetChart />
+                    </div>
+                    <div>
+                        <TransactCard />
                     </div>
                     <div id="assetComment">
                         <CommentCard />

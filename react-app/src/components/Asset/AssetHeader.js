@@ -4,6 +4,7 @@ import { thunkGetPrice } from '../../store/crypto';
 import { thunkCreateWatchlist, thunkGetWatchlist } from '../../store/watchlist';
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import './Asset.css'
 import coins from './coins'
 
 
@@ -34,11 +35,11 @@ export default function AssetHeader() {
         }
     }
     let inWatchlist = false
-    if (watchlist){
+    if (watchlist) {
         for (let i = 0; i < watchlist.length; i++) {
             if (watchlist[i].cryptoId == matchingId) {
                 inWatchlist = true
-    
+
             }
         }
     }
@@ -58,13 +59,20 @@ export default function AssetHeader() {
         <>
             {isLoaded && data ? (
                 <>
-                    <div>
+                    <div id='selectAddButtonDiv'>
                         <div>
                             <h2>${cryptoSymbol} • ${formatPrice(data?.price)}</h2>
                         </div>
-                        <div>
-                            {!inWatchlist && <button onClick={() => handleAdd()}>Add to watchlist</button>}
-                        </div>
+                        {/* {inWatchlist ? (
+                            <div className="goldStar" onClick={() => handleAdd()}>
+                                <i className="fas fa-star"></i>
+                            </div>
+                        ) : (
+                            <div className="whiteStar" onClick={() => handleAdd()}>
+                                <i className="far fa-star"></i>
+                            </div>
+                        )} */}
+                        {!inWatchlist && <button onClick={() => handleAdd()}>Add to watchlist</button>}
                     </div>
                 </>
             ) : (
