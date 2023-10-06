@@ -1,4 +1,4 @@
-.account-details-container {
+/* .account-details-container {
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -35,4 +35,50 @@ h2 {
 
 .logout-button:hover {
     background-color: #2980b9;
+} */
+
+/* AccountDetails.css */
+
+.account-details-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.sidebar-container {
+    margin-right: 2rem; /* Increased margin for better spacing */
+}
+
+.content-container {
+    padding: 1rem;
+}
+
+.section {
+    margin-bottom: 1.5rem; /* Increased margin for better spacing */
+}
+
+.section-title {
+    font-size: 1.5rem; /* Larger font size for section titles */
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.info {
+    font-size: 1rem; /* Adjusted font size for information */
+    margin-bottom: 0.5rem; /* Reduced margin for information lines */
+}
+
+.logout-button {
+    background-color: #007CFF; /* Adjusted button color */
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem; /* Smoother button corners */
+    cursor: pointer;
+    margin-right: 1rem; /* Increased margin for better spacing */
+}
+
+.logout-button:hover {
+    background-color: #005FBF; /* Darker color on hover */
 }

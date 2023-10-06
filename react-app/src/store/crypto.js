@@ -3,6 +3,7 @@ const GET_PRICE = "crypto/getPrice"
 const GET_PRICE2 = "crypto/getPrice"
 const GET_PRICES = "crypto/getPrices"
 const GET_CHART_DATA = "crypto/getChartData"
+const GET_TRENDING = "crypto/getTrending"
 
 // Action Creator 
 const getPrice = (cryptoSymbol) => {
@@ -33,6 +34,12 @@ const getChartData = (data) => {
     }
 }
 
+const getTrending = (data) => {
+    return {
+        type: GET_TRENDING,
+        data
+    }
+}
 
 // Thunks
 
@@ -78,6 +85,20 @@ export const thunkGetPrice2 = (cryptoSymbol) => async (dispatch) => {
     }
 }
 
+export const thunkGetTrending = () => async (dispatch) => {
+    const res = await fetch(`https://api.coingecko.com/api/v3/search/trending`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    })
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(getTrending(data))
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
 export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (dispatch) => {
     const res = await fetch(`/api/coin/data/chart/${cryptoName}/${timeStart}/${timeEnd}`, {
         method: 'GET',
@@ -100,7 +121,8 @@ export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (disp
 // State
 const initialState = {
     crypto: {},
-    chartData: {}
+    chartData: {},
+    trending: {}
 }
 
 
@@ -119,6 +141,9 @@ const cryptoReducer = (state = initialState, action) => {
         }
         case GET_PRICES: {
             return {...state, crypto: action.cryptoSymbols}
+        }
+        case GET_TRENDING: {
+            return {...state, trending: action.data}
         }
         default: {
             return state

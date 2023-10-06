@@ -1,58 +1,73 @@
+/* General Styles */
 .loader-container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    margin-top: 150px;
-    margin-left: 600px;
-
+    align-items: center;
+    height: 100vh; /* Vertically center loader */
 }
 
+/* Wallet Container Styles */
+#fullWalletDiv {
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+    margin-top: 50px;
+    padding: 20px; /* Add padding for better spacing */
+}
+
+/* Portfolio Balance Styles */
 #portfolioBalDiv {
-    padding-top: 25px;
+    padding: 15px; /* Add padding for better spacing */
+    /* border-bottom: 1px solid lightgrey; */
 }
 
 #portfolioBalText {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 15px 0; /* Add margin for better spacing */
     font-size: 25px;
 }
 
-#thisDiv {
-    margin-top: 50px;
-}
-
-#buyingPowerTable {
-    margin-top: 25px;
-    width: 100px;
-}
-
+/* Buying Power Styles */
 #buyingPowerFull {
+    margin-top: 25px;
+    padding: 20px; /* Add padding for better spacing */
+    border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
 }
 
 #buyingPowerHead {
-    border-top: 1px solid lightgrey;
-    margin-top: 25px;
-    padding-top: 25px;
-    font-size: 20px
+    font-size: 20px;
+    margin-top: 15px;
+    padding-top: 15px;
 }
 
+/* Cryptocurrency Table Styles */
 #cryptoHeadTab {
     font-size: 20px;
-    margin-top: 25px;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    margin: 25px 0; /* Add margin for better spacing */
+    padding: 15px 0; /* Add padding for better spacing */
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
 }
 
-#supportedCoinTable {
-    height: 800px;
-    overflow: auto;
+#fullWalletD {
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
     border: 1px solid #e1e1e1;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    margin-bottom: 20px; /* Add margin for better spacing */
 }
 
+/* Cryptocurrency Table Header Styles */
+.coinTable thead th {
+    background-color: #f2f2f2; /* Add a background color to header cells */
+    text-align: left;
+    padding: 10px;
+}
 
+/* Cryptocurrency Table Body Styles */
+.coinTable tbody td {
+    padding: 10px;
+}
+
+/* Additional Styles */
 .clickToAsset {
     cursor: pointer;
 }
@@ -67,4 +82,3 @@
     height: 100%;
     margin-right: 50px;
 }
-

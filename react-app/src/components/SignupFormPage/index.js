@@ -12,7 +12,10 @@ export default function SignUpPage() {
             <div>
                 <div id='fullSignUpPage-Div'>
                     <div id='signC'>
-                        <i id='backArrowS' className="fa-solid fa-circle-arrow-left fa-xl" onClick={() => history.push('/')}></i>
+                        <i id='backArrowS' className="fa-solid fa-circle-arrow-left fa-xl" onClick={() => {
+                            history.push('/')
+                            localStorage.removeItem("userEmail")
+                        }}></i>
                         <SignupFormPage />
                     </div>
                     <div id='photoSignUpDiv'>

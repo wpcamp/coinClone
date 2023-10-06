@@ -10,6 +10,7 @@ export default function AccountDetails() {
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
+        localStorage.removeItem("userEmail");
     };
 
     return (
@@ -19,13 +20,13 @@ export default function AccountDetails() {
             </div>
             <div className="content-container">
                 <div className="section">
-                    <h2>Basic Information</h2>
-                    <p>Name: {user.firstName} {user.lastName}</p>
-                    <p>Email: {user.email}</p>
+                    <h2 className="section-title">Basic Information</h2>
+                    <p className="info"><strong>Name:</strong> {user.firstName} {user.lastName}</p>
+                    <p className="info"><strong>Email:</strong> {user.email}</p>
                 </div>
                 <div className="section">
-                    <h2>Wallet Info</h2>
-                    <p>Buying Power: ${user.buyingPower}</p>
+                    <h2 className="section-title">Wallet Info</h2>
+                    <p className="info"><strong>Buying Power:</strong> ${user.buyingPower}</p>
                 </div>
                 <div className="section">
                     <button className="logout-button" onClick={handleLogout}>

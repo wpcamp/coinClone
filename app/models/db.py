@@ -178,15 +178,12 @@ class Watchlist(db.Model):
     cryptos_rel = db.relationship("Crypto", back_populates="watchlists_rel")
 
     def to_dict(self):
-        # user_name = User.query.get(self.user_id)
-        # user_data = user_name.to_dict()
         return {
             'id': self.id,
             'userId': self.user_id,
             'cryptoId': self.crypto_id,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            # 'user': user_data
         }
 
 # ==================================== Crypto Model ====================================
