@@ -21,6 +21,7 @@ export default function WalletBreakdown() {
         .map((coin) => {
             const matchingWallet = wallets?.find((wallet) => wallet?.cryptoId === coin?.id);
             if (matchingWallet) {
+                console.log('matchingWallet', matchingWallet);
                 return {
                     coinSymbol: coin?.name,
                     walletId: matchingWallet?.id,
@@ -54,7 +55,10 @@ export default function WalletBreakdown() {
         if (priceData && walletCoins) {
             const price = priceData.usd;
             const quantity = walletCoin.quantity;
+            console.log('quantity:', quantity);
+            console.log('price:', price);
             const value = price * quantity;
+            console.log('value:', value);
             return {
                 name: walletCoin.coinSymbol,
                 price,
@@ -65,6 +69,8 @@ export default function WalletBreakdown() {
         return null;
     });
 
+
+    console.log('heres coinData', coinData);
 
     const colorList = ["#FF5733", "#3498DB", "#2ECC71", "#FF33FF", "#FFA500"];
 
@@ -128,7 +134,7 @@ export default function WalletBreakdown() {
                                         return (
                                             <tr key={coin?.symbol}>
                                                 <td>{coin?.name.charAt(0).toUpperCase() + coin?.name.slice(1)}</td>
-                                                <td className='xCoinBalance'>{coin?.quantity.toFixed(4)}</td>
+                                                <td className='xCoinBalance'>{coin?.quantity?.toFixed(4)}</td>
                                                 <td className='xCoinPrice'>${formatPrice(coin?.price)}</td>
                                                 <td>
                                                     ${(coin?.price * coin?.quantity) > 0.1

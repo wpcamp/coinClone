@@ -38,7 +38,7 @@ export default function BuyCard() {
 
     const handleBuy = () => {
         if (currency === "USD") {
-            const fiat = +amount
+            let fiat = +amount
             console.log("fiat", fiat);
             console.log("crypto.crypto.price", crypto.crypto.price);
             console.log("userbuyingpower", user.buyingPower);
@@ -62,17 +62,18 @@ export default function BuyCard() {
             }
 
             const method = matchedWallet ? 'PUT' : 'POST';
-            dispatch(thunkBuyCoin(selectedCoin.id, quantity, fiat, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
+            fiat = `${fiat}`
+            dispatch(thunkBuyCoin(`${selectedCoin.id}`, `${quantity}`, `${fiat}`, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
         } else {
 
-            const quantity = amount
+            let quantity = amount
             if (quantity <= 0) {
                 setError("Amount must be greater than zero");
                 return;
             }
-            const method = matchedWallet ? 'PUT' : 'POST';
-            const fiatFinal = quantity * crypto.crypto.price;
-            dispatch(thunkBuyCoin(coin.id, quantity, fiatFinal, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
+            let method = matchedWallet ? 'PUT' : 'POST';
+            let fiatFinal = quantity * crypto.crypto.price;
+            dispatch(thunkBuyCoin(`${coin.id}`, `${quantity}`, `${fiatFinal}`, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
         }
         setAmount(0);
         setError("");
@@ -81,15 +82,14 @@ export default function BuyCard() {
 
     const handleSell = () => {
         if (currency === "USD") {
-
             const quantity = amount / crypto.crypto.price
             if (quantity <= 0) {
                 setError("Amount must be greater than zero");
                 return;
             }
-            dispatch(thunkSellCoin(coin.id, quantity, amount)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))    
+            dispatch(thunkSellCoin(`${coin.id}`, `${quantity}`, `${amount}`)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id))) 
+            setAmount(0)   
         } else {
-
             const fiatAmount = amount
             if (fiatAmount <= 0) {
                 setError("Amount must be greater than zero");
@@ -100,8 +100,9 @@ export default function BuyCard() {
                 return;
             }
             const fiatFinal = fiatAmount * crypto.crypto.price;
-            dispatch(thunkSellCoin(coin.id, fiatAmount, fiatFinal)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
+            dispatch(thunkSellCoin(`${coin.id}`, `${fiatAmount}`, `${fiatFinal}`)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
         }
+        setAmount(0)
     }
 
     return (
