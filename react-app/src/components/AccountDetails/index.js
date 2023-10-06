@@ -10,6 +10,7 @@ export default function AccountDetails() {
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
+        localStorage.removeItem("userEmail");
     };
 
     return (

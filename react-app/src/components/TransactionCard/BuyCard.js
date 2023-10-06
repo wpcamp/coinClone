@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { thunkBuyCoin, thunkGetWallet, thunkSellCoin } from "../../store/wallet";
 import { useParams } from "react-router-dom";
+import { thunkGetUser } from "../../store/session";
 import coins from '../Asset/coins.js';
 import "./BuyCard.css"; // Import your CSS file here
 
@@ -34,48 +35,73 @@ export default function BuyCard() {
         }
     }
 
+
     const handleBuy = () => {
-        let fiat = amount;
-        if (fiat <= 0) {
-            setError("Amount must be greater than zero");
-            return;
+        if (currency === "USD") {
+            const fiat = +amount
+            console.log("fiat", fiat);
+            console.log("crypto.crypto.price", crypto.crypto.price);
+            console.log("userbuyingpower", user.buyingPower);
+            console.log(+fiat > user.buyingPower);
+            if (amount <= 0) {
+                setError("Amount must be greater than zero");
+                return;
+            }
+
+            const selectedCoin = coins.find((c) => c.id === coin.id);
+            if (!selectedCoin) {
+                setError("Invalid coin selection");
+                return;
+            }
+
+            const quantity = fiat / crypto.crypto.price;
+
+            if (fiat > user.buyingPower) {
+                setError("Insufficient buying power");
+                return;
+            }
+
+            const method = matchedWallet ? 'PUT' : 'POST';
+            dispatch(thunkBuyCoin(selectedCoin.id, quantity, fiat, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
+        } else {
+
+            const quantity = amount
+            if (quantity <= 0) {
+                setError("Amount must be greater than zero");
+                return;
+            }
+            const method = matchedWallet ? 'PUT' : 'POST';
+            const fiatFinal = quantity * crypto.crypto.price;
+            dispatch(thunkBuyCoin(coin.id, quantity, fiatFinal, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
         }
-    
-        const selectedCoin = coins.find((c) => c.id === coin.id);
-        if (!selectedCoin) {
-            setError("Invalid coin selection");
-            return;
-        }
-        if (currency !== "USD") {
-            const exchangeRate = crypto.crypto.price;
-            fiat = amount * exchangeRate;
-        }
-        if (fiat > user.buyingPower) {
-            setError("Insufficient buying power");
-            return;
-        }
-    
-        const method = matchedWallet ? 'PUT' : 'POST';
-        dispatch(thunkBuyCoin(selectedCoin.id, amount, fiat, method));
         setAmount(0);
-        setError(""); // Clear the error message when successful
+        setError("");
     }
 
+
     const handleSell = () => {
-        let fiat = amount;
-        if (fiat <= 0) {   
-            setError("Amount must be greater than zero");
-            return;
+        if (currency === "USD") {
+
+            const quantity = amount / crypto.crypto.price
+            if (quantity <= 0) {
+                setError("Amount must be greater than zero");
+                return;
+            }
+            dispatch(thunkSellCoin(coin.id, quantity, amount)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))    
+        } else {
+
+            const fiatAmount = amount
+            if (fiatAmount <= 0) {
+                setError("Amount must be greater than zero");
+                return;
+            }
+            if (amount > matchedWallet.quantity) {
+                setError("Insufficient quantity");
+                return;
+            }
+            const fiatFinal = fiatAmount * crypto.crypto.price;
+            dispatch(thunkSellCoin(coin.id, fiatAmount, fiatFinal)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
         }
-        if (currency !== "USD") {
-            const exchangeRate = crypto.crypto.price;
-            fiat = amount * exchangeRate;
-        }
-        if (amount > matchedWallet.quantity) {
-            setError("Insufficient quantity");
-            return;
-        }
-        dispatch(thunkSellCoin(coin.id, amount, fiat));
     }
 
     return (

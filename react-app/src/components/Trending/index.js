@@ -67,7 +67,7 @@ export default function TrendingCard() {
     }
 
     return (
-        isLoaded && normalizedTrendingArr && normalizedTrendingArr.every((coin) => coin !== undefined) ? (
+        isLoaded && normalizedTrendingArr && currentItem && normalizedTrendingArr.every((coin) => coin !== undefined) ? (
 
             <div className="trending-card">
                 <h1>Trending Coins (24hr)</h1>
@@ -77,11 +77,11 @@ export default function TrendingCard() {
                         <i className="fa-solid fa-arrow-left"></i>
                     </button>
                     <div className="carousel-item">
-                        <img src={currentItem.small} alt="Thumbnail" />
-                        <h2>{currentItem.name}</h2>
-                        <p>Symbol: {currentItem.symbol}</p>
-                        <p>Market Cap Rank: {currentItem.market_cap_rank}</p>
-                        <p>Price BTC: {formatPrice(currentItem.price_btc)}</p>
+                        <img src={currentItem?.small} alt="Thumbnail" />
+                        <h2>{currentItem?.name}</h2>
+                        <p>Symbol: {currentItem?.symbol}</p>
+                        <p>Market Cap Rank: {currentItem?.market_cap_rank}</p>
+                        <p>Price BTC: {formatPrice(currentItem?.price_btc)}</p>
                     </div>
                     <button className="carousel-button" onClick={nextItem}>
                         <i className="fa-solid fa-arrow-right"></i>
