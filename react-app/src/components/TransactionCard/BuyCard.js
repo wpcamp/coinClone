@@ -25,15 +25,16 @@ export default function BuyCard() {
     const coin = coins.find((c) => c.symbol.toUpperCase() === coinTicker.cryptoSymbol.toUpperCase());
     const matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
 
-    function formatValuation(num) {
-        if (num >= 1000000000) {
-            return (num / 1000000000).toFixed(1) + 'B';
-        } else if (num >= 1000000) {
-            return (num / 1000000).toFixed(1) + 'M';
-        } else {
-            return num?.toString();
-        }
-    }
+    // function formatValuation(num) {
+    //     if (num >= 1000000000) {
+    //         return (num / 1000000000) + 'B'; // No rounding
+    //     } else if (num >= 1000000) {
+    //         return (num / 1000000) + 'M'; // No rounding
+    //     } else {
+    //         return num?.toString();
+    //     }
+    // }
+    
 
 
     const handleBuy = () => {
@@ -140,7 +141,7 @@ export default function BuyCard() {
                                     min="0"
                                 />
                             </td>
-                            <td>${formatValuation(user.buyingPower)}</td>
+                            <td>${user.buyingPower.toLocaleString(2)}</td>
                             <td>
                                 {error && <div className="error-message">{error}</div>} {/* Display error message */}
                                 <button className="buy-button" onClick={handleBuy}>
