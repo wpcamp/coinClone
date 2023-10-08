@@ -25,18 +25,6 @@ export default function BuyCard() {
     const coin = coins.find((c) => c.symbol.toUpperCase() === coinTicker.cryptoSymbol.toUpperCase());
     const matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
 
-    // function formatValuation(num) {
-    //     if (num >= 1000000000) {
-    //         return (num / 1000000000) + 'B'; // No rounding
-    //     } else if (num >= 1000000) {
-    //         return (num / 1000000) + 'M'; // No rounding
-    //     } else {
-    //         return num?.toString();
-    //     }
-    // }
-    
-
-
     const handleBuy = () => {
         if (currency === "USD") {
             let fiat = +amount
@@ -72,6 +60,7 @@ export default function BuyCard() {
                 setError("Amount must be greater than zero");
                 return;
             }
+            
             let method = matchedWallet ? 'PUT' : 'POST';
             let fiatFinal = quantity * crypto.crypto.price;
             dispatch(thunkBuyCoin(`${coin.id}`, `${quantity}`, `${fiatFinal}`, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
