@@ -183,10 +183,6 @@ def sell_coin(id, quantity, fiat):
         current_holding.quantity -= float(quantity)
         current_holding.updated_at = datetime.datetime.now()
 
-        if current_holding.quantity == 0:
-            # Remove the wallet entry if the quantity becomes zero
-            db.session.delete(current_holding)
-
         db.session.commit()
         return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict() if current_holding else None}
     else:
