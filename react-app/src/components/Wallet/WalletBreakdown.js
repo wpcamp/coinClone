@@ -123,7 +123,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { thunkGetWallet } from '../../store/wallet';
+import { thunkCreateEmptyWallets, thunkGetWallet } from '../../store/wallet';
 import { thunkGetPrice2 } from '../../store/crypto';
 import { PropagateLoader } from 'react-spinners';
 import coins from '../Asset/coins.js';
@@ -175,6 +175,7 @@ export default function WalletBreakdown() {
 
     useEffect(() => {
         dispatch(thunkGetWallet(sessionUser.id));
+        dispatch(thunkCreateEmptyWallets())
         dispatch(thunkGetPrice2(finalWallet))
             .then(() => setIsLoaded(true))
             .catch((error) => {

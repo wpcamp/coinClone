@@ -3,6 +3,7 @@
 const GET_WALLET = "wallet/getWallet"
 const BUY_COIN = "wallet/buyCoin"
 const SELL_COIN = "wallet/sellCoin"
+const CREATE_EMPTY_WALLETS = "wallet/createEmptyWallets"
 
 
 
@@ -29,6 +30,13 @@ const sellCoin = (wallet) => {
     }
 }
 
+
+const createEmptyWallets = (wallet) => {
+    return {
+        type: CREATE_EMPTY_WALLETS,
+        wallet
+    }
+}
 
 // Thunks
 
@@ -79,7 +87,20 @@ export const thunkSellCoin = (coinId, quantity, fiat) => async (dispatch) => {
     }
 }
 
+export const thunkCreateEmptyWallets = () => async (dispatch) => {
+    const res = await fetch('/api/wallet/create', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
 
+    if (res.ok) {
+        const wallet = await res.json()
+        dispatch(createEmptyWallets([wallet]))
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
 
 // State 
 
@@ -111,6 +132,22 @@ const walletReducer = (state = initialState, action) => {
                 }
             }
         }
+        case CREATE_EMPTY_WALLETS: {
+            // Assuming action.wallet is an array of wallets
+            const updatedWallets = {};
+            action.wallet.forEach((wallet) => {
+                updatedWallets[wallet.id] = wallet;
+            });
+        
+            return {
+                ...state,
+                wallet: {
+                    ...state.wallet,
+                    ...updatedWallets
+                }
+            };
+        }
+        
         default: {
             return state
         }

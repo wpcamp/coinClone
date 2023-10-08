@@ -1,3 +1,5 @@
+import { thunkCreateEmptyWallets } from "./wallet";
+
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
@@ -50,6 +52,7 @@ export const login = (email, password) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
+		dispatch(thunkCreateEmptyWallets())
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();

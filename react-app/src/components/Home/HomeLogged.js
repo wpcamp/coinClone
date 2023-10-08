@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SideBar from '../Sidebar/index';
 import WalletBreakdown from '../Wallet/WalletBreakdown';
 import WalletPortfolio from '../Wallet/WalletPortfolio';
 import TrendingCard from '../Trending';
 import BuyingPowerCard from '../Wallet/BuyingPower';
 import './Home.css';
+import { thunkCreateEmptyWallets } from '../../store/wallet';
 
 export default function HomeLoggedIn() {
     return (

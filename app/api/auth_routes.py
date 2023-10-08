@@ -59,23 +59,9 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
-
-        # Query the Crypto model using the db object
-        coins = Crypto.query.all()
-
-        # Check if the user has wallets for all available coins
-        for coin in coins:
-            wallet = Wallet.query.filter_by(user_id=user.id, crypto_id=coin.id).first()
-            if wallet is None:
-                # Create an empty wallet for the user and the coin
-                empty_wallet = Wallet(user_id=user.id, crypto_id=coin.id, quantity=0.0, created_at=datetime.datetime.now(), updated_at=datetime.datetime.now())
-                db.session.add(empty_wallet)
-                db.session.commit()
-
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
 
 
 @auth_routes.route('/logout')
