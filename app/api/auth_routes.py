@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import db
-from app.models.db import User
+from app.models.db import User, Crypto, Wallet
 from app.forms import LoginForm
 from app.forms import SignUpForm
 import datetime, random
@@ -56,6 +56,35 @@ def logout():
     return {'message': 'User logged out'}
 
 
+# @auth_routes.route('/signup', methods=['POST'])
+# def sign_up():
+#     """
+#     Creates a new user and logs them in
+#     """
+#     form = SignUpForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         user = User(
+#             username=form.data['username'],
+#             email=form.data['email'],
+#             password=form.data['password'],
+#             first_name=form.data['first_name'],
+#             last_name = form.data["last_name"],
+#             buying_power = round(random.uniform(1.00, 2_500.00), 2),
+#             title='Watchlist #1',
+#             created_at= datetime.datetime.now(),
+#             updated_at= datetime.datetime.now()
+#         )
+#         db.session.add(user)
+#         db.session.commit()
+#         coins = session.query(Crypto).all()
+#     for coin in coins:
+#         empty_wallet = Wallet(user_id=user.id, crypto_id=coin.id, quantity=0.0)
+#         session.add(empty_wallet)
+#         login_user(user)
+#         return user.to_dict()
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     """
@@ -69,16 +98,28 @@ def sign_up():
             email=form.data['email'],
             password=form.data['password'],
             first_name=form.data['first_name'],
-            last_name = form.data["last_name"],
-            buying_power = round(random.uniform(1.00, 2_500.00), 2),
+            last_name=form.data["last_name"],
+            buying_power=round(random.uniform(1.00, 2_500.00), 2),
             title='Watchlist #1',
-            created_at= datetime.datetime.now(),
-            updated_at= datetime.datetime.now()
+            created_at=datetime.datetime.now(),
+            updated_at=datetime.datetime.now()
         )
         db.session.add(user)
         db.session.commit()
+
+        # Fetch the list of coins
+        coins = Crypto.query.all()
+
+        # Create empty wallets for each coin
+        for coin in coins:
+            empty_wallet = Wallet(user_id=user.id, crypto_id=coin.id, quantity=0.0)
+            db.session.add(empty_wallet)
+
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

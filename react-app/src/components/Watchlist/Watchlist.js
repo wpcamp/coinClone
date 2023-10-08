@@ -112,7 +112,7 @@ export default function WatchlistCard() {
     }));
 
 
-    console.log("heres watchlist", Object.keys(crypto));
+    // console.log("heres watchlist", Object.keys(crypto));
     // console.log("heres crypto", crypto);
     // Display a loading indicator while the data is loading
     if (!isLoaded || !isLoaded2 || Object.keys(crypto).length > 50 || crypto.hasOwnProperty('created')) {

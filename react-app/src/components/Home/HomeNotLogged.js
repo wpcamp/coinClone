@@ -88,7 +88,7 @@ function HomeNotLogged() {
                         }}><img className='coinLogos' src='./coinLogos/ada.png' /></div>
                     </div>
                 </div>
-                <div id='thirdSeg'>
+                {/* <div id='thirdSeg'>
                     <div>
                         <div>
                             Learn more about cryptocurrencies and the technology that powers them:
@@ -102,7 +102,8 @@ function HomeNotLogged() {
                             List of links will go here
                         </div>
                     </div>
-                </div>
+                </div> */}
+                <br></br>
             </div>
         </>
     );
