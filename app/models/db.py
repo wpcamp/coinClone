@@ -129,7 +129,7 @@ class Wallet(db.Model):
         add_prefix_for_prod("users.id")), nullable=False)
     crypto_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("cryptos.id")), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.Date, nullable=False)
     updated_at = db.Column(db.Date, nullable=False)
 
