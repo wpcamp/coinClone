@@ -72,55 +72,18 @@ export default function WalletPortfolio() {
 
     const colorList = ["#FF5733", "#3498DB", "#2ECC71", "#FF33FF", "#FFA500"];
 
+    const filteredCoinData = coinData.filter((coin) => coin?.value > 0.0001);
 
-    // return (
-    //     <>
-    //         {isLoaded && coinData && coinData.every((coin) => coin !== undefined)?
-    //             (
-    //                 <div>
-    //                     <div>
-    //                     </div>
-    //                     <div id='thisDiv'>
-    //                         <ResponsiveContainer width="100%" height={400} >
-    //                             <PieChart>
-    //                                 <Pie
-    //                                     data={coinData}
-    //                                     dataKey="value"
-    //                                     nameKey="name"
-    //                                     cx="50%"
-    //                                     cy="50%"
-    //                                     outerRadius={80}
-    //                                     fill="#8884d8"
-    //                                     label={false}
-    //                                 >
-    //                                     {coinData.map((entry, index) => (
-    //                                         <Cell key={`cell-${index}`} fill={colorList[index % colorList.length]} />
-    //                                     ))}
-    //                                 </Pie>
-    //                                 <Tooltip />
 
-    //                                 <Legend layout="horizontal" verticalAlign="bottom" align="right" />
-
-    //                             </PieChart>
-    //                         </ResponsiveContainer>
-    //                     </div>
-    //                 </div>
-    //             ) : (
-    //                 <div className='loader-container'>
-    //                     <PropagateLoader color='#36D7B7' size={15} />
-    //                 </div>
-    //             )}
-    //     </>
-    // )
     return (
         <>
-            {isLoaded && coinData && coinData.every((coin) => coin !== undefined) ? (
+            {isLoaded && filteredCoinData && filteredCoinData.every((coin) => coin !== undefined) ? (
                 <div className="chart-container">
                     <div id="thisDiv">
                         <ResponsiveContainer width="100%" height={400}>
                             <PieChart>
                                 <Pie
-                                    data={coinData}
+                                    data={filteredCoinData}
                                     dataKey="value"
                                     nameKey="name"
                                     cx="50%"
@@ -129,7 +92,7 @@ export default function WalletPortfolio() {
                                     fill="#8884d8"
                                     label={false}
                                 >
-                                    {coinData.map((entry, index) => (
+                                    {filteredCoinData.map((entry, index) => (
                                         <Cell
                                             key={`cell-${index}`}
                                             fill={colorList[index % colorList.length]}

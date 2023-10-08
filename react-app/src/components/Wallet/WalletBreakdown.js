@@ -1,3 +1,126 @@
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { thunkGetWallet } from '../../store/wallet';
+// import { thunkGetPrice2 } from '../../store/crypto';
+// import { PropagateLoader } from 'react-spinners';
+// import coins from '../Asset/coins.js';
+// import '../Home/Home.css';
+// import './Wallet.css';
+// import TrendingCard from '../Trending';
+
+// export default function WalletBreakdown() {
+//     const sessionUser = useSelector((state) => state.session.user);
+//     const wallets = useSelector((state) => state.wallet.wallet.wallets);
+//     const crypto = useSelector((state) => state.crypto);
+//     const [isLoaded, setIsLoaded] = useState(false);
+//     const dispatch = useDispatch();
+
+//     // console.log("heres my wallets:", crypto);
+
+//     const walletCoins = coins
+//         .map((coin) => {
+//             const matchingWallet = wallets?.find((wallet) => wallet?.cryptoId === coin?.id);
+//             if (matchingWallet) {
+//                 console.log('matchingWallet', matchingWallet);
+//                 return {
+//                     coinSymbol: coin?.name,
+//                     walletId: matchingWallet?.id,
+//                     quantity: matchingWallet?.quantity,
+//                 };
+//             }
+//             return null;
+//         })
+//         .filter((walletCoin) => walletCoin !== null);
+
+//     // console.log("HERES THE WALLET COINS: ", walletCoins);
+
+//     const finalWallet = walletCoins.map((walletCoin) => walletCoin.coinSymbol).join("%2C");
+
+//     useEffect(() => {
+//         dispatch(thunkGetWallet(sessionUser.id));
+//         dispatch(thunkGetPrice2(finalWallet));
+//         setIsLoaded(true)
+//     }, [dispatch, sessionUser, finalWallet]);
+
+
+
+//     // const coinData = walletCoins.map((walletCoin) => {
+//     //     const priceData = crypto.crypto[walletCoin.coinSymbol];
+//     //     if (priceData && walletCoins) {
+//     //         const price = priceData.usd;
+//     //         const quantity = walletCoin.quantity;
+//     //         // console.log('quantity:', quantity);
+//     //         // console.log('price:', price);
+//     //         const value = price * quantity;
+//     //         // console.log('value:', value);
+//     //         return {
+//     //             name: walletCoin.coinSymbol,
+//     //             price,
+//     //             quantity,
+//     //             value,
+//     //         };
+//     //     }
+//     //     return null;
+//     // });
+
+//     const coinData = walletCoins.map((walletCoin) => {
+//         const priceData = crypto.crypto[walletCoin.coinSymbol];
+//         if (priceData && walletCoins) {
+//             const price = priceData.usd;
+//             const quantity = walletCoin.quantity;
+//             const value = price * quantity;
+//             return {
+//                 name: walletCoin.coinSymbol,
+//                 price,
+//                 quantity,
+//                 value,
+//             };
+//         }
+//         return null;
+//     });
+
+//     // Calculate total balance and formatted balance
+//     let totalBalance = 0;
+//     coinData.forEach((coin) => {
+//         if (coin) {
+//             totalBalance += coin.value;
+//         }
+//     });
+//     const formattedBalance = totalBalance.toFixed(2);
+
+
+//     console.log('heres coinData', coinData);
+
+//     const colorList = ["#FF5733", "#3498DB", "#2ECC71", "#FF33FF", "#FFA500"];
+
+//     function formatPrice(value) {
+//         const base = 1;
+//         if (Math.abs(value) >= base) {
+//             return value?.toFixed(2);
+//         } else {
+//             return value?.toFixed(8).replace(/\.?0+$/, '');
+//         }
+//     }
+
+//     function formatValuation(num) {
+//         if (num >= 1000000000) {
+//             return (num / 1000000000).toFixed(1) + 'B';
+//         } else if (num >= 1000000) {
+//             return (num / 1000000).toFixed(1) + 'M';
+//         } else {
+//             return num?.toString();
+//         }
+//     }
+
+//     // let totalBalance = 0;
+//     // coinData.map((coin) => {
+//     //     totalBalance += coin?.value;
+//     // });
+//     // const formattedBalance = totalBalance.toFixed(2);
+//     // console.log('heres coinData', coinData);
+
+//     const filteredCoinData = coinData.filter((coin) => coin?.value > 0.0001);
+
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkGetWallet } from '../../store/wallet';
@@ -14,65 +137,6 @@ export default function WalletBreakdown() {
     const crypto = useSelector((state) => state.crypto);
     const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch();
-
-    // console.log("heres my wallets:", crypto);
-
-    const walletCoins = coins
-        .map((coin) => {
-            const matchingWallet = wallets?.find((wallet) => wallet?.cryptoId === coin?.id);
-            if (matchingWallet) {
-                console.log('matchingWallet', matchingWallet);
-                return {
-                    coinSymbol: coin?.name,
-                    walletId: matchingWallet?.id,
-                    quantity: matchingWallet?.quantity,
-                };
-            }
-            return null;
-        })
-        .filter((walletCoin) => walletCoin !== null);
-
-    // console.log("HERES THE WALLET COINS: ", walletCoins);
-
-    const finalWallet = walletCoins.map((walletCoin) => walletCoin.coinSymbol).join("%2C");
-
-    useEffect(() => {
-        const fetchData = async () => {
-            // console.log('Fetching data...');
-            await dispatch(thunkGetWallet(sessionUser.id));
-
-            await dispatch(thunkGetPrice2(finalWallet));
-
-            // setIsLoaded(true); 
-        };
-
-        fetchData()
-        setIsLoaded(true)
-    }, [dispatch, sessionUser, finalWallet]);
-
-    const coinData = walletCoins.map((walletCoin) => {
-        const priceData = crypto.crypto[walletCoin.coinSymbol];
-        if (priceData && walletCoins) {
-            const price = priceData.usd;
-            const quantity = walletCoin.quantity;
-            console.log('quantity:', quantity);
-            console.log('price:', price);
-            const value = price * quantity;
-            console.log('value:', value);
-            return {
-                name: walletCoin.coinSymbol,
-                price,
-                quantity,
-                value,
-            };
-        }
-        return null;
-    });
-
-
-    console.log('heres coinData', coinData);
-
-    const colorList = ["#FF5733", "#3498DB", "#2ECC71", "#FF33FF", "#FFA500"];
 
     function formatPrice(value) {
         const base = 1;
@@ -93,16 +157,61 @@ export default function WalletBreakdown() {
         }
     }
 
+    const walletCoins = coins
+        .map((coin) => {
+            const matchingWallet = wallets?.find((wallet) => wallet?.cryptoId === coin?.id);
+            if (matchingWallet) {
+                return {
+                    coinSymbol: coin?.name,
+                    walletId: matchingWallet?.id,
+                    quantity: matchingWallet?.quantity,
+                };
+            }
+            return null;
+        })
+        .filter((walletCoin) => walletCoin !== null);
+
+    const finalWallet = walletCoins.map((walletCoin) => walletCoin.coinSymbol).join("%2C");
+
+    useEffect(() => {
+        dispatch(thunkGetWallet(sessionUser.id));
+        dispatch(thunkGetPrice2(finalWallet))
+            .then(() => setIsLoaded(true))
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+                setIsLoaded(true);
+            });
+    }, [dispatch, sessionUser, finalWallet]);
+
+    const coinData = walletCoins.map((walletCoin) => {
+        const priceData = crypto.crypto[walletCoin.coinSymbol];
+        if (priceData && walletCoins) {
+            const price = priceData.usd;
+            const quantity = walletCoin.quantity;
+            const value = price * quantity;
+            return {
+                name: walletCoin.coinSymbol,
+                price,
+                quantity,
+                value,
+            };
+        }
+        return null;
+    });
+
+    const filteredCoinData = coinData.filter((coin) => coin?.value > 0.0001);
+
+    // Calculate total balance and formatted balance
     let totalBalance = 0;
-    coinData.map((coin) => {
-        totalBalance += coin?.value;
+    filteredCoinData.forEach((coin) => {
+        if (coin) {
+            totalBalance += coin.value;
+        }
     });
     const formattedBalance = totalBalance.toFixed(2);
-    console.log('heres coinData', coinData);
-
     return (
         <>
-            {isLoaded && coinData && coinData.every((coin) => coin !== null) ? (
+            {isLoaded && filteredCoinData && filteredCoinData.every((coin) => coin !== null) ? (
                 <div id='fullWalletDiv'>
                     <div id='portfolioBalDiv'>
                         <div id='portfolioBalText'>
@@ -129,7 +238,10 @@ export default function WalletBreakdown() {
                                 </thead>
                                 <tbody>
                                     {/* Render cryptocurrency data */}
-                                    {coinData?.map((coin) => {
+                                    {filteredCoinData?.map((coin) => {
+                                        const portfolioAllo = (coin?.value / formattedBalance * 100) > 0.01
+                                            ? (coin?.value / formattedBalance * 100).toFixed(2)
+                                            : formatPrice(coin?.value / formattedBalance * 100);
                                         const matchingCrypto = Object.entries(crypto.crypto).find(([name]) => coin?.name === name);
                                         return (
                                             <tr key={coin?.symbol}>
@@ -142,9 +254,7 @@ export default function WalletBreakdown() {
                                                         : formatPrice(coin?.price * coin?.quantity)}
                                                 </td>
                                                 <td className='xCoinAllocation'>
-                                                    {(coin?.value / formattedBalance * 100) > 0.01
-                                                        ? (coin?.value / formattedBalance * 100).toFixed(2)
-                                                        : formatPrice(coin?.value / formattedBalance * 100)}%
+                                                    {portfolioAllo}%
                                                 </td>
                                                 <td className='xCoin24h'>
                                                     {matchingCrypto && matchingCrypto[1]?.usd_24h_change !== undefined
@@ -172,10 +282,10 @@ export default function WalletBreakdown() {
                     </div>
                 </div>
             ) : (
-                                        <div className='loader-container'>
-                                            <PropagateLoader color='#36D7B7' size={15} />
-                                        </div>
+                <div className='loader-container'>
+                    <PropagateLoader color='#36D7B7' size={15} />
+                </div>
             )}
-                                    </>
-                                    );
+        </>
+    );
 }
