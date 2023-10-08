@@ -73,7 +73,7 @@ export const thunkBuyCoin = (coinId, quantity, fiat, method) => async (dispatch)
 
 export const thunkSellCoin = (coinId, quantity, fiat) => async (dispatch) => {
     const res = await fetch(`/api/coin/sell/${coinId}/${quantity}/${fiat}`, {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ coinId, quantity, fiat })
     })

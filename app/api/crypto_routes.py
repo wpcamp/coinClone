@@ -168,7 +168,7 @@ def buy_coin(id, quantity, fiat):
 
 
 # Sell Crypto:
-@crypto_routes.route('/sell/<string:id>/<string:quantity>/<string:fiat>', methods=['POST'])
+@crypto_routes.route('/sell/<string:id>/<string:quantity>/<string:fiat>', methods=['PUT'])
 def sell_coin(id, quantity, fiat):
     user = current_user
 
