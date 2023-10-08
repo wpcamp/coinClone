@@ -4,7 +4,8 @@
 
 Schema: 
 
-![CoinClone](https://github.com/wpcamp/coinClone/assets/125541324/1bd0dc87-58fe-4d58-bec1-2cb950da40fd)
+![CoinClone (1)](https://github.com/wpcamp/coinClone/assets/125541324/56605282-9a16-4888-8564-f14c518a58d4)
+
 
 
 
