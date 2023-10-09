@@ -99,21 +99,6 @@ export const thunkGetTrending = () => async (dispatch) => {
     }
 }
 
-// export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (dispatch) => {
-//     const res = await fetch(`/api/coin/data/chart/${cryptoName}/${timeStart}/${timeEnd}`, {
-//         method: 'GET',
-//         headers: { "Content-Type": "application/json" }
-//     })
-//     if (res.ok) {
-//         const data = await res.json()
-//         // console.log("HERE IS THE RESPONSE DATA:", data);
-//         dispatch(getChartData(data))
-//         // console.log("HERE IS THE CHART DATA IN THUNK:", data);
-//     } else {
-//         const errors = await res.json()
-//         return errors
-//     }
-// }
 
 export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (dispatch) => {
     const url = `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart/range?vs_currency=USD&from=${timeStart}&to=${timeEnd}&precision=full`;
@@ -135,9 +120,6 @@ export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (disp
 };
 
 
-
-
-
 // State
 const initialState = {
     crypto: {},
@@ -156,7 +138,6 @@ const cryptoReducer = (state = initialState, action) => {
             return { ...state, crypto: action.cryptoSymbol }
         }
         case GET_CHART_DATA: {
-            // console.log("HERES THE action.data:", action.data);
             return { ...state, chartData: action.data };
         }
         case GET_PRICES: {

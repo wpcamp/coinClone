@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { thunkBuyCoin, thunkGetWallet, thunkSellCoin } from "../../store/wallet";
+import { thunkBuyCoin, thunkCreateEmptyWallets, thunkGetWallet, thunkSellCoin } from "../../store/wallet";
 import { useParams } from "react-router-dom";
 import { thunkGetUser } from "../../store/session";
 import coins from '../Asset/coins.js';
@@ -23,9 +23,15 @@ export default function BuyCard() {
     }, [dispatch, user.id])
 
     const coin = coins.find((c) => c.symbol.toUpperCase() === coinTicker.cryptoSymbol.toUpperCase());
-    const matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
+    let matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
 
-    const handleBuy = () => {
+
+    const handleBuy = async () => {
+
+        if (!matchedWallet) {
+            matchedWallet = await dispatch(thunkCreateEmptyWallets(coin.id))
+        }
+
         if (currency === "USD") {
             let fiat = +amount
             console.log("fiat", fiat);

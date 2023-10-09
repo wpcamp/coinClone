@@ -21,8 +21,6 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # get price info from coinmarketcap api
-
-
 @crypto_routes.route('/data/<string:symbol>', methods=['GET'])
 def get_coin_market_details(symbol):
     api_key = os.environ.get('COINMARKETCAP_API_KEY')
@@ -58,23 +56,6 @@ def get_coin_market_details(symbol):
     else:
         return {'error': 'Failed to fetch data'}, 500
 
-# Get chart data from coingecko api
-# @crypto_routes.route('/data/chart/<string:id>/<string:time_start>/<string:time_end>', methods=["GET"])
-# def get_coin_chart_data(id, time_start, time_end):
-#     url = (
-#         f'https://api.coingecko.com/api/v3/coins/{id}/market_chart/range?vs_currency=USD&from={time_start}&to={time_end}&precision=full')
-#     headers = {
-#         'Content-Type': 'application/json'
-#     }
-#     session = Session()
-#     response = session.get(url, headers=headers)
-
-#     if response.ok:
-#         data = response.json()
-#         formatted_data = data["prices"]
-#         return formatted_data
-#     else:
-#         return {'error': 'Failed to fetch data'}, 500
 
 # Create a comment
 @crypto_routes.route('/<int:id>/comments', methods=["POST"])
@@ -120,45 +101,21 @@ def get_comments(id):
 @crypto_routes.route('/buy/<string:id>/<string:quantity>/<string:fiat>', methods=['POST', 'PUT'])
 def buy_coin(id, quantity, fiat):
     user = current_user
-
     current_holding = Wallet.query.filter_by(user_id=user.id, crypto_id=id).first()
-
-    if request.method == 'POST':
-        # User wants to buy a new cryptocurrency
-        if not current_holding:
-            if user.buying_power < Decimal(fiat):
-                return {'error': 'Insufficient funds'}, 500
-
-            user.buying_power -= Decimal(fiat)
-            new_coin = Wallet(
-                user_id=user.id,
-                crypto_id=id,
-                quantity=Decimal(quantity),  # Convert quantity to Decimal
-                created_at=datetime.datetime.now(),
-                updated_at=datetime.datetime.now()
-            )
-            db.session.add(new_coin)
-            db.session.commit()
-            return {'user': user.to_dict(), 'new_coin': new_coin.to_dict()}
-        else:
-            return {'error': 'You already own this cryptocurrency'}, 400
-    elif request.method == 'PUT':
-        # User wants to update the quantity of an existing cryptocurrency
-        if current_holding:
+    if current_holding:
             # Check if the user has sufficient buying power to update the holding
-            if user.buying_power < Decimal(fiat):
-                return {'error': 'Insufficient funds'}, 500
+        if user.buying_power < Decimal(fiat):
+            return {'error': 'Insufficient funds'}, 500
 
-            user.buying_power -= Decimal(fiat)
-            quantity_decimal = Decimal(quantity)  # Convert quantity to Decimal
-            current_holding.quantity += quantity_decimal  # Use Decimal for addition
-            current_holding.updated_at = datetime.datetime.now()
-            db.session.commit()
-            return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict()}
-        else:
-            return {'error': 'You do not own this cryptocurrency'}, 400
+        user.buying_power -= Decimal(fiat)
+        quantity_decimal = Decimal(quantity)  # Convert quantity to Decimal
+        current_holding.quantity += quantity_decimal  # Use Decimal for addition
+        current_holding.updated_at = datetime.datetime.now()
+        db.session.commit()
+        return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict()}
+    else:
+        return {'error': 'You do not own this cryptocurrency'}, 400
 
-    return {'error': 'Invalid request method'}, 400
 
 # Sell Crypto:
 @crypto_routes.route('/sell/<string:id>/<string:quantity>/<string:fiat>', methods=['PUT'])
@@ -182,28 +139,8 @@ def sell_coin(id, quantity, fiat):
     else:
         return {'error': 'You do not own this cryptocurrency'}, 400
 
-# @crypto_routes.route('/sell/<string:id>/<string:quantity>/<string:fiat>', methods=['PUT'])
-# def sell_coin(id, quantity, fiat):
-#     user = current_user
 
-#     current_holding = Wallet.query.filter_by(user_id=user.id, crypto_id=id).first()
-
-#         # User wants to sell a cryptocurrency
-#     if current_holding:
-#         if current_holding.quantity < Decimal(quantity):
-#             return {'error': 'Insufficient quantity to sell'}, 400
-
-#         user.buying_power += Decimal(fiat)
-#         current_holding.quantity -= float(quantity)
-#         current_holding.updated_at = datetime.datetime.now()
-
-#         db.session.commit()
-#         return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict() if current_holding else None}
-#     else:
-#         return {'error': 'You do not own this cryptocurrency'}, 400
-    
-
-
+# Get all coins in the database -- COINMAKRETCAP API
 @crypto_routes.route('/datum/<string:ids>', methods=['GET'])
 def get_coins_market_details(ids):
     api_key = os.environ.get('COINMARKETCAP_API_KEY')
@@ -241,7 +178,94 @@ def get_coins_market_details(ids):
                 'date_added': coin_info['date_added'],
                 'last_updated': coin_info['last_updated']
             }
-
         return coin_data
     else:
         return {'error': 'Failed to fetch data'}, 500
+
+
+
+#older routes
+
+# Get chart data from coingecko api
+# @crypto_routes.route('/data/chart/<string:id>/<string:time_start>/<string:time_end>', methods=["GET"])
+# def get_coin_chart_data(id, time_start, time_end):
+#     url = (
+#         f'https://api.coingecko.com/api/v3/coins/{id}/market_chart/range?vs_currency=USD&from={time_start}&to={time_end}&precision=full')
+#     headers = {
+#         'Content-Type': 'application/json'
+#     }
+#     session = Session()
+#     response = session.get(url, headers=headers)
+
+#     if response.ok:
+#         data = response.json()
+#         formatted_data = data["prices"]
+#         return formatted_data
+#     else:
+#         return {'error': 'Failed to fetch data'}, 500
+
+
+# @crypto_routes.route('/sell/<string:id>/<string:quantity>/<string:fiat>', methods=['PUT'])
+# def sell_coin(id, quantity, fiat):
+#     user = current_user
+
+#     current_holding = Wallet.query.filter_by(user_id=user.id, crypto_id=id).first()
+
+#         # User wants to sell a cryptocurrency
+#     if current_holding:
+#         if current_holding.quantity < Decimal(quantity):
+#             return {'error': 'Insufficient quantity to sell'}, 400
+
+#         user.buying_power += Decimal(fiat)
+#         current_holding.quantity -= float(quantity)
+#         current_holding.updated_at = datetime.datetime.now()
+
+#         db.session.commit()
+#         return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict() if current_holding else None}
+#     else:
+#         return {'error': 'You do not own this cryptocurrency'}, 400
+
+
+# # Buy Crypto:
+# @crypto_routes.route('/buy/<string:id>/<string:quantity>/<string:fiat>', methods=['POST', 'PUT'])
+# def buy_coin(id, quantity, fiat):
+#     user = current_user
+
+#     current_holding = Wallet.query.filter_by(user_id=user.id, crypto_id=id).first()
+
+#     if request.method == 'POST':
+#         # User wants to buy a new cryptocurrency
+#         if not current_holding:
+#             if user.buying_power < Decimal(fiat):
+#                 return {'error': 'Insufficient funds'}, 500
+
+#             user.buying_power -= Decimal(fiat)
+#             new_coin = Wallet(
+#                 user_id=user.id,
+#                 crypto_id=id,
+#                 quantity=Decimal(quantity),  # Convert quantity to Decimal
+#                 created_at=datetime.datetime.now(),
+#                 updated_at=datetime.datetime.now()
+#             )
+#             db.session.add(new_coin)
+#             db.session.commit()
+#             return {'user': user.to_dict(), 'new_coin': new_coin.to_dict()}
+#         else:
+#             return {'error': 'You already own this cryptocurrency'}, 400
+#     elif request.method == 'PUT':
+#         # User wants to update the quantity of an existing cryptocurrency
+#         if current_holding:
+#             # Check if the user has sufficient buying power to update the holding
+#             if user.buying_power < Decimal(fiat):
+#                 return {'error': 'Insufficient funds'}, 500
+
+#             user.buying_power -= Decimal(fiat)
+#             quantity_decimal = Decimal(quantity)  # Convert quantity to Decimal
+#             current_holding.quantity += quantity_decimal  # Use Decimal for addition
+#             current_holding.updated_at = datetime.datetime.now()
+#             db.session.commit()
+#             return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict()}
+#         else:
+#             return {'error': 'You do not own this cryptocurrency'}, 400
+
+#     return {'error': 'Invalid request method'}, 400

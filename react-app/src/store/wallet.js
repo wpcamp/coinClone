@@ -87,15 +87,19 @@ export const thunkSellCoin = (coinId, quantity, fiat) => async (dispatch) => {
     }
 }
 
-export const thunkCreateEmptyWallets = () => async (dispatch) => {
-    const res = await fetch('/api/wallet/create', {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
+export const thunkCreateEmptyWallets = (id) => async (dispatch) => {
+    console.log("*****id*****", id);
+    const res = await fetch(`/api/wallet/create/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id })
     })
 
     if (res.ok) {
         const wallet = await res.json()
+        console.log("*****wallet*****", wallet);
         dispatch(createEmptyWallets([wallet]))
+        return wallet
     } else {
         const errors = await res.json()
         return errors
@@ -134,20 +138,14 @@ const walletReducer = (state = initialState, action) => {
         }
         case CREATE_EMPTY_WALLETS: {
             // Assuming action.wallet is an array of wallets
-            const updatedWallets = {};
-            action.wallet.forEach((wallet) => {
-                updatedWallets[wallet.id] = wallet;
-            });
-        
             return {
                 ...state,
                 wallet: {
                     ...state.wallet,
-                    ...updatedWallets
+                    [action.wallet.id]: action.wallet 
                 }
             };
         }
-        
         default: {
             return state
         }

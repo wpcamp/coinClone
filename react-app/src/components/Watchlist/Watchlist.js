@@ -16,7 +16,7 @@ export default function WatchlistCard() {
     const crypto = useSelector(state => state.crypto.crypto);
     const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isLoaded2, setIsLoaded2] = useState(false);
+    // const [isLoaded2, setIsLoaded2] = useState(false);
     const [watchlistCoins, setWatchlistCoins] = useState([]);
     const watchlistCoinIds = {}
 
@@ -46,14 +46,13 @@ export default function WatchlistCard() {
         await dispatch(thunkGetWatchlist(sessionUser.id));
     };
 
+    // const handleDelete = (watchlistId) => {
+    //     dispatch(thunkRemoveWatchlist(watchlistId));
+    //     dispatch(thunkGetWatchlist(sessionUser.id));
+    // };
+
     useEffect(() => {
-        dispatch(thunkGetWatchlist(sessionUser.id)).then(() => {
-            // Check if watchlist contains any undefined values
-            const hasUndefinedValues = watchlist.some(item => item === undefined);
-            if (!hasUndefinedValues) {
-                setIsLoaded(true);
-            }
-        });
+        dispatch(thunkGetWatchlist(sessionUser.id))
     }, [dispatch, sessionUser]);
 
     for (let i = 0; i < coins.length; i++) {
@@ -77,34 +76,25 @@ export default function WatchlistCard() {
             }
         }
         setWatchlistCoins(output);
-    }, [watchlist]);
 
-    // useEffect(() => {
-    //     if (watchlistCoins.length > 0) {
-    //         const searchParams = watchlistCoins.join(",").toUpperCase();
-    //         dispatch(thunkGetPrices(searchParams)).then(() => setIsLoaded2(true))
-    //     } else {
-    //         setIsLoaded2(true)
-    //     }
-    // }, [dispatch, watchlistCoins]);
-
-    useEffect(() => {
         if (watchlistCoins.length > 0) {
             const searchParams = watchlistCoins.join(",").toUpperCase();
             dispatch(thunkGetPrices(searchParams))
                 .then(() => {
-                    // Set isLoaded2 to true when the data fetching is complete
-                    setIsLoaded2(true);
+                    setIsLoaded(true);
                 })
                 .catch((error) => {
-                    // Handle any errors here if needed
                     console.error('Error fetching prices:', error);
                 });
         } else {
-            // If watchlistCoins is empty, just set isLoaded2 to true
-            setIsLoaded2(true);
+            setIsLoaded(true);
         }
-    }, [dispatch, watchlistCoins]);
+
+
+    }, [watchlist]);
+
+    // useEffect(() => {
+    // }, [dispatch, watchlistCoins]);
 
     const cryptoArray = Object.keys(crypto).map(symbol => ({
         symbol,
@@ -115,7 +105,7 @@ export default function WatchlistCard() {
     // console.log("heres watchlist", Object.keys(crypto));
     // console.log("heres crypto", crypto);
     // Display a loading indicator while the data is loading
-    if (!isLoaded || !isLoaded2 || Object.keys(crypto).length > 50 || crypto.hasOwnProperty('created')) {
+    if (!isLoaded || Object.keys(crypto).length > 50 || crypto.hasOwnProperty('created')) {
         return (
             <div className='loader-container' id='watchlistLoaderDiv'>
                 <PropagateLoader color='#36D7B7' size={15} />
@@ -194,3 +184,33 @@ export default function WatchlistCard() {
     );
 }
 
+
+
+
+// useEffect(() => {
+//     const output = [];
+//     for (let i = 0; i < coins.length; i++) {
+//         for (let j = 0; j < watchlist?.length; j++) {
+//             if (watchlist[j]?.cryptoId === coins[i]?.id) {
+//                 const coinSymbol = coins[i]?.symbol
+//                 output.push(coinSymbol);
+//             }
+//         }
+//     }
+//     setWatchlistCoins(output);
+// }, [watchlist]);
+
+// useEffect(() => {
+//     if (watchlistCoins.length > 0) {
+//         const searchParams = watchlistCoins.join(",").toUpperCase();
+//         dispatch(thunkGetPrices(searchParams))
+//             .then(() => {
+//                 setIsLoaded(true);
+//             })
+//             .catch((error) => {
+//                 console.error('Error fetching prices:', error);
+//             });
+//     } else {
+//         setIsLoaded(true);
+//     }
+// }, [dispatch, watchlistCoins]);
