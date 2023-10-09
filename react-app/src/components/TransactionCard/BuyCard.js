@@ -60,7 +60,7 @@ export default function BuyCard() {
                 setError("Amount must be greater than zero");
                 return;
             }
-            
+
             let method = matchedWallet ? 'PUT' : 'POST';
             let fiatFinal = quantity * crypto.crypto.price;
             dispatch(thunkBuyCoin(`${coin.id}`, `${quantity}`, `${fiatFinal}`, method)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
@@ -69,31 +69,46 @@ export default function BuyCard() {
         setError("");
     }
 
+    function formatDecimal(decimalValue, decimalPlaces) {
+        // Check if decimalValue is a valid number
+        if (!isNaN(decimalValue) && decimalValue !== null && decimalValue !== undefined) {
+            // Use Number.toFixed to format the number with the specified decimal places
+            return parseFloat(decimalValue).toFixed(decimalPlaces);
+        } else {
+            // Return an empty string or another default value for invalid inputs
+            return '';
+        }
+    }
 
     const handleSell = () => {
+        console.log("Currency:", currency);
+        console.log("Amount:", amount);
+        console.log("Crypto Price:", crypto.crypto.price);
+        console.log("Matched Wallet Quantity:", matchedWallet ? matchedWallet.quantity : 0);
+        console.log("amount > matched ? :", amount > matchedWallet.quantity);
         if (currency === "USD") {
-            const quantity = amount / crypto.crypto.price
+            const quantity = amount / crypto.crypto.price;
             if (quantity <= 0) {
                 setError("Amount must be greater than zero");
                 return;
             }
-            dispatch(thunkSellCoin(`${coin.id}`, `${quantity}`, `${amount}`)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id))) 
-            setAmount(0)   
+            dispatch(thunkSellCoin(`${coin.id}`, `${quantity}`, `${amount}`)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)));
+            setAmount(0);
         } else {
-            const fiatAmount = amount
-            if (fiatAmount <= 0) {
+            const quantity = amount;
+            if (quantity <= 0) {
                 setError("Amount must be greater than zero");
                 return;
             }
-            if (amount > matchedWallet.quantity) {
+            if (quantity > matchedWallet.quantity) {
                 setError("Insufficient quantity");
                 return;
             }
-            const fiatFinal = fiatAmount * crypto.crypto.price;
-            dispatch(thunkSellCoin(`${coin.id}`, `${fiatAmount}`, `${fiatFinal}`)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)))
+            const fiatFinal = quantity * crypto.crypto.price;
+            dispatch(thunkSellCoin(`${coin.id}`, `${quantity}`, `${fiatFinal}`)).then(() => dispatch(thunkGetWallet(user.id))).then(() => dispatch(thunkGetUser(user.id)));
+            setAmount(0);
         }
-        setAmount(0)
-    }
+    };
 
     return (
         <div className="buy-card">
@@ -121,7 +136,7 @@ export default function BuyCard() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{matchedWallet ? matchedWallet.quantity.toFixed(4) : 0}</td>
+                            <td>{matchedWallet ? formatDecimal(matchedWallet.quantity,4) : 0}</td>
                             <td>
                                 <input
                                     type="number"
@@ -130,7 +145,7 @@ export default function BuyCard() {
                                     min="0"
                                 />
                             </td>
-                            <td>${user.buyingPower.toLocaleString(2)}</td>
+                            <td>${parseFloat(user.buyingPower).toLocaleString(2)}</td>
                             <td>
                                 {error && <div className="error-message">{error}</div>} {/* Display error message */}
                                 <button className="buy-button" onClick={handleBuy}>

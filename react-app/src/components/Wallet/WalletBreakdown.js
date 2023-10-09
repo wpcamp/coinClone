@@ -175,7 +175,7 @@ export default function WalletBreakdown() {
 
     useEffect(() => {
         dispatch(thunkGetWallet(sessionUser.id));
-        dispatch(thunkCreateEmptyWallets())
+        // dispatch(thunkCreateEmptyWallets())
         dispatch(thunkGetPrice2(finalWallet))
             .then(() => setIsLoaded(true))
             .catch((error) => {
@@ -210,6 +210,17 @@ export default function WalletBreakdown() {
         }
     });
     const formattedBalance = totalBalance.toFixed(2);
+
+    function formatDecimal(decimalValue, decimalPlaces) {
+        // Check if decimalValue is a valid number
+        if (!isNaN(decimalValue) && decimalValue !== null && decimalValue !== undefined) {
+            // Use Number.toFixed to format the number with the specified decimal places
+            return parseFloat(decimalValue).toFixed(decimalPlaces);
+        } else {
+            // Return an empty string or another default value for invalid inputs
+            return '';
+        }
+    }
     return (
         <>
             {isLoaded && filteredCoinData && filteredCoinData.every((coin) => coin !== null) ? (
@@ -247,7 +258,7 @@ export default function WalletBreakdown() {
                                         return (
                                             <tr key={coin?.symbol}>
                                                 <td>{coin?.name.charAt(0).toUpperCase() + coin?.name.slice(1)}</td>
-                                                <td className='xCoinBalance'>{coin?.quantity?.toFixed(4)}</td>
+                                                <td className='xCoinBalance'>{parseFloat(formatDecimal(coin?.quantity, 2)).toLocaleString()}</td>
                                                 <td className='xCoinPrice'>${formatPrice(coin?.price)}</td>
                                                 <td>
                                                     ${(coin?.price * coin?.quantity) > 0.1

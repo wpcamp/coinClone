@@ -21,7 +21,7 @@ export default function BuyingPowerCard() {
                     <tbody>
                         <tr>
                             <td>USDC</td>
-                            <td>${sessionUser.buyingPower}</td>
+                            <td>${parseFloat(sessionUser.buyingPower).toLocaleString()}</td>
                         </tr>
                     </tbody>
                 </table>
