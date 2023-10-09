@@ -55,7 +55,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('crypto_id', sa.Integer(), nullable=False),
-    sa.Column('quantity', sa.Integer(), nullable=False),
+    sa.Column('quantity', sa.Numeric(precision=50, scale=20), nullable=False),
     sa.Column('created_at', sa.Date(), nullable=False),
     sa.Column('updated_at', sa.Date(), nullable=False),
     sa.ForeignKeyConstraint(['crypto_id'], ['cryptos.id'], ),

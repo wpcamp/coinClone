@@ -9,7 +9,9 @@ import "./Asset.css"
 
 export default function AssetChart() {
     const dispatch = useDispatch();
-    const chartData = useSelector(state => state.crypto.chartData);
+    const data = useSelector(state => state.crypto.chartData);
+    const chartData = data.prices;
+    // console.log("chartData:", chartData);
 
     const { cryptoSymbol } = useParams();
 
@@ -55,6 +57,7 @@ export default function AssetChart() {
 
     useEffect(() => {
         const fetchChartData = async () => {
+            console.log("name:", name);
             await dispatch(thunkGetChartData(name, startTime, endTime));
             setIsLoaded(true);
         };
@@ -64,7 +67,7 @@ export default function AssetChart() {
 
 
     const finalData = []
-    for (let i = 0; i < chartData.length; i++) {
+    for (let i = 0; i < chartData?.length; i++) {
         const [time, value] = chartData[i];
         finalData.push({
             time: new Date(time).toLocaleString(),

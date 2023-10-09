@@ -6,7 +6,7 @@ import WalletPortfolio from '../Wallet/WalletPortfolio';
 import TrendingCard from '../Trending';
 import BuyingPowerCard from '../Wallet/BuyingPower';
 import './Home.css';
-import { thunkCreateEmptyWallets } from '../../store/wallet';
+
 
 export default function HomeLoggedIn() {
     return (
