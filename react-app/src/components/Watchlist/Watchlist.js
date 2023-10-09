@@ -12,6 +12,7 @@ import './Watchlist.css'
 export default function WatchlistCard() {
     const dispatch = useDispatch();
     const watchlist = useSelector(state => state.watchlist.watchlist.watchlists ?? []);
+    console.log("heres watchlist", watchlist);
     const sessionUser = useSelector(state => state.session.user);
     const crypto = useSelector(state => state.crypto.crypto);
     const history = useHistory()
@@ -86,11 +87,7 @@ export default function WatchlistCard() {
                 .catch((error) => {
                     console.error('Error fetching prices:', error);
                 });
-        } else {
-            setIsLoaded(true);
         }
-
-
     }, [watchlist]);
 
     // useEffect(() => {
@@ -105,7 +102,7 @@ export default function WatchlistCard() {
     // console.log("heres watchlist", Object.keys(crypto));
     // console.log("heres crypto", crypto);
     // Display a loading indicator while the data is loading
-    if (!isLoaded || Object.keys(crypto).length > 50 || crypto.hasOwnProperty('created')) {
+    if (!isLoaded) {
         return (
             <div className='loader-container' id='watchlistLoaderDiv'>
                 <PropagateLoader color='#36D7B7' size={15} />
@@ -187,30 +184,10 @@ export default function WatchlistCard() {
 
 
 
-// useEffect(() => {
-//     const output = [];
-//     for (let i = 0; i < coins.length; i++) {
-//         for (let j = 0; j < watchlist?.length; j++) {
-//             if (watchlist[j]?.cryptoId === coins[i]?.id) {
-//                 const coinSymbol = coins[i]?.symbol
-//                 output.push(coinSymbol);
-//             }
-//         }
-//     }
-//     setWatchlistCoins(output);
-// }, [watchlist]);
-
-// useEffect(() => {
-//     if (watchlistCoins.length > 0) {
-//         const searchParams = watchlistCoins.join(",").toUpperCase();
-//         dispatch(thunkGetPrices(searchParams))
-//             .then(() => {
-//                 setIsLoaded(true);
-//             })
-//             .catch((error) => {
-//                 console.error('Error fetching prices:', error);
-//             });
-//     } else {
-//         setIsLoaded(true);
-//     }
-// }, [dispatch, watchlistCoins]);
+// if (!isLoaded || Object.keys(crypto).length > 50 || crypto.hasOwnProperty('created')) {
+//     return (
+//         <div className='loader-container' id='watchlistLoaderDiv'>
+//             <PropagateLoader color='#36D7B7' size={15} />
+//         </div>
+//     );
+// }

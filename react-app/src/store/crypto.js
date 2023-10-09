@@ -124,7 +124,8 @@ export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (disp
 const initialState = {
     crypto: {},
     chartData: {},
-    trending: {}
+    trending: {}, 
+    cryptoData: {}
 }
 
 
