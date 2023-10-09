@@ -16,6 +16,7 @@ export default function AssetHeader() {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const data = useSelector(state => state.crypto.crypto)
+    console.log("data", data);
     const watchlist = useSelector(state => state.watchlist.watchlist.watchlists);
 
     function formatPrice(value) {

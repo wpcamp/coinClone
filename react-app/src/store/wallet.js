@@ -137,7 +137,6 @@ const walletReducer = (state = initialState, action) => {
             }
         }
         case CREATE_EMPTY_WALLETS: {
-            // Assuming action.wallet is an array of wallets
             return {
                 ...state,
                 wallet: {
