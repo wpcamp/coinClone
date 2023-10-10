@@ -17,7 +17,6 @@ export default function WatchlistCard() {
     const crypto = useSelector(state => state.crypto.crypto);
     const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false);
-    // const [isLoaded2, setIsLoaded2] = useState(false);
     const [watchlistCoins, setWatchlistCoins] = useState([]);
     const watchlistCoinIds = {}
 
