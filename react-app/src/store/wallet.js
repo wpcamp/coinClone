@@ -64,7 +64,9 @@ export const thunkBuyCoin = (coinId, quantity, fiat, method) => async (dispatch)
 
     if (res.ok) {
         const wallet = await res.json()
+        console.log("*****wallet*****", wallet);
         dispatch(buyCoin(wallet))
+        return wallet
     } else {
         const errors = await res.json()
         return errors
