@@ -109,6 +109,7 @@ def buy_coin(id, quantity, fiat):
 
         user.buying_power -= Decimal(fiat)
         quantity_decimal = Decimal(quantity)  # Convert quantity to Decimal
+        print(quantity_decimal)
         current_holding.quantity += quantity_decimal  # Use Decimal for addition
         current_holding.updated_at = datetime.datetime.now()
         db.session.commit()
