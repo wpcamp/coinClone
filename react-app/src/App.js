@@ -12,6 +12,10 @@ import HomeLoggedIn from "./components/Home/HomeLogged";
 import Footer from "./components/Footer";
 import SignUpPage from "./components/SignupFormPage";
 import TopCoins from "./components/AllAssets/TopCoins";
+import RouteChangeTracker from "./components/RouteChangeTracker";
+import ReactGA from 'react-ga';
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -20,10 +24,22 @@ function App() {
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+  
+  const TRACKING_ID = "UA-288680528-1"; 
+  ReactGA.initialize(TRACKING_ID);
+  ReactGA.pageview(window.location.pathname + window.location.search); 
+
+  ReactGA.event({
+    category: 'User',
+    action: 'Created an Account'
+  });
+
+
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <RouteChangeTracker />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
