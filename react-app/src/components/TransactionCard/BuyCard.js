@@ -79,7 +79,11 @@ export default function BuyCard() {
         // Check if decimalValue is a valid number
         if (!isNaN(decimalValue) && decimalValue !== null && decimalValue !== undefined) {
             // Use Number.toFixed to format the number with the specified decimal places
-            return parseFloat(decimalValue).toFixed(decimalPlaces);
+            let output = parseFloat(decimalValue).toFixed(decimalPlaces);
+            console.log("output", output);
+            console.log("decimal value", decimalValue);
+            console.log("parsed decimal value", parseFloat(decimalValue));
+            return output
         } else {
             // Return an empty string or another default value for invalid inputs
             return '';
