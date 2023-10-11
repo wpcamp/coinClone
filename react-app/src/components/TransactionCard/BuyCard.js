@@ -25,16 +25,11 @@ export default function BuyCard() {
     const coin = coins.find((c) => c.symbol.toUpperCase() === coinTicker.cryptoSymbol.toUpperCase());
     let matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
 
-    let coinIDReal = coin?.id;
-    const quantity = useSelector((state) => state.wallet?.wallet?.wallets[coinIDReal]?.quantity);
-    console.log("quantity HERE", quantity);
 
     const handleBuy = async () => {
-
         if (!matchedWallet) {
             matchedWallet = await dispatch(thunkCreateEmptyWallets(coin.id))
         }
-
         if (currency === "USD") {
             let fiat = +amount
             console.log("fiat", fiat);
@@ -149,8 +144,7 @@ export default function BuyCard() {
                     </thead>
                     <tbody>
                         <tr>
-                            {/* <td>{matchedWallet ? formatDecimal(matchedWallet.quantity,4) : 0}</td> */}
-                            <td>{matchedWallet?.quantity}</td>
+                            <td>{matchedWallet ? formatDecimal(matchedWallet.quantity,4) : 0}</td>
                             <td>
                                 <input
                                     type="number"
