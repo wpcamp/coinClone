@@ -147,7 +147,7 @@ export default function BuyCard() {
                     <tbody>
                         <tr>
                             {/* <td>{matchedWallet ? formatDecimal(matchedWallet.quantity,4) : 0}</td> */}
-                            <td>{matchedWallet.quantity}</td>
+                            <td>{matchedWallet?.quantity}</td>
                             <td>
                                 <input
                                     type="number"
