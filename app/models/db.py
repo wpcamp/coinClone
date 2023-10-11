@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
-    buying_power = db.Column(db.Numeric(10, 2), nullable=False)
+    buying_power = db.Column(db.Float(10, 2), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.Date, nullable=False)
     updated_at = db.Column(db.Date, nullable=False)
@@ -129,7 +129,7 @@ class Wallet(db.Model):
         add_prefix_for_prod("users.id")), nullable=False)
     crypto_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("cryptos.id")), nullable=False)
-    quantity = db.Column(db.Numeric(precision=50, scale=20), nullable=True)
+    quantity = db.Column(db.Float(precision=50, scale=20), nullable=True)
     created_at = db.Column(db.Date, nullable=False)
     updated_at = db.Column(db.Date, nullable=False)
 
