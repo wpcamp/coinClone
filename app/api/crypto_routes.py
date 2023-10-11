@@ -123,6 +123,7 @@ def buy_coin(id, quantity, fiat):
         print("HERE IS THE CURRENT HOLDING", current_holding)
         print("HERE IS QUANTITY DECIMAL", quantity_decimal)
         outputcurrent['quantity'] = quantity_decimal
+        print("HERE IS THE OUTPUT CURRENT AFTER", outputcurrent)
         return {'user': user.to_dict(), 'updated_coin': outputcurrent}
     else:
         return {'error': 'You do not own this cryptocurrency'}, 400
