@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
 let enhancer;
 
 if (process.env.NODE_ENV === 'production') {
-  enhancer = applyMiddleware(thunk);
+  enhancer = applyMiddleware(thunk, logger);
 } else {
   const logger = require('redux-logger').default;
   const composeEnhancers =

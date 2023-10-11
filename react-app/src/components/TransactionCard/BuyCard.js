@@ -25,6 +25,9 @@ export default function BuyCard() {
     const coin = coins.find((c) => c.symbol.toUpperCase() === coinTicker.cryptoSymbol.toUpperCase());
     let matchedWallet = wallets?.find((wallet) => wallet.cryptoId === coin.id);
 
+    let coinIDReal = coin?.id;
+    const quantity = useSelector((state) => state.wallet?.wallet?.wallets[coinIDReal]?.quantity);
+    console.log("quantity HERE", quantity);
 
     const handleBuy = async () => {
 
