@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 40cf551ab2bb
+Revision ID: 6ff65a4538f0
 Revises: 
-Create Date: 2023-09-06 15:15:27.332412
+Create Date: 2023-10-11 17:39:21.140866
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '40cf551ab2bb'
+revision = '6ff65a4538f0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -44,7 +44,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('crypto_id', sa.Integer(), nullable=False),
     sa.Column('text', sa.String(length=800), nullable=False),
-    sa.Column('bullish', sa.Boolean()),
+    sa.Column('bullish', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.Date(), nullable=False),
     sa.Column('updated_at', sa.Date(), nullable=False),
     sa.ForeignKeyConstraint(['crypto_id'], ['cryptos.id'], ),
@@ -55,7 +55,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('crypto_id', sa.Integer(), nullable=False),
-    sa.Column('quantity', sa.Numeric(precision=15, scale=20), nullable=False),
+    sa.Column('quantity', sa.Numeric(precision=10, scale=9), nullable=True),
     sa.Column('created_at', sa.Date(), nullable=False),
     sa.Column('updated_at', sa.Date(), nullable=False),
     sa.ForeignKeyConstraint(['crypto_id'], ['cryptos.id'], ),
