@@ -118,6 +118,8 @@ const walletReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_WALLET: {
             const newState = { ...state, wallet: action.wallet }
+            console.log("*****action.wallet*****", action.wallet);
+            console.log("*****newState*****", newState);
             return newState
         }
         case BUY_COIN: {

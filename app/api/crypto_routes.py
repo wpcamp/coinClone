@@ -102,6 +102,7 @@ def get_comments(id):
 def buy_coin(id, quantity, fiat):
     user = current_user
     current_holding = Wallet.query.filter_by(user_id=user.id, crypto_id=id).first()
+    
     if current_holding:
             # Check if the user has sufficient buying power to update the holding
         if user.buying_power < Decimal(fiat):
@@ -109,11 +110,18 @@ def buy_coin(id, quantity, fiat):
 
         user.buying_power -= Decimal(fiat)
         quantity_decimal = Decimal(quantity)  # Convert quantity to Decimal
-        print(quantity_decimal)
+        print("HERE IS THE QUANTITY HOLDING", current_holding.quantity)
+        print("TYPE OF CURRENT HOLDING QUANTITY", type(current_holding.quantity))
+        print("HERE IS THE TYPE OF QUANTITY DECIMAL", type(quantity_decimal))
+        print("HERE IS QUANTITY + QUANTITY DECIMAL", current_holding.quantity + quantity_decimal)
         current_holding.quantity += quantity_decimal  # Use Decimal for addition
         current_holding.updated_at = datetime.datetime.now()
         db.session.commit()
-        return {'user': user.to_dict(), 'updated_coin': current_holding.to_dict()}
+        outputcurrent= current_holding.to_dict()
+        print("currentholding to Dict", outputcurrent)
+        print("HERE IS THE CURRENT HOLDING", current_holding)
+        print("HERE IS QUANTITY DECIMAL", quantity_decimal)
+        return {'user': user.to_dict(), 'updated_coin': outputcurrent}
     else:
         return {'error': 'You do not own this cryptocurrency'}, 400
 
