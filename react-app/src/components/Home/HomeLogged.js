@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { thunkGetWatchlist } from '../../store/watchlist';
 import SideBar from '../Sidebar/index';
 import WalletBreakdown from '../Wallet/WalletBreakdown';
 import WalletPortfolio from '../Wallet/WalletPortfolio';
@@ -9,6 +10,11 @@ import './Home.css';
 
 
 export default function HomeLoggedIn() {
+    const sessionUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(thunkGetWatchlist(sessionUser.id))
+    }, [])
     return (
         <div id='homePageFullDiv'>
             <div id='homePageSideWal'>

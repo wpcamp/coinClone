@@ -11,7 +11,7 @@ export default function TrendingCard() {
     useEffect(() => {
         dispatch(thunkGetTrending());
         setIsLoaded(true);
-    }, [dispatch]);
+    }, []);
 
     const trendingArr = Object.values(trending).flat();
 

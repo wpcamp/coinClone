@@ -16,8 +16,6 @@ function DeleteCommentModal({ commentId, cryptoId }) {
         closeModal()
     }
 
-    // console.log("heres cryptoId inside delete", cryptoId);
-
     const handleDelete = async (e, commentId) => {
         e.preventDefault();
         dispatch(thunkRemoveComment(commentId))

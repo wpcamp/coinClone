@@ -5,11 +5,14 @@ import AssetSelect from "./AssetSelect";
 import CommentCard from "../Comment/CommentCard";
 import Sidebar from "../Sidebar";
 import TransactCard from "../TransactionCard";
+import { useSelector } from "react-redux";
 import "./Asset.css"
 import OpenModalButton from "../OpenModalButton";
 
 
 export default function Asset() {
+    const crypto = useSelector(state => state.crypto.crypto);
+
     return (
         <>
             <div className='fullPageDiv'>
@@ -18,7 +21,7 @@ export default function Asset() {
                 </div>
                 <div id="contentDiv">
                     <span id="topDiv">
-                        <AssetHeader />
+                        {/* <AssetHeader /> */}
                         <OpenModalButton 
                         modalComponent={<AssetSelect/>}
                         buttonText={"Select an asset"}

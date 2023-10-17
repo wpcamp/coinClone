@@ -1,0 +1,60 @@
+#deleteModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+.deleteModalHeader {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.deleteModalSecondaryText {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#deleteModalSecondaryText a {
+    text-decoration: none;
+    color: #333;
+}
+
+#yesNoButtons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#deleteModalYesButton,
+#deleteModalNoButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#deleteModalYesButton {
+    background-color: #ff0000;
+    color: white;
+}
+
+#deleteModalNoButton {
+    background-color: #ccc;
+    color: #333;
+}
+
+#deleteModalYesButton:hover {
+    background-color: #cc0000;
+}
+
+#deleteModalNoButton:hover {
+    background-color: #aaa;
+}

@@ -1,9 +1,10 @@
 // Constant
 const GET_PRICE = "crypto/getPrice"
-const GET_PRICE2 = "crypto/getPrice"
+const GET_PRICE2 = "crypto/getPrice2"
 const GET_PRICES = "crypto/getPrices"
 const GET_CHART_DATA = "crypto/getChartData"
 const GET_TRENDING = "crypto/getTrending"
+const GET_WATCHLIST_PRICE = "crypto/getWatchlistPrice"
 
 // Action Creator 
 const getPrice = (cryptoSymbol) => {
@@ -15,10 +16,18 @@ const getPrice = (cryptoSymbol) => {
 
 const getPrice2 = (cryptoSymbol) => {
     return {
-        type: GET_PRICE,
+        type: GET_PRICE2,
         cryptoSymbol
     }
 }
+
+const getWatchlistPrice = (cryptoSymbol) => {
+    return {
+        type: GET_WATCHLIST_PRICE,
+        cryptoSymbol
+    }
+}
+
 
 const getPrices = (cryptoSymbols) => {
     return {
@@ -60,7 +69,6 @@ export const thunkGetPrices = (cryptoSymbols) => async (dispatch) => {
 export const thunkGetPrice = (cryptoSymbol) => async (dispatch) => {
     const res = await fetch(`/api/coin/data/${cryptoSymbol}`, {
         method: 'GET',
-        headers: { "Content-Type": "application/json" }
     })
     if (res.ok) {
         const data = await res.json()
@@ -72,13 +80,27 @@ export const thunkGetPrice = (cryptoSymbol) => async (dispatch) => {
 }
 
 export const thunkGetPrice2 = (cryptoSymbol) => async (dispatch) => {
-    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoSymbol}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&precision=18`, {
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoSymbol}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&precision=18&x_cg_demo_api_key=CG-DJKcHE6ya2n8E79iCY69oLYd`, {
         method: 'GET',
         headers: { "Content-Type": "application/json" }
     })
     if (res.ok) {
         const data = await res.json()
         dispatch(getPrice2(data))
+    } else {
+        const errors = await res.json()
+        return errors
+    }
+}
+
+export const thunkGetWatchlistPrice = (cryptoSymbol) => async (dispatch) => {
+    const res = await fetch(`/api/coin/datum/${cryptoSymbol}`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    })
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(getWatchlistPrice(data))
     } else {
         const errors = await res.json()
         return errors
@@ -101,7 +123,7 @@ export const thunkGetTrending = () => async (dispatch) => {
 
 
 export const thunkGetChartData = (cryptoName, timeStart, timeEnd) => async (dispatch) => {
-    const url = `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart/range?vs_currency=USD&from=${timeStart}&to=${timeEnd}&precision=full`;
+    const url = `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart/range?vs_currency=USD&from=${timeStart}&to=${timeEnd}&precision=full&x_cg_demo_api_key=CG-oKCoqVtQGbKzxve9C2op9KpW`;
     const res = await fetch(url, {
         method: 'GET',
         headers: {
@@ -125,7 +147,8 @@ const initialState = {
     crypto: {},
     chartData: {},
     trending: {}, 
-    cryptoData: {}
+    cryptoData: {},
+    watchlistPrices:{}
 }
 
 
@@ -137,6 +160,9 @@ const cryptoReducer = (state = initialState, action) => {
         }
         case GET_PRICE2: {
             return { ...state, crypto: action.cryptoSymbol }
+        }
+        case GET_WATCHLIST_PRICE: {
+            return { ...state, watchlistPrices: action.cryptoSymbol }
         }
         case GET_CHART_DATA: {
             return { ...state, chartData: action.data };

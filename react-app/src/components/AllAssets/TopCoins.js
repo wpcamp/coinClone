@@ -51,7 +51,7 @@ export default function TopCoins() {
     useEffect(() => {
         dispatch(thunkGetPrice2(finalWallet))
         setIsLoaded(true)
-    }, [dispatch, sessionUser])
+    }, [])
 
 
     function formatPrice(value) {
@@ -71,7 +71,7 @@ export default function TopCoins() {
         } else if (num >= 25000) {
             return (num / 1000).toFixed(1) + 'K';
         } else {
-            return num?.toString();
+            return num?.toFixed(2).toLocaleString();
         }
     }
 
@@ -80,8 +80,6 @@ export default function TopCoins() {
         ...crypto.crypto[name],
     }));
 
-
-    // console.log("HERES THE LENGTH:", coinDataArray.length);
 
     return (
         <>

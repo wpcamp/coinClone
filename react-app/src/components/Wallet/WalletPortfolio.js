@@ -17,9 +17,6 @@ export default function WalletPortfolio() {
     const dispatch = useDispatch()
 
 
-
-    // console.log("heres my wallets:", crypto);
-
     const walletCoins = coins.map((coin) => {
         const matchingWallet = wallets?.find((wallet) => wallet?.cryptoId === coin?.id);
         if (matchingWallet) {
@@ -42,15 +39,12 @@ export default function WalletPortfolio() {
 
     const finalWallet = walletCoinsA.join("%2C");
 
-
-
-
-
-    useEffect(() => {
-        dispatch(thunkGetWallet(sessionUser.id))
-        dispatch(thunkGetPrice2(finalWallet))
-        setIsLoaded(true)
-    }, [dispatch, sessionUser])
+    // useEffect(() => {
+    //     dispatch(thunkGetWallet(sessionUser.id))
+    //     dispatch(thunkGetPrice2(finalWallet))
+    //     setIsLoaded(true)
+    // }, [dispatch, sessionUser])
+    //!! Seems to work without this useEffect
 
 
 
@@ -77,7 +71,7 @@ export default function WalletPortfolio() {
 
     return (
         <>
-            {isLoaded && filteredCoinData && filteredCoinData.every((coin) => coin !== undefined) ? (
+            {filteredCoinData && filteredCoinData.every((coin) => coin !== undefined) ? (
                 <div className="chart-container">
                     <div id="thisDiv">
                         <ResponsiveContainer width="100%" height={400}>

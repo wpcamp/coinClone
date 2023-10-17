@@ -43,7 +43,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            {sessionUser && <HomeLoggedIn />}
+            {sessionUser && <HomeLoggedIn />  }
             {!sessionUser && <HomeNotLogged />}
           </Route>
           <ProtectedRoute exact path='/watchlist'>

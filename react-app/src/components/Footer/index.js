@@ -15,6 +15,7 @@ export default function Footer() {
                     <img src="../../imgs/python.svg" alt="Python" />
                     <img src="../../imgs/css3.svg" alt="CSS" />
                     <img src="../../imgs/html5.svg" alt="HTML" />
+                    <img src='../../imgs/coingecko.png' alt='CoinGecko' />
                 </div>
             </div>
             <div className='footer-2'>

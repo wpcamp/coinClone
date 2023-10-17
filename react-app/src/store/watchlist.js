@@ -103,37 +103,56 @@ export const thunkUpdateWatchlist = (userId, title) => async (dispatch) => {
 // State 
 
 const initialState = {
-    watchlist: {}
+    // watchlist: {}
 }
 
 const watchlistReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_WATCHLIST: {
-            const newState = { ...state, watchlist: action.watchlist }
+            // const newState = { ...state, watchlist: action.watchlist}
+            const newState = action.watchlist.watchlists
             return newState
         }
         case CREATE_WATCHLIST: {
-            const newState = {
-                ...state, watchlist: {
-                    ...state.watchlist,
-                    [action.watchlist.id]: action.watchlist
-                }
-            }
+            // const newState = {
+            //     ...state, watchlist: {
+            //         watchlists: {
+            //             ...state.watchlist.watchlists,
+            //             [action.watchlist.id]: action.watchlist
+            //         }
+            //     }
+            // }
+            const newState = [...state, action.watchlist]
             return newState
         }
         case REMOVE_WATCHLIST: {
-            const newState = { ...state }
-            delete newState.watchlist[action.id]
-            return newState
-        }
-        case UPDATE_WATCHLIST: {
-            const newState = {
-                ...state, watchlist: {
-                    ...state.watchlist,
-                    [action.watchlist.id]: action.watchlist
+            const newState = [...state]
+            for (let i = 0; i < newState.length; i++) {
+                if (newState[i]["id"] === action.id) {
+                    newState.splice(i, 1)
+                    break
                 }
             }
             return newState
+        }
+        case UPDATE_WATCHLIST: {
+            // let newState = {
+            //     ...state, watchlist: {
+            //         ...state.watchlist,
+            //         [action.watchlist.id]: action.watchlist
+            //     }
+            // }
+            // return newState
+            const updatedWatchlist = action.watchlist;
+            const newState = state.map(item => {
+                if (item.id === updatedWatchlist.id) {
+                    // Replace the item with the updated watchlist
+                    return updatedWatchlist;
+                } else {
+                    return item;
+                }
+            });
+            return newState;
         }
         default: {
             return state
