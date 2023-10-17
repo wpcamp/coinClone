@@ -218,7 +218,7 @@ export default function BuyCard() {
                             <th>Holdings</th>
                             <th>Value</th>
                             <th>
-                                Trade in:
+                                Trade in:     
                                 <select
                                     value={currency}
                                     onChange={(e) => setCurrency(e.target.value)}
@@ -229,6 +229,7 @@ export default function BuyCard() {
                                     </option>
                                 </select>
                             </th>
+                            {currency !== "USD" && <th>USD Value</th>}
                             <th>Buying Power</th>
                             <th>Action</th>
                         </tr>
@@ -245,6 +246,11 @@ export default function BuyCard() {
                                     min="0"
                                 />
                             </td>
+                            {currency !== "USD" && (
+                                <td>
+                                    {"$"+formatDecimal(amount * crypto.crypto.price, 2)}
+                                </td>
+                            )}
                             <td>${parseFloat(user.buyingPower).toLocaleString(2)}</td>
                             <td>
                                 <button className="buy-button" onClick={handleBuy}>

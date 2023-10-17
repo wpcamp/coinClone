@@ -125,10 +125,10 @@ export default function AssetChart() {
             {isLoaded ? (
                 <div>
                     <div id='selectAddButtonDiv'>
-                        <div>
+                        <div id='coinAndWatchlist'>
                             <h2>${cryptoSymbol} • ${formatPrice(coin?.price)}</h2>
+                            {!inWatchlist && <button id='addToWatchlistButton' onClick={() => handleAdd()}>Add to watchlist</button>}
                         </div>
-                        {!inWatchlist && <button onClick={() => handleAdd()}>Add to watchlist</button>}
                     </div>
                     <div id='intervalSelectDiv'>
                         <select
@@ -154,12 +154,12 @@ export default function AssetChart() {
                 </div>
             ) : (
                 <div>
-                <h5>This is likely a sympton of rate-limiting from free-tier APIs. I apologize for the inconvience. Please wait approxiamtely 1 minute and refresh.</h5>
-                <h5>If you would like to help increase the functionality of this website feel free to send any ETH Chain tokens to the following address:</h5>
-                <h5>willcampbell.eth</h5>
-                <div className='loader-container'>
-                    <PropagateLoader color='#36D7B7' size={15} />
-                </div>
+                    <h5>This is likely a sympton of rate-limiting from free-tier APIs. I apologize for the inconvience. Please wait approxiamtely 1 minute and refresh.</h5>
+                    <h5>If you would like to help increase the functionality of this website feel free to send any ETH Chain tokens to the following address:</h5>
+                    <h5>willcampbell.eth</h5>
+                    <div className='loader-container'>
+                        <PropagateLoader color='#36D7B7' size={15} />
+                    </div>
 
                 </div>
             )}
