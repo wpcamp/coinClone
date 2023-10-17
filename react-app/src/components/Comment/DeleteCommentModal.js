@@ -31,7 +31,7 @@ function DeleteCommentModal({ commentId, cryptoId }) {
                     <p id="deleteHeaderA">Are you sure you want to delete your comment?</p>
                 </div>
                 <div id="deleteButtonDiv">
-                    <button id='submitUpdateCommentButton' onClick={(e) => { handleDelete(e, commentId).then(dispatch(thunkGetComments(cryptoId))) }}>Yes, delete my comment</button>
+                    <button id='submitUpdateCommentButton' className="deleteComm" onClick={(e) => { handleDelete(e, commentId).then(dispatch(thunkGetComments(cryptoId))) }}>Yes, delete my comment</button>
                     <button id='submitUpdateCommentButton' onClick={handleKeep} >No, keep my comment</button>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import TransactCard from "../TransactionCard";
 import { useSelector } from "react-redux";
 import "./Asset.css"
 import OpenModalButton from "../OpenModalButton";
+import NewsComponent from "../Trending/NewsComponent";
 
 
 export default function Asset() {
@@ -36,6 +37,7 @@ export default function Asset() {
                     <div id="assetComment">
                         <CommentCard />
                         <AssetMarketDetails />
+                        <NewsComponent />
                     </div>
                 </div>
             </div>

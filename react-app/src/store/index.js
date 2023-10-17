@@ -5,13 +5,17 @@ import cryptoReducer from './crypto';
 import commentsReducer from './comment'
 import watchlistReducer from './watchlist';
 import walletReducer from './wallet';
+import newsReducer from './news'
+
 
 const rootReducer = combineReducers({
   session,
   crypto: cryptoReducer,
   comments: commentsReducer,
   watchlist: watchlistReducer,
-  wallet: walletReducer
+  wallet: walletReducer,
+  news: newsReducer
+
 });
 
 
