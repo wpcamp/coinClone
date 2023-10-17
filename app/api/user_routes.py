@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models.db import User
+from flask_login import login_required, current_user
+from app.models.db import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -22,4 +22,16 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
+    return user.to_dict()
+
+
+@user_routes.route('/<int:amount>/add-funds', methods=['PUT'])
+@login_required
+def add_funds(amount):
+    """
+    Add funds to a users buying power
+    """
+    user = User.query.get(current_user.id)
+    user.buying_power += amount
+    db.session.commit()
     return user.to_dict()

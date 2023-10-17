@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
+import OpenModalButton from '../OpenModalButton';
 import Sidebar from '../Sidebar';
 import './AccountDetails.css';
+import AddMoneyModal from './AddMoneyModal';
 
 export default function AccountDetails() {
     const dispatch = useDispatch();
@@ -12,6 +14,11 @@ export default function AccountDetails() {
         dispatch(logout());
         localStorage.removeItem("userEmail");
     };
+
+    let stringBuying = `${user.buyingPower}`.split(".");
+    let firstHalf = stringBuying[0];
+    let secondHalf = stringBuying[1].slice(0, 2);
+    let finalBuying = firstHalf + "." + secondHalf;
 
     return (
         <div className="account-details-container">
@@ -26,9 +33,15 @@ export default function AccountDetails() {
                 </div>
                 <div className="section">
                     <h2 className="section-title">Wallet Info</h2>
-                    <p className="info"><strong>Buying Power:</strong> ${user.buyingPower}</p>
+                    <p className="info"><strong>Buying Power:</strong> ${finalBuying}</p>
                 </div>
-                <div className="section">
+                <div className="sectionAdd">
+                    <div className='add-funds-button'>
+                        <OpenModalButton
+                            modalComponent={<AddMoneyModal />}
+                            buttonText={"Add Funds"}
+                        />
+                    </div>
                     <button className="logout-button" onClick={handleLogout}>
                         Sign Out
                     </button>

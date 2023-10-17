@@ -16,7 +16,7 @@ const NewsComponent = () => {
 
     return (
         <div className="news-card">
-            <h2>News</h2>
+            <div id='newsCardTitle'>News:</div>
             <ul>
                 {newsData?.map((newsItem, index) => (
                     <li key={index} className="news-item">

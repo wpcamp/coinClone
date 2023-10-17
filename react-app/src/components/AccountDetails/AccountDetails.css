@@ -1,44 +1,3 @@
-/* .account-details-container {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-}
-
-.sidebar-container {
-    margin-right: 50px;
-}
-
-.content-container {
-    padding: 20px;
-}
-
-.section {
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.logout-button {
-    background-color: rgb(0, 82, 255);
-    color: #ffffff;
-    border: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 15px;
-}
-
-.logout-button:hover {
-    background-color: #2980b9;
-} */
-
-/* AccountDetails.css */
-
 .account-details-container {
     display: flex;
     flex-direction: row;
@@ -55,6 +14,12 @@ h2 {
 
 .section {
     margin-bottom: 1.5rem; /* Increased margin for better spacing */
+}
+
+.sectionAdd {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 .section-title {
@@ -80,5 +45,20 @@ h2 {
 }
 
 .logout-button:hover {
+    background-color: #005FBF; /* Darker color on hover */
+}
+
+.sectionAdd button{ 
+    background-color: #007CFF; /* Adjusted button color */
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem; /* Smoother button corners */
+    cursor: pointer;
+    margin-right: 1rem; /* Increased margin for better spacing */
+}
+
+.add-funds-button button:hover {
     background-color: #005FBF; /* Darker color on hover */
 }

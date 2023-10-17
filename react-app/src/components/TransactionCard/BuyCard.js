@@ -211,7 +211,7 @@ export default function BuyCard() {
     return (
         <div className="buy-card">
             <div className="card-container">
-                <h2>Trading</h2>
+                <h2>Trading:</h2>
                 <table className="wallet-table">
                     <thead>
                         <tr>

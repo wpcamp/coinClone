@@ -8,7 +8,7 @@ users = [
         "email": "user@demo.io",
         "first_name": "Demo",
         "last_name": "Lition",
-        "buying_power": 10000000,
+        "buying_power": 10000,
         "title": "Demo Watchlist",
         "created_at": datetime.datetime.now(),
         "updated_at": datetime.datetime.now()

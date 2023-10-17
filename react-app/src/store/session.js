@@ -2,6 +2,7 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const GET_USER = "session/GET_USER";
+const ADD_FUNDS = "session/ADD_FUNDS";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -14,6 +15,11 @@ const removeUser = () => ({
 
 const getUser = (user) => ({
 	type: GET_USER,
+	payload: user,
+});
+
+const addFunds = (user) => ({
+	type: ADD_FUNDS,
 	payload: user,
 });
 
@@ -112,6 +118,25 @@ export const thunkGetUser = (userId) => async (dispatch) => {
 	}
 }
 
+export const thunkAddFunds = (userId, amount) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}/add-funds`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			amount
+		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(addFunds(data));
+	}else{
+		const errors = await response.json();
+		return errors;
+	}
+}
+
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
@@ -120,6 +145,8 @@ export default function reducer(state = initialState, action) {
 		case REMOVE_USER:
 			return { user: null };
 		case GET_USER:
+			return { user: action.payload };
+		case ADD_FUNDS:
 			return { user: action.payload };
 		default:
 			return state;

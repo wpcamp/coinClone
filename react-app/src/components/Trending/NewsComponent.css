@@ -1,7 +1,7 @@
 .news-card {
     background-color: #f5f5f5;
     /* Slight grey background */
-    border: 1px solid #ddd;
+    border: none;
     /* Add a border for separation */
     border-radius: 8px;
     padding: 16px;
@@ -11,6 +11,7 @@
     max-height: 500px;
     overflow-y: auto;
     margin-right: 6.5%;
+    max-width: 50%;
 }
 
 .news-item {
@@ -36,9 +37,18 @@
     flex: 1;
 }
 
+#newsCardTitle {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    /* Text color */
+    margin-top: 5px;
+}
+
 .news-title {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: bold;
     text-decoration: none;
     color: #333;
     /* Text color */
