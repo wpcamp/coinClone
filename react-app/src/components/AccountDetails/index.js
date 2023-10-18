@@ -20,6 +20,12 @@ export default function AccountDetails() {
     // let secondHalf = stringBuying[1]?.slice(0, 2);
     // let finalBuying = firstHalf + "." + secondHalf;
 
+    const formattedBuyingPower = parseFloat(user.buyingPower).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
+
+
     return (
         <div className="account-details-container">
             <div className="sidebar-container">
@@ -33,7 +39,7 @@ export default function AccountDetails() {
                 </div>
                 <div className="section">
                     <h2 className="section-title">Wallet Info</h2>
-                    <p className="info"><strong>Buying Power:</strong> ${user.buyingPower}</p>
+                    <p className="info"><strong>Buying Power:</strong> {formattedBuyingPower}</p>
                 </div>
                 <div className="sectionAdd">
                     <div className='add-funds-button'>
