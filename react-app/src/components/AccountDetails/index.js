@@ -15,9 +15,9 @@ export default function AccountDetails() {
         localStorage.removeItem("userEmail");
     };
 
-    let stringBuying = `${user.buyingPower}`.split(".");
+    let stringBuying = `${user.buyingPower}`?.split(".");
     let firstHalf = stringBuying[0];
-    let secondHalf = stringBuying[1].slice(0, 2);
+    let secondHalf = stringBuying[1]?.slice(0, 2);
     let finalBuying = firstHalf + "." + secondHalf;
 
     return (
