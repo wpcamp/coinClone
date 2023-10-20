@@ -18,6 +18,33 @@ export default function TopCoins() {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    // const walletCoinsA = [
+    //     'bitcoin', 'ethereum', 'tether',
+    //     'pepe', 'ripple', 'usd',
+    //     'cardano', 'dogecoin', 'solana',
+    //     'tron', 'dai', 'polkadot',
+    //     'matic-network', 'litecoin', 'shiba-inu',
+    //     'wrapped-bitcoin', 'bitcoin-cash', 'avalanche-2',
+    //     'stellar', 'chainlink', 'wbnb',
+    //     'monero', 'binance-usd', 'uniswap',
+    //     'okb', 'cosmos', 'ethereum-classic',
+    //     'hedera-hashgraph', 'internet-computer', 'filecoin',
+    //     'lido-dao', 'mantle', 'crypto-com-chain',
+    // 'aptos', 'quant-network', 'arbitrum',
+    //     'vechain', 'maker', 'near',
+    //     'optimism', 'aave', 'the-graph',
+    //     'xdce-crowd-sale', 'algorand', 'usdd',
+    //     'blockstack', 'tezos', 'eos',
+    //     'axie-infinity', 'elrond-erd-2', 'the-sandbox',
+    //     'theta-token', 'havven', 'immutable-x',
+    //     'bitcoin-cash-sv', 'injective-protocol', 'fantom',
+    //     'decentraland', 'render-token', 'thorchain',
+    //     'neo', 'iota', 'kava',
+    //     'apecoin', 'pax-gold', 'dao-maker',
+    //     'dfx-finance', 'juventus-fan-token',
+    //     'dydx'
+    // ]
+
     const walletCoinsA = [
         'bitcoin', 'ethereum', 'tether',
         'pepe', 'ripple', 'usd',
@@ -30,7 +57,7 @@ export default function TopCoins() {
         'okb', 'cosmos', 'ethereum-classic',
         'hedera-hashgraph', 'internet-computer', 'filecoin',
         'lido-dao', 'mantle', 'crypto-com-chain',
-        'aptos', 'quant-network', 'arbitrum',
+        'aptos', 'quant-network',
         'vechain', 'maker', 'near',
         'optimism', 'aave', 'the-graph',
         'xdce-crowd-sale', 'algorand', 'usdd',
@@ -83,7 +110,7 @@ export default function TopCoins() {
 
     return (
         <>
-            {isLoaded && coinDataArray.length === 69 ?
+            {isLoaded && coinDataArray.length === 68 ?
                 (
                     <>
                         <div id='topCoinsFullD'>

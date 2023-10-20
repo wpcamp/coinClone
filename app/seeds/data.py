@@ -568,10 +568,10 @@ coins = [
         "name": "quant-network",
         "symbol": "qnt"
     },
-    {
-        "name": "arbitrum",
-        "symbol": "arb"
-    },
+    # {
+    #     "name": "arbitrum",
+    #     "symbol": "arb"
+    # },
     {
         "name": "vechain",
         "symbol": "vet"
