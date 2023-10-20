@@ -111,7 +111,6 @@ function SignupFormPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {console.log("ERRORS", errors)}
           </div>
 
           <div className="signUpFormatB">

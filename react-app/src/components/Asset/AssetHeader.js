@@ -16,7 +16,6 @@ export default function AssetHeader() {
     // const history = useHistory()
     // const sessionUser = useSelector(state => state.session.user);
     // const data = useSelector(state => state.crypto.crypto)
-    // console.log("data", data);
     // const watchlist = useSelector(state => state.watchlist.watchlist.watchlists);
 
     // function formatPrice(value) {
@@ -48,7 +47,6 @@ export default function AssetHeader() {
     // useEffect(() => {
     //     dispatch(thunkGetPrice(cryptoSymbol))
     //     setIsLoaded(true)
-    //     console.log("AssetHeader");
     // }, [dispatch, cryptoSymbol])
 
     // const handleAdd = async () => {

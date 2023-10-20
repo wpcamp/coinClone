@@ -33,10 +33,10 @@ export default function BuyCard() {
     //     }
     //     if (currency === "USD") {
     //         let fiat = +amount;
-    //         console.log("fiat", fiat);
-    //         console.log("crypto.crypto.price", crypto.crypto.price);
-    //         console.log("userbuyingpower", user.buyingPower);
-    //         console.log(+fiat > user.buyingPower);
+
+
+
+
     //         if (amount <= 0) {
     //             setError("Amount must be greater than zero");
     //             return;

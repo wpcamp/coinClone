@@ -13,7 +13,7 @@ export default function CommentCard() {
     const dispatch = useDispatch();
     const { cryptoSymbol } = useParams();
     const comments = useSelector((state) => state.comments.comments);
-    console.log("comments", comments.comments);
+
     const sessionUser = useSelector((state) => state.session.user);
     const [pastComment, setPastComment] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);

@@ -64,7 +64,6 @@ export const thunkBuyCoin = (coinId, quantity, fiat, method) => async (dispatch)
 
     if (res.ok) {
         const wallet = await res.json()
-        // console.log("*****wallet*****", wallet);
         dispatch(buyCoin(wallet))
         return wallet
     } else {
@@ -90,7 +89,7 @@ export const thunkSellCoin = (coinId, quantity, fiat) => async (dispatch) => {
 }
 
 export const thunkCreateEmptyWallets = (id) => async (dispatch) => {
-    // console.log("*****id*****", id);
+
     const res = await fetch(`/api/wallet/create/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -99,7 +98,6 @@ export const thunkCreateEmptyWallets = (id) => async (dispatch) => {
 
     if (res.ok) {
         const wallet = await res.json()
-        console.log("*****wallet*****", wallet);
         dispatch(createEmptyWallets([wallet]))
         return wallet
     } else {
@@ -118,8 +116,6 @@ const walletReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_WALLET: {
             const newState = { ...state, wallet: action.wallet }
-            // console.log("*****action.wallet*****", action.wallet);
-            // console.log("*****newState*****", newState);
             return newState
         }
         case BUY_COIN: {

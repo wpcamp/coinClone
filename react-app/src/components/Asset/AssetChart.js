@@ -26,7 +26,6 @@ export default function AssetChart() {
     // useEffect(() => {
     //     dispatch(thunkGetPrice(cryptoSymbol));
     //     setIsLoaded(true);
-    //     console.log("AssetHeader");
     // }, [dispatch, cryptoSymbol]);
     //!! SEEMS TO WORK WITHOUT THIS USEEFFECT. MAYBE DELETE?
 

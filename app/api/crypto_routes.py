@@ -110,20 +110,11 @@ def buy_coin(id, quantity, fiat):
 
         user.buying_power -= Decimal(fiat)
         quantity_decimal = Decimal(quantity)  # Convert quantity to Decimal
-        print("HERE IS THE QUANTITY HOLDING", current_holding.quantity)
-        print("TYPE OF CURRENT HOLDING QUANTITY", type(current_holding.quantity))
-        print("HERE IS THE TYPE OF QUANTITY DECIMAL", type(quantity_decimal))
-        print("HERE IS QUANTITY + QUANTITY DECIMAL", current_holding.quantity + quantity_decimal)
         current_holding.quantity += quantity_decimal  # Use Decimal for addition
-        print("HERE IS THE CURRENT HOLDING QUANTITY", current_holding.quantity)
         current_holding.updated_at = datetime.datetime.now()
         db.session.commit()
         outputcurrent = current_holding.to_dict()
-        print("currentholding to Dict", outputcurrent)
-        print("HERE IS THE CURRENT HOLDING", current_holding)
-        print("HERE IS QUANTITY DECIMAL", quantity_decimal)
         outputcurrent['quantity'] = quantity_decimal
-        print("HERE IS THE OUTPUT CURRENT AFTER", outputcurrent)
         return {'user': user.to_dict(), 'updated_coin': outputcurrent}
     else:
         return {'error': 'You do not own this cryptocurrency'}, 400
