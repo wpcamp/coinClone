@@ -2,6 +2,8 @@
 
 OpenWallet is a fullstack stack project made using a React/Redux JS front-end and a Python Flask back-end. This project utilizes two cryptocurrency real-time price APIs, and allows users to create watchlists of their favorite cryptocurrencies, buy and sell cryptocurrencies with a virtual balance, and watch their portfolio grow over time.
 
+## Live Link:
+[openWallet](https://coinclone-thesecond.onrender.com/)
 
 ## Index
 [Schema](https://github.com/wpcamp/coinClone/wiki/Schema) 
